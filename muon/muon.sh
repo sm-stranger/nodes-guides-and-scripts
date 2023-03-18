@@ -30,6 +30,8 @@ do
             # run container
             docker compose up -d
 
+            break
+
         ;;
 
 
@@ -38,6 +40,8 @@ do
             echo -e '\n\e[42mCreating a backup...\e[0m\n' && sleep 1
 
             docker exec -it muon-node ./node_modules/.bin/ts-node ./src/cmd keys backup > backup.json
+
+            break
 
         ;;
 
@@ -48,11 +52,11 @@ do
         echo "To Check Node Status - Copy And Paste This link In Your Browser:"
         echo "http://"$ip":8000/status"
         
+        break
+        
         ;;
 
 
       esac  
 
 done
-
-

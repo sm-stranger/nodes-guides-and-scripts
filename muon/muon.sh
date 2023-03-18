@@ -22,7 +22,7 @@ do
             "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
             $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
             sudo apt update
-            sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+            sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
             # download Muon docker-compose.yml
             curl -o docker-compose.yml https://raw.githubusercontent.com/muon-protocol/muon-node-js/testnet/docker-compose-pull.yml
@@ -39,7 +39,14 @@ do
             docker exec -it muon-node ./node_modules/.bin/ts-node ./src/cmd keys backup > backup.json
 
         ;;
+
+        ############ Check Node Status ############
+        ip=$(curl ifconfig.me)
+        echo "To Check Node Status - Copy And Paste This link In Your Browser:"
+        echo "http://"$ip":8000/status"
         
+
+
       esac  
 
 done

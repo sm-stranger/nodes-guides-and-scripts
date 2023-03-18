@@ -1,5 +1,5 @@
 PS3="Choose option and press Enter: "
-options=("Install Muon", "Backup")
+options=("Install Muon" "Backup")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -43,4 +43,5 @@ do
       esac  
 
 done
+
 

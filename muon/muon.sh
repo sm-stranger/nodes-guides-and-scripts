@@ -1,10 +1,10 @@
 PS3="Choose option and press Enter: "
-options=("Install Muon" "Backup")
+options=("Install Muon" "Backup" "Node Status")
 select opt in "${options[@]}"
 do
     case $opt in
 
-        ############ Installing Muon ############
+        ######################## Installing Muon ########################
         "Install Muon")
             echo -e '\n\e[42mInstalling Muon...\e[0m\n' && sleep 1
 
@@ -32,7 +32,8 @@ do
 
         ;;
 
-        ############ Creating A Backup ############
+
+        ######################## Creating A Backup ########################
         "Backup")
             echo -e '\n\e[42mCreating a backup...\e[0m\n' && sleep 1
 
@@ -40,11 +41,14 @@ do
 
         ;;
 
-        ############ Check Node Status ############
+
+        ######################## Check Node Status ########################
+        "Node Status")
         ip=$(curl ifconfig.me)
         echo "To Check Node Status - Copy And Paste This link In Your Browser:"
         echo "http://"$ip":8000/status"
         
+        ;;
 
 
       esac  

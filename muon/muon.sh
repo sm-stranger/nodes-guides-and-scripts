@@ -1,4 +1,4 @@
-PS3="Choose option and press Enter"
+PS3="Choose option and press Enter:"
 options=("Install Muon", "Backup")
 select opt in "${options[@]}"
 do
@@ -42,5 +42,3 @@ do
       esac  
 
 done
-
-

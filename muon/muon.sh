@@ -1,4 +1,4 @@
-PS3="Choose option and press Enter:"
+PS3="Choose option and press Enter: "
 options=("Install Muon", "Backup")
 select opt in "${options[@]}"
 do
@@ -38,7 +38,9 @@ do
 
             docker exec -it muon-node ./node_modules/.bin/ts-node ./src/cmd keys backup > backup.json
 
-
+        ;;
+        
       esac  
 
 done
+

@@ -1,3 +1,5 @@
+while true
+do
 PS3="Choose option and press Enter: "
 options=("Install Muon" "Create Backup" "Check Node Status" "Show Logs")
 select opt in "${options[@]}"
@@ -72,7 +74,7 @@ do
         ;;
 
       esac  
-
+done
 done
 
 # docker logs -f --tail 50 muon-node

@@ -69,7 +69,7 @@ do
 
             break
 
-        ;
+        ;;
 
       esac  
 

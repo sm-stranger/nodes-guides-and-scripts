@@ -48,23 +48,33 @@ do
 
         ######################## Check Node Status ########################
         "Check Node Status")
-        ip=$(curl ifconfig.me)
-        echo "To Check Node Status - Copy And Paste This link In Your Browser:"
-        echo "http://"$ip":8000/status"
+            echo -e '\n\e[42mChecking node status...\e[0m\n' && sleep 1
+
+            curl http://localhost:8000/status | jq
+
+            # ip=$(curl ifconfig.me)
+            # echo "To Check Node Status - Copy And Paste This link In Your Browser:"
+            # echo "http://"$ip":8000/status"
         
-        break
+            break
 
         ;;
 
 
         ######################## Show Logs ########################
         "Show Logs")
-        docker exec -it muon-node pm2 logs
+            echo -e '\n\e[42mChecking node status...\e[0m\n' && sleep 1
+
+            docker exec -it muon-node pm2 logs
+
+            break
+
+        ;
 
       esac  
 
 done
 
 # logs
-docker logs -f --tail 50 muon-node
+# docker logs -f --tail 50 muon-node
 

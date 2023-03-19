@@ -2,7 +2,7 @@ muon="./muon.sh"
 echo 'export muon='$muon >> $HOME/.profile
 source $HOME/.profile
 
-PS3="Choose option and press Enter. "
+PS3="Choose option and press Enter: "
 options=("Install Muon" "Create Backup" "Check Node Status" "Show Logs")
 select opt in "${options[@]}"
 do

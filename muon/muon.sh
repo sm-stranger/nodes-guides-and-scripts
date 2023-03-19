@@ -1,7 +1,7 @@
 while true
 do
 PS3="Choose option and press Enter: "
-options=("Install Muon" "Create Backup" "Check Node Status" "Show Logs")
+options=("Install Muon" "Create Backup" "Check Node Status" "Show Logs" "Exit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -71,6 +71,12 @@ do
 
             break
 
+        ;;
+
+
+        ######################################## Exit ########################################
+        "Exit")
+            exit
         ;;
 
       esac  

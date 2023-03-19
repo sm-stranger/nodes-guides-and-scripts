@@ -1,4 +1,6 @@
-PS3="Choose option and press Enter: "
+muon="./muon.sh"
+
+PS3="Choose option and press Enter. To bring up the menu - type $muon "
 options=("Install Muon" "Create Backup" "Check Node Status" "Show Logs")
 select opt in "${options[@]}"
 do

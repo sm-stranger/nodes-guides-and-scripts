@@ -1,12 +1,14 @@
 muon="./muon.sh"
+echo 'export muon='$muon >> $HOME/.profile
+source $HOME/.profile
 
-PS3="Choose option and press Enter. To bring up the menu - type $muon "
+PS3="Choose option and press Enter. "
 options=("Install Muon" "Create Backup" "Check Node Status" "Show Logs")
 select opt in "${options[@]}"
 do
     case $opt in
 
-        ######################## Install Muon ########################
+        ######################################## Install Muon ########################################
         "Install Muon")
             echo -e '\n\e[42mInstalling Muon...\e[0m\n' && sleep 1
 
@@ -14,7 +16,7 @@ do
             sudo apt update && sudo apt upgrade -y
 
             # install dependencies
-            sudo apt install ca-certificates curl gnupg lsb-release -y
+            sudo apt install ca-certificates curl gnupg lsb-release jq mc -y
 
             # install Docker
             sudo apt update
@@ -37,7 +39,7 @@ do
         ;;
 
 
-        ######################## Create Backup ########################
+        ######################################## Create Backup ########################################
         "Create Backup")
             echo -e '\n\e[42mCreating a backup...\e[0m\n' && sleep 1
 
@@ -48,7 +50,7 @@ do
         ;;
 
 
-        ######################## Check Node Status ########################
+        ######################################## Check Node Status ########################################
         "Check Node Status")
             echo -e '\n\e[42mChecking node status...\e[0m\n' && sleep 1
 
@@ -63,7 +65,7 @@ do
         ;;
 
 
-        ######################## Show Logs ########################
+        ######################################## Show Logs ########################################
         "Show Logs")
             echo -e '\n\e[42mChecking node status...\e[0m\n' && sleep 1
 

@@ -1,10 +1,10 @@
 PS3="Choose option and press Enter: "
-options=("Install Muon" "Backup" "Node Status")
+options=("Install Muon" "Create Backup" "Check Node Status" "Show Logs")
 select opt in "${options[@]}"
 do
     case $opt in
 
-        ######################## Installing Muon ########################
+        ######################## Install Muon ########################
         "Install Muon")
             echo -e '\n\e[42mInstalling Muon...\e[0m\n' && sleep 1
 
@@ -35,8 +35,8 @@ do
         ;;
 
 
-        ######################## Creating A Backup ########################
-        "Backup")
+        ######################## Create Backup ########################
+        "Create Backup")
             echo -e '\n\e[42mCreating a backup...\e[0m\n' && sleep 1
 
             docker exec -it muon-node ./node_modules/.bin/ts-node ./src/cmd keys backup > backup.json
@@ -47,18 +47,24 @@ do
 
 
         ######################## Check Node Status ########################
-        "Node Status")
+        "Check Node Status")
         ip=$(curl ifconfig.me)
         echo "To Check Node Status - Copy And Paste This link In Your Browser:"
         echo "http://"$ip":8000/status"
         
         break
-        
+
         ;;
 
+
+        ######################## Show Logs ########################
+        "Show Logs")
+        docker exec -it muon-node pm2 logs
 
       esac  
 
 done
 
+# logs
+docker logs -f --tail 50 muon-node
 

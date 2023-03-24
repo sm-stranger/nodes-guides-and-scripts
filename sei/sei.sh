@@ -15,31 +15,20 @@ do
             "Install")
 
                 # install dependencies
-                sudo apt update
-                sudo apt install -y curl git jq lz4 build-essential mc-y
+                sudo apt update && sudo apt upgrade -y
+                sudo apt install -y curl git jq lz4 build-essential mc -y
                 sudo rm -rf /usr/local/go
                 sudo curl -Ls https://go.dev/dl/go1.19.linux-amd64.tar.gz | sudo tar -C /usr/local -xz
                 echo "export PATH=$PATH:/usr/local/go/bin" >> $HOME/.profile
                 source $HOME/.profile
 
+                
                 ############ Download/compile and install seid ############
 
                 cd $HOME
                 rm -rf sei-chain
                 git clone https://github.com/sei-protocol/sei-chain.git
                 cd sei-chain
-
-                # compile version 2.0.34beta-atlantic-2
-                git checkout 2.0.34beta-atlantic-2
-                make build
-                mkdir -p $HOME/.sei/cosmovisor/genesis/bin
-                mv build/seid $HOME/.sei/cosmovisor/genesis/bin/
-
-                # compile version 2.0.37beta
-                git checkout 2.0.37beta
-                make build
-                mkdir -p $HOME/.sei/cosmovisor/upgrades/2.0.37beta/bin
-                mv build/seid $HOME/.sei/cosmovisor/upgrades/2.0.37beta/bin/
 
                 # Compile version 2.0.40beta
                 git checkout 2.0.40beta
@@ -97,6 +86,9 @@ do
                 sed -i -e "s|^snapshot-interval *=.*|snapshot-interval = \"1000\"|" $HOME/.sei/config/app.toml
                 sed -i -e "s|^snapshot-keep-recent *=.*|snapshot-keep-recent = \"2\"|" $HOME/.sei/config/app.toml
 
+                # download the latest snapshot
+                SNAPSHOT_FILE=$(curl -Ls https://snapshots.brocha.in/sei-testnet-2/atlantic-2.json | jq .goleveldb.file)
+                curl -L https://snapshots.brocha.in/sei-testnet-2/$SNAPSHOT_FILE | lz4 -dc - | tar -xf - -C $HOME/.sei
 
             break
             ;;
@@ -117,6 +109,8 @@ do
             break
             ;;
 
+
+            ######################################## Exit ########################################
 
             "Exit")
                 exit

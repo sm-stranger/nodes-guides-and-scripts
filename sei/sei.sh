@@ -4,7 +4,7 @@ while true
 do
 
     PS3="Choose option and press Enter: "
-    options=("Install" "Delete")
+    options=("Install" "Delete" "Exit")
     select opt in "${options[@]}"
     do
 
@@ -16,7 +16,7 @@ do
 
                 # install dependencies
                 sudo apt update
-                sudo apt install -y curl git jq lz4 build-essential
+                sudo apt install -y curl git jq lz4 build-essential mc-y
                 sudo rm -rf /usr/local/go
                 sudo curl -Ls https://go.dev/dl/go1.19.linux-amd64.tar.gz | sudo tar -C /usr/local -xz
                 echo "export PATH=$PATH:/usr/local/go/bin" >> $HOME/.profile
@@ -65,7 +65,7 @@ do
                 Environment="DAEMON_NAME=seid"
                 Environment="UNSAFE_SKIP_BACKUP=true"
                 [Install]
-                WantedBy=multi-user.target' > $HOME/seid.service
+                WantedBy=multi-user.target' > /etc/systemd/system/seid.service
                 
                 sudo systemctl daemon-reload
                 sudo systemctl enable seid
@@ -101,8 +101,30 @@ do
             break
             ;;
 
-        esac
 
+            ######################################## Install ########################################
+
+            "Delete")
+
+                sudo systemctl stop seid
+                sudo systemctl disable seid
+                sudo rm /etc/systemd/system/sei* -rf
+                sudo rm $(which seid) -rf
+                sudo rm $HOME/.sei -rf
+                sudo rm $HOME/sei-chain -rf
+                sed -i '/SEI_/d' ~/.bash_profile
+
+            break
+            ;;
+
+
+            "Exit")
+                exit
+
+            break
+            ;;
+
+        esac
 
     done
 

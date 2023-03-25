@@ -88,13 +88,17 @@ do
 
                 # download the latest snapshot
                 SNAPSHOT_FILE=$(curl -Ls https://snapshots.brocha.in/sei-testnet-2/atlantic-2.json | jq .goleveldb.file)
+                SNAPSHOT_FILE="$(tr -d '"' <<< "$SNAPSHOT_FILE" )"
                 curl -L https://snapshots.brocha.in/sei-testnet-2/$SNAPSHOT_FILE | lz4 -dc - | tar -xf - -C $HOME/.sei
+
+                sudo systemctl start seid
+                sudo journalctl -u seid -f --no-hostname -o cat
 
             break
             ;;
 
 
-            ######################################## Install ########################################
+            ######################################## Delete ########################################
 
             "Delete")
 
@@ -104,7 +108,7 @@ do
                 sudo rm $(which seid) -rf
                 sudo rm $HOME/.sei -rf
                 sudo rm $HOME/sei-chain -rf
-                sed -i '/SEI_/d' ~/.bash_profile
+                sed -i '/SEI_/d' ~/.profile
 
             break
             ;;

@@ -3,127 +3,132 @@
 while true
 do
 
-    PS3="Choose option and press Enter: "
-    options=("Install" "Delete" "Exit")
-    select opt in "${options[@]}"
-    do
+PS3="Choose option and press Enter: "
+options=("Install" "Delete" "Update" "Check Logs")
+select opt in "${options[@]}"
+do
+    case $opt in
+    
+        ######################################## Install ########################################
+        
+        "Install")
+            
+            # update && upgrade
+            sudo apt update && sudo apt upgrade -y
 
-        case $opt in
+            # install dependencies
+            sudo apt update && sudo apt install software-properties-common -y
+            sudo add-apt-repository ppa:deadsnakes/ppa -y
+            sudo apt install curl git tmux python3 python3-venv python3-dev build-essential libgmp-dev pkg-config libssl-dev mc -y
+            
+            # install Rust
+            sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
+            source $HOME/.cargo/env
+            rustup update stable --force
 
-            ######################################## Install ########################################
+            
+            cd $HOME
+            git clone https://github.com/eqlabs/pathfinder.git
+            cd $HOME/pathfinder/py
+            python3 -m venv .venv
+            source .venv/bin/activate
+            PIP_REQUIRE_VIRTUALENV=true pip install --upgrade pip
+            PIP_REQUIRE_VIRTUALENV=true pip install -r requirements-dev.txt
+            pytest
+            cd $HOME/pathfinder
+            cargo +stable build --release --bin pathfinder
+            cd $home
 
-            "Install")
+            source $HOME/.bash_profile
+            mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
+            read -p "Enter Your Alchemy HTTP : " ALCHEMY
 
-                # install dependencies
-                sudo apt update && sudo apt upgrade -y
-                sudo apt install -y curl git jq lz4 build-essential mc -y
-                sudo rm -rf /usr/local/go
-                sudo curl -Ls https://go.dev/dl/go1.19.linux-amd64.tar.gz | sudo tar -C /usr/local -xz
-                echo "export PATH=$PATH:/usr/local/go/bin" >> $HOME/.profile
-                source $HOME/.profile
+            #substr='"https://eth-goerli.alchemyapi.io/v2"'
+            #ALCHEMY=''
+            #until [$ALCHEMY==*$substr]
+            #do
+            #    read -p "Enter Your Alchemy HTTP : " ALCHEMY
+            #    if [ ${#ALCHEMY}==0 ]; then 
+            #done
 
-                
-                ############ Download/compile and install seid ############
+            echo 'export ALCHEMY='${ALCHEMY} >> $HOME/.profile
+            source $HOME/.profile
 
-                cd $HOME
-                rm -rf sei-chain
-                git clone https://github.com/sei-protocol/sei-chain.git
-                cd sei-chain
+            echo "[Unit]
+            Description=StarkNet
+            After=network.target
+            [Service]
+            User=$USER
+            Type=simple
+            WorkingDirectory=$HOME/pathfinder/py
+            ExecStart=/bin/bash -c \"source $HOME/pathfinder/py/.venv/bin/activate && /usr/local/bin/pathfinder --http-rpc=\"0.0.0.0:9545\" --ethereum.url $ALCHEMY\"
+            Restart=on-failure
+            LimitNOFILE=65535
+            [Install]
+            WantedBy=multi-user.target" > $HOME/starknetd.service
+            mv $HOME/starknetd.service /etc/systemd/system/
 
-                # Compile version 2.0.40beta
-                git checkout 2.0.40beta
-                make build
-                mkdir -p $HOME/.sei/cosmovisor/upgrades/2.0.40beta/bin
-                mv build/seid $HOME/.sei/cosmovisor/upgrades/2.0.40beta/bin/
-
-                # Install cosmovisor and service
-                curl -Ls https://github.com/cosmos/cosmos-sdk/releases/download/cosmovisor%2Fv1.3.0/cosmovisor-v1.3.0-linux-amd64.tar.gz | tar xz
-                chmod 755 cosmovisor
-                sudo mv cosmovisor /usr/bin/cosmovisor
-
-                echo '[Unit]
-                Description=Sei Atlantic 2 Node Service
-                After=network-online.target
-                [Service]
-                User=$USER
-                ExecStart=/usr/bin/cosmovisor run start
-                Restart=on-failure
-                RestartSec=10
-                LimitNOFILE=8192
-                Environment="DAEMON_HOME=$HOME/.sei"
-                Environment="DAEMON_NAME=seid"
-                Environment="UNSAFE_SKIP_BACKUP=true"
-                [Install]
-                WantedBy=multi-user.target' > /etc/systemd/system/seid.service
-                
-                sudo systemctl daemon-reload
-                sudo systemctl enable seid
-
-                # Initialize the node
-                read -p "Enter Node Name: " MONIKER
-                echo 'export MONIKER='${MONIKER} >> $HOME/.profile
-                source $HOME/.profile
-
-
-                ln -s $HOME/.sei/cosmovisor/upgrades/2.0.40beta $HOME/.sei/cosmovisor/current
-                sudo ln -s $HOME/.sei/cosmovisor/current/bin/seid /usr/local/bin/seid
-                seid config chain-id atlantic-2
-                seid init $MONIKER --chain-id atlantic-2
-                curl -Ls https://raw.githubusercontent.com/sei-protocol/testnet/main/atlantic-2/genesis.json > $HOME/.sei/config/genesis.json
-                sed -i -e "s|^bootstrap-peers *=.*|bootstrap-peers = \"f97a75fb69d3a5fe893dca7c8d238ccc0bd66a8f@sei-testnet-2.seed.brocha.in:30587\"|" $HOME/.sei/config/config.toml
-                echo '
-                {
-                "height": "0",
-                "round": 0,
-                "step": 0
-                }' > $HOME/.sei/data/priv_validator_state.json
-                
-                sed -i -e "s|^minimum-gas-prices *=.*|minimum-gas-prices = \"0.0001usei\"|" $HOME/.sei/config/app.toml
-                sed -i -e "s|^pruning *=.*|pruning = \"custom\"|" $HOME/.sei/config/app.toml
-                sed -i -e "s|^pruning-keep-recent *=.*|pruning-keep-recent = \"3000\"|" $HOME/.sei/config/app.toml
-                sed -i -e "s|^pruning-keep-every *=.*|pruning-keep-every = \"0\"|" $HOME/.sei/config/app.toml
-                sed -i -e "s|^pruning-interval *=.*|pruning-interval = \"10\"|" $HOME/.sei/config/app.toml
-                sed -i -e "s|^snapshot-interval *=.*|snapshot-interval = \"1000\"|" $HOME/.sei/config/app.toml
-                sed -i -e "s|^snapshot-keep-recent *=.*|snapshot-keep-recent = \"2\"|" $HOME/.sei/config/app.toml
-
-                # download the latest snapshot
-                SNAPSHOT_FILE=$(curl -Ls https://snapshots.brocha.in/sei-testnet-2/atlantic-2.json | jq .goleveldb.file)
-                SNAPSHOT_FILE="$(tr -d '"' <<< "$SNAPSHOT_FILE" )"
-                curl -L https://snapshots.brocha.in/sei-testnet-2/$SNAPSHOT_FILE | lz4 -dc - | tar -xf - -C $HOME/.sei
-
-                sudo systemctl start seid
-                sudo journalctl -u seid -f --no-hostname -o cat
-
-            break
-            ;;
+            sudo systemctl restart systemd-journald
+            sudo systemctl daemon-reload
+            sudo systemctl enable starknetd
+            sudo systemctl restart starknetd
+                  
+        break
+        ;;
 
 
-            ######################################## Delete ########################################
+        ######################################## Delete ########################################
 
-            "Delete")
-
-                sudo systemctl stop seid
-                sudo systemctl disable seid
-                sudo rm /etc/systemd/system/sei* -rf
-                sudo rm $(which seid) -rf
-                sudo rm $HOME/.sei -rf
-                sudo rm $HOME/sei-chain -rf
-                sed -i '/SEI_/d' ~/.profile
-
-            break
-            ;;
+        "Delete")
+        
+        systemctl stop starknetd
+        systemctl disable starknetd
+        rm -rf ~/pathfinder/
+        rm -rf /etc/systemd/system/starknetd.service
+        rm -rf /usr/local/bin/pathfinder
+        
+        break
+        ;;
 
 
-            ######################################## Exit ########################################
+        ######################################## Update ########################################
+        
+        "Update")
 
-            "Exit")
-                exit
+            cd ~/pathfinder
+            rustup update
+            git fetch
+            git checkout v0.5.1
+            cargo build --release --bin pathfinder
+            mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
+            cd py
+            source .venv/bin/activate
+            PIP_REQUIRE_VIRTUALENV=true pip install -e .[dev]
+            pip install --upgrade pip
+            systemctl restart starknetd
 
-            break
-            ;;
+        break
+        ;;
 
-        esac
 
-    done
+        ######################################## Check Logs ########################################
 
+        "Check Logs")
+            journalctl -u starknetd -f
+        break
+        ;;
+
+
+        ######################################## Restart ########################################
+
+        "Restart")
+            systemctl restart starknetd
+        break
+        ;;
+
+
+    
+    esac
+
+done
 done

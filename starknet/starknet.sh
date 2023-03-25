@@ -41,20 +41,32 @@ do
 
             source $HOME/.bash_profile
             mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
+            read -p "Enter Your Alchemy HTTP : " ALCHEMY
+
+            #substr='"https://eth-goerli.alchemyapi.io/v2"'
+            #ALCHEMY=''
+            #until [$ALCHEMY==*$substr]
+            #do
+            #    read -p "Enter Your Alchemy HTTP : " ALCHEMY
+            #    if [ ${#ALCHEMY}==0 ]; then 
+            #done
+
+            echo 'export ALCHEMY='${ALCHEMY} >> $HOME/.profile
+            source $HOME/.profile
 
             echo "[Unit]
-            Description=StarkNet
-            After=network.target
-            [Service]
-            User=$USER
-            Type=simple
-            WorkingDirectory=$HOME/pathfinder/py
-            ExecStart=/bin/bash -c \"source $HOME/pathfinder/py/.venv/bin/activate && /usr/local/bin/pathfinder --http-rpc=\"0.0.0.0:9545\" --ethereum.url $ALCHEMY\"
-            Restart=on-failure
-            LimitNOFILE=65535
-            [Install]
-            WantedBy=multi-user.target" > $HOME/starknetd.service
-            mv $HOME/starknetd.service /etc/systemd/system/
+Description=StarkNet
+After=network.target
+[Service]
+User=$USER
+Type=simple
+WorkingDirectory=$HOME/pathfinder/py
+ExecStart=/bin/bash -c \"source $HOME/pathfinder/py/.venv/bin/activate && /usr/local/bin/pathfinder --http-rpc=\"0.0.0.0:9545\" --ethereum.url $ALCHEMY\"
+Restart=on-failure
+LimitNOFILE=65535
+[Install]
+WantedBy=multi-user.target" > $HOME/starknetd.service
+    mv $HOME/starknetd.service /etc/systemd/system/
 
             sudo systemctl restart systemd-journald
             sudo systemctl daemon-reload

@@ -19,7 +19,7 @@ do
             # install dependencies
             sudo apt update && sudo apt install software-properties-common -y
             sudo add-apt-repository ppa:deadsnakes/ppa -y
-            sudo apt update && sudo apt install curl git tmux python3.10 python3.10-venv python3.10-dev build-essential libgmp-dev pkg-config libssl-dev -y
+            sudo apt update && sudo apt install curl git tmux python3.10 python3.10-venv python3.10-dev build-essential libgmp-dev pkg-config libssl-dev mc -y
             
             # install Rust
             sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
@@ -27,6 +27,7 @@ do
             rustup update stable --force
 
 
+            # install Python
             cd $HOME
             git clone https://github.com/eqlabs/pathfinder.git
             cd $HOME/pathfinder
@@ -42,7 +43,7 @@ do
             cargo +stable build --release --bin pathfinder
             cd $home
 
-            source $HOME/.bash_profile
+            source $HOME/.profile
             mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
 
 
@@ -71,7 +72,7 @@ Restart=on-failure
 LimitNOFILE=65535
 [Install]
 WantedBy=multi-user.target" > $HOME/starknetd.service
-    mv $HOME/starknetd.service /etc/systemd/system/
+            mv $HOME/starknetd.service /etc/systemd/system/
 
             sudo systemctl restart systemd-journald
             sudo systemctl daemon-reload

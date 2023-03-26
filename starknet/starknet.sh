@@ -31,7 +31,7 @@ do
             cd $HOME
             rm -rf pathfinder
             git clone https://github.com/eqlabs/pathfinder.git
-            cd $HOME/pathfinder
+            cd pathfinder
             git fetch
             git checkout v0.5.1
             cd $HOME/pathfinder/py

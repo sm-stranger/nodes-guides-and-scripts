@@ -29,6 +29,7 @@ do
 
             # install Python
             cd $HOME
+            rm -rf pathfinder
             git clone https://github.com/eqlabs/pathfinder.git
             cd $HOME/pathfinder
             git fetch

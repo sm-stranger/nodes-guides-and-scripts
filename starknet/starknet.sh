@@ -50,7 +50,7 @@ do
 
             read -p "Enter Your Alchemy HTTP : " ALCHEMY
             echo 'export ALCHEMY='${ALCHEMY} >> $HOME/.profile
-            source $HOME/.profile
+            source $HOME/.bash_profile
 
             echo "[Unit]
 Description=StarkNet

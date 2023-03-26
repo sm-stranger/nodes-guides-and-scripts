@@ -49,16 +49,6 @@ do
 
 
             read -p "Enter Your Alchemy HTTP : " ALCHEMY
-
-            #substr='"https://eth-goerli.alchemyapi.io/v2"'
-            #ALCHEMY=''
-            #until [$ALCHEMY==*$substr]
-            #do
-            #    read -p "Enter Your Alchemy HTTP : " ALCHEMY
-            #    if [ ${#ALCHEMY}==0 ]; then
-                    echo "Вы ничего не ввели. Повторите еще раз."
-            #done
-
             echo 'export ALCHEMY='${ALCHEMY} >> $HOME/.profile
             source $HOME/.profile
 

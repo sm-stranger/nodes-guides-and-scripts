@@ -19,28 +19,33 @@ do
             # install dependencies
             sudo apt update && sudo apt install software-properties-common -y
             sudo add-apt-repository ppa:deadsnakes/ppa -y
-            sudo apt install curl git tmux python3 python3-venv python3-dev build-essential libgmp-dev pkg-config libssl-dev mc -y
+            sudo apt update && sudo apt install curl git tmux python3.10 python3.10-venv python3.10-dev build-essential libgmp-dev pkg-config libssl-dev -y
             
             # install Rust
             sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
             source $HOME/.cargo/env
             rustup update stable --force
 
-            
+
             cd $HOME
             git clone https://github.com/eqlabs/pathfinder.git
+            cd $HOME/pathfinder
+            git fetch
+            git checkout v0.5.1
             cd $HOME/pathfinder/py
-            python3 -m venv .venv
+            python3.10 -m venv .venv
             source .venv/bin/activate
             PIP_REQUIRE_VIRTUALENV=true pip install --upgrade pip
             PIP_REQUIRE_VIRTUALENV=true pip install -r requirements-dev.txt
             pytest
-            cd $HOME/pathfinder
+            cd $HOME/pathfinder/
             cargo +stable build --release --bin pathfinder
             cd $home
 
             source $HOME/.bash_profile
             mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
+
+
             read -p "Enter Your Alchemy HTTP : " ALCHEMY
 
             #substr='"https://eth-goerli.alchemyapi.io/v2"'
@@ -99,6 +104,7 @@ WantedBy=multi-user.target" > $HOME/starknetd.service
             rustup update
             git fetch
             git checkout v0.5.1
+            source $HOME/.cargo/env
             cargo build --release --bin pathfinder
             mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
             cd py

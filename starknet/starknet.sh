@@ -38,13 +38,13 @@ do
             python3.10 -m venv .venv
             source .venv/bin/activate
             PIP_REQUIRE_VIRTUALENV=true pip install --upgrade pip
-            PIP_REQUIRE_VIRTUALENV=true pip install -r requirements-dev.txt
+            PIP_REQUIRE_VIRTUALENV=true pip install -e .[dev]
             pytest
             cd $HOME/pathfinder/
             cargo +stable build --release --bin pathfinder
             cd $home
 
-            source $HOME/.profile
+            source $HOME/.bash_profile
             mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
 
 
@@ -55,7 +55,8 @@ do
             #until [$ALCHEMY==*$substr]
             #do
             #    read -p "Enter Your Alchemy HTTP : " ALCHEMY
-            #    if [ ${#ALCHEMY}==0 ]; then 
+            #    if [ ${#ALCHEMY}==0 ]; then
+                    echo "Вы ничего не ввели. Повторите еще раз."
             #done
 
             echo 'export ALCHEMY='${ALCHEMY} >> $HOME/.profile

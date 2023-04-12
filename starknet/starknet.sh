@@ -96,7 +96,7 @@ do
             cd ~/pathfinder
             rustup update
             git fetch
-            git checkout v0.5.2
+            git checkout v0.5.3
             source $HOME/.cargo/env
             cargo build --release --bin pathfinder
             mv ~/pathfinder/target/release/pathfinder /usr/local/bin/

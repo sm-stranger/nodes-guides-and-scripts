@@ -36,11 +36,10 @@ mkdir $HOME/leo_deploy && cd $HOME/leo_deploy
 leo new $aleo_cn
 
 read -p "Paste The Faucet Link: " aleo_fl
-#echo 'export aleo_fl='$aleo_fl >> $HOME/.bash_profile
-
+echo 'export aleo_fl='$aleo_fl >> $HOME/.bash_profile
 ct=$(curl -s $aleo_fl | jq -r '.execution.transitions[0].outputs[0].value')
+
 rec=$(snarkos developer decrypt --ciphertext $ct --view-key $aleo_vk)
-rec="https://vm.aleo.org/api/testnet3/transaction/at1l0a325gryjr38gf5xtk4a76hmutgwcn70wcpku2a0mvnttn7jsgsyen0zw"
 
 snarkos developer deploy "$aleo_cn.aleo" \
 --private-key "$aleo_pk" \

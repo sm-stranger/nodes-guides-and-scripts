@@ -8,12 +8,12 @@ fi
 sudo apt update && sudo apt upgrade -y
 sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw -y
 
-read -p "Enter Your Private Key: " aleo_pk
-echo 'export aleo_pk='$aleo_pk >> $HOME/.bash_profile
-read -p "Enter Your View Key: " aleo_vk
-echo 'export aleo_vk='$aleo_vk >> $HOME/.bash_profile
-read -p "Enter Your Address: " aleo_addr
-echo 'export aleo_addr='$aleo_addr >> $HOME/.bash_profile
+read -p "Enter Your Private Key: " PK
+echo 'export PK='$PK >> $HOME/.bash_profile
+read -p "Enter Your View Key: " VK
+echo 'export VK='$VK >> $HOME/.bash_profile
+read -p "Enter Your Address: " ADDRESS
+echo 'export ADDRESS='$ADDRESS >> $HOME/.bash_profile
 
 
 cd $HOME
@@ -29,16 +29,48 @@ cd leo
 cargo install --path .
 
 # contract name
-read -p "Enter the Name of your contract: " aleo_cn
-echo 'export aleo_cn='$aleo_cn >> $HOME/.bash_profile
+read -p "Enter the Name of your contract: " NAME
+echo 'export NAME='$NAME >> $HOME/.bash_profile
 
 mkdir $HOME/leo_deploy && cd $HOME/leo_deploy
-leo new $aleo_cn
+leo new $NAME
 
 # faucet link
-read -p "Paste The Faucet Link: " aleo_fl
-echo 'export aleo_fl='$aleo_fl >> $HOME/.bash_profile
+read -p "Paste The Faucet Link: " QUOTE_LINK
+echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bash_profile
 
-ct=$(curl -s $aleo_fl | jq -r '.execution.transitions[0].outputs[0].value')
+CIPHERTEXT=$(curl -s $QUOTE_LINK | jq -r '.execution.transitions[0].outputs[0].value')
 
-rec=$(snarkos developer decrypt --ciphertext $ct --view-key $aleo_vk)
+RECORD=$(snarkos developer decrypt --ciphertext $CIPHERTEXT --view-key $VK)
+
+
+#################################### Deploy ####################################
+
+snarkos developer deploy "$NAME.aleo" \
+--private-key "$PK" \
+--query "https://vm.aleo.org/api" \
+--path "$HOME/leo_deploy/$NAME/build/" \
+--broadcast "https://vm.aleo.org/api/testnet3/transaction/broadcast" \
+--fee 4000000 \
+--record "$RECORD"
+
+
+
+#################################### Execute ####################################
+
+read -p "Enter Deployment TX Hash: " aleo_dtxh
+DL="https://vm.aleo.org/api/testnet3/transaction/"$DH
+echo 'export DH='$DH >> $HOME/.bash_profile
+
+CIPHERTEXT=$(curl -s $DL | jq -r '.fee.transition.outputs[].value')
+RECORD=$(snarkos developer decrypt --ciphertext $CIPHERTEXT --view-key $VK)
+
+
+snarkos developer execute "$NAME.aleo" "hello" "1u32" "2u32" \
+--private-key "$PK" \
+--query "https://vm.aleo.org/api" \
+--broadcast "https://vm.aleo.org/api/testnet3/transaction/broadcast" \
+--fee 4000000 \
+--record "$RECORD"
+
+

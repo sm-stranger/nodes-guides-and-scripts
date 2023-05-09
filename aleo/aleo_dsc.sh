@@ -29,7 +29,10 @@ cd leo
 cargo install --path .
 
 # contract name
-read -p "Enter the Name of your contract: " NAME
+until [ ${#$NAME} < 10 ]
+do
+    read -p "Enter the Name of your contract: " NAME
+done
 echo 'export NAME='$NAME >> $HOME/.bash_profile
 
 mkdir $HOME/leo_deploy && cd $HOME/leo_deploy

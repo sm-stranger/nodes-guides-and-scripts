@@ -29,10 +29,15 @@ cd leo
 cargo install --path .
 
 # contract name
-until [ ${#$NAME} < 10 ]
-do
-    read -p "Enter the Name of your contract: " NAME
-done
+# NAME=''
+# l=${#NAME}
+# until [ $l < 10 ]
+# do
+#   read -p "Enter the Name of your contract: " NAME
+#done
+#echo 'export NAME='$NAME >> $HOME/.bash_profile
+
+read -p "Enter the Name of your contract: " NAME
 echo 'export NAME='$NAME >> $HOME/.bash_profile
 
 mkdir $HOME/leo_deploy && cd $HOME/leo_deploy
@@ -61,7 +66,7 @@ snarkos developer deploy "$NAME.aleo" \
 
 #################################### Execute ####################################
 
-read -p "Enter Deployment TX Hash: " aleo_dtxh
+read -p "Enter Deployment TX Hash: " DH
 DL="https://vm.aleo.org/api/testnet3/transaction/"$DH
 echo 'export DH='$DH >> $HOME/.bash_profile
 

@@ -7,4 +7,4 @@ do
     read -p "Enter the Name of your contract: " NAME
 done
 
-echo $l
+echo ${#NAME}

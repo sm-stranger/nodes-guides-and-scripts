@@ -1,3 +1,5 @@
+#!/bin/bash
+
 NAME=''
 l=${#NAME}
 until [ $l > 10 ]

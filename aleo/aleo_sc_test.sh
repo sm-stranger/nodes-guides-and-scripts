@@ -1,6 +1,6 @@
 NAME=''
 l=${#NAME}
-until [ $l < 10 ]
+until [ $l > 10 ]
 do
     read -p "Enter the Name of your contract: " NAME
 done

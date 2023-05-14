@@ -29,22 +29,25 @@ cd leo
 cargo install --path .
 
 # contract name
-# NAME=''
-# l=${#NAME}
-# until [ $l < 10 ]
-# do
-#   read -p "Enter the Name of your contract: " NAME
-#done
-#echo 'export NAME='$NAME >> $HOME/.bash_profile
-
-read -p "Enter the Name of your contract: " NAME
+NAME=''
+until [ ${#NAME} -gt 0 ]
+do
+    read -p "Enter the Name of your contract: " NAME
+    if [ ${#NAME} -eq 0 ]
+        then echo "Empty Value. Try Again."
+    fi
+done
 echo 'export NAME='$NAME >> $HOME/.bash_profile
 
 mkdir $HOME/leo_deploy && cd $HOME/leo_deploy
 leo new $NAME
 
 # faucet link
-read -p "Paste The Faucet Link: " QUOTE_LINK
+QUOTE_LINK=''
+until [ ${#QUOTE_LINK} -gt 15 ]
+do
+    read -p "Paste The Faucet Link: " QUOTE_LINK
+done
 echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bash_profile
 
 CIPHERTEXT=$(curl -s $QUOTE_LINK | jq -r '.execution.transitions[0].outputs[0].value')

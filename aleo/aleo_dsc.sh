@@ -5,15 +5,25 @@ if [ -f "$bash_profile" ]; then
     . $HOME/.bash_profile
 fi
 
-sudo apt update && sudo apt upgrade -y
-sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw -y
+#sudo apt update && sudo apt upgrade -y
+#sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw -y
 
-read -p "Enter Your Private Key: " PK
-echo 'export PK='$PK >> $HOME/.bash_profile
-read -p "Enter Your View Key: " VK
-echo 'export VK='$VK >> $HOME/.bash_profile
-read -p "Enter Your Address: " ADDRESS
-echo 'export ADDRESS='$ADDRESS >> $HOME/.bash_profile
+function enter_val(){
+    vn=$2
+    v=''
+    until [ ${#v} -gt 0 ]
+    do
+        read -p "Enter Your $1: " vn
+        v=$vn
+    done
+    echo 'export '$vn'='$v >> $HOME/.bash_profile
+}
+
+keys=(PK, VK, ADDRESS)
+
+enter_val "Private Key" PK
+enter_val "View Key" VK
+enter_val "Address" ADDRESS
 
 
 cd $HOME
@@ -29,26 +39,13 @@ cd leo
 cargo install --path .
 
 # contract name
-NAME=''
-until [ ${#NAME} -gt 0 ]
-do
-    read -p "Enter the Name of your contract: " NAME
-    if [ ${#NAME} -eq 0 ]
-        then echo "Empty Value. Try Again."
-    fi
-done
-echo 'export NAME='$NAME >> $HOME/.bash_profile
+enter_val "Contract Name" NAME
 
 mkdir $HOME/leo_deploy && cd $HOME/leo_deploy
 leo new $NAME
 
 # faucet link
-QUOTE_LINK=''
-until [ ${#QUOTE_LINK} -gt 15 ]
-do
-    read -p "Paste The Faucet Link: " QUOTE_LINK
-done
-echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bash_profile
+enter_val "Faucet Link" QUOTE_LINK
 
 CIPHERTEXT=$(curl -s $QUOTE_LINK | jq -r '.execution.transitions[0].outputs[0].value')
 
@@ -83,5 +80,3 @@ snarkos developer execute "$NAME.aleo" "hello" "1u32" "2u32" \
 --broadcast "https://vm.aleo.org/api/testnet3/transaction/broadcast" \
 --fee 4000000 \
 --record "$RECORD"
-
-

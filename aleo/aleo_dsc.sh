@@ -8,16 +8,8 @@ fi
 sudo apt update && sudo apt upgrade -y
 sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw -y
 
-function enter_val(){
-    vn=$2
-    v=''
-    until [ ${#v} -gt 0 ]
-    do
-        read -p "Enter Your $1: " vn
-        v=$vn
-    done
-    echo 'export '$2'='$v >> $HOME/.bash_profile
-}
+curl -s https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/functions.sh
+
 
 enter_val "Private Key" PK
 enter_val "View Key" VK

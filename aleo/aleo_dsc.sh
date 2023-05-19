@@ -6,7 +6,7 @@ if [ -f "$bash_profile" ]; then
 fi
 
 sudo apt update && sudo apt upgrade -y
-sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw -y
+sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw mc -y 
 
 function enter_val(){
     vn=$2

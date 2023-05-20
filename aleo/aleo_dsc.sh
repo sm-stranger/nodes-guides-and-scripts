@@ -8,8 +8,8 @@ fi
 sudo apt update && sudo apt upgrade -y
 sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw -y
 
-curl -s https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/functions.sh
-
+wget -O functions.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/functions.sh
+source functions.sh
 
 enter_val "Private Key" PK
 enter_val "View Key" VK

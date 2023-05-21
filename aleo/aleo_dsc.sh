@@ -16,20 +16,27 @@ enter_val "View Key" VK
 enter_val "Address" ADDRESS
 
 
-cd && git clone https://github.com/AleoHQ/snarkOS.git --depth 1
-cd $HOME/snarkOS
-bash ./build_ubuntu.sh
-source $HOME/.bashrc
-source $HOME/.cargo/env
+if ! [ -d /root/snarkOS ]; then
+    cd && git clone https://github.com/AleoHQ/snarkOS.git --depth 1
+    cd $HOME/snarkOS
+    bash ./build_ubuntu.sh
+    source $HOME/.bashrc
+    source $HOME/.cargo/env
+fi
 
-cd && git clone https://github.com/AleoHQ/leo.git
-cd $HOME/leo
-cargo install --path .
+if ! [ -d /root/leo ]; then
+    cd && git clone https://github.com/AleoHQ/leo.git
+    cd $HOME/leo
+    cargo install --path .
+fi
 
 # contract name
 enter_val "Contract Name" NAME
 
-mkdir $HOME/leo_deploy && cd $HOME/leo_deploy
+if ! [ -d /root/leo_deploy ]; then
+    mkdir $HOME/leo_deploy
+fi
+cd $HOME/leo_deploy
 leo new $NAME
 
 # faucet link

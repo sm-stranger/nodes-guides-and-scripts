@@ -6,5 +6,5 @@ function enter_val(){
         read -p "Enter Your $1: " vn
         v=$vn
     done
-    echo 'export '$2'='$v >> $HOME/.bash_profile
+    echo 'export '$2'='$v >> $HOME/.bashrc
 }

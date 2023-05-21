@@ -10,7 +10,7 @@ sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils g
 
 if ! [ -f /root/functions.sh ]; then
     wget -O functions.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/functions.sh
-fi;
+fi
 source functions.sh
 
 enter_val "Private Key" PK

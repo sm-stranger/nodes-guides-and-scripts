@@ -1,133 +1,70 @@
 #!/bin/bash
 
-while true
-do
+#bash_profile=$HOME/.bash_profile
+#if [ -f "$bash_profile" ]; then
+#    . $HOME/.bash_profile
+#fi
 
-PS3="Choose option and press Enter: "
-options=("Install" "Delete" "Update" "Check Logs")
-select opt in "${options[@]}"
-do
-    case $opt in
-    
-        ######################################## Install ########################################
-        
-        "Install")
-            
-            # update && upgrade
-            sudo apt update && sudo apt upgrade -y
+sudo apt update && sudo apt upgrade -y
+sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw mc -y
 
-            # install dependencies
-            sudo apt update && sudo apt install software-properties-common -y
-            sudo add-apt-repository ppa:deadsnakes/ppa -y
-            sudo apt update && sudo apt install curl git tmux python3.10 python3.10-venv python3.10-dev build-essential libgmp-dev pkg-config libssl-dev mc -y
-            
-            # install Rust
-            sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
-            source $HOME/.cargo/env
-            rustup update stable --force
+wget -O functions.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/functions.sh
+source functions.sh
+
+enter_val "Private Key" PK
+enter_val "View Key" VK
+enter_val "Address" ADDRESS
 
 
-            # install Python
-            cd $HOME
-            rm -rf pathfinder
-            git clone https://github.com/eqlabs/pathfinder.git
-            cd pathfinder
-            git fetch
-            git checkout v0.5.1
-            cd $HOME/pathfinder/py
-            python3.10 -m venv .venv
-            source .venv/bin/activate
-            PIP_REQUIRE_VIRTUALENV=true pip install --upgrade pip
-            PIP_REQUIRE_VIRTUALENV=true pip install -e .[dev]
-            pytest
-            cd $HOME/pathfinder/
-            cargo +stable build --release --bin pathfinder
-            cd $home
+cd && git clone https://github.com/AleoHQ/snarkOS.git --depth 1
+cd $HOME/snarkOS
+bash ./build_ubuntu.sh
+source $HOME/.bashrc
+source $HOME/.cargo/env
 
-            source $HOME/.bash_profile
-            mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
+cd && git clone https://github.com/AleoHQ/leo.git
+cd $HOME/leo
+cargo install --path .
 
+# contract name
+enter_val "Contract Name" NAME
 
-            read -p "Enter Your Alchemy HTTP : " ALCHEMY
-            echo 'export ALCHEMY='${ALCHEMY} >> $HOME/.profile
-            source $HOME/.bash_profile
+mkdir $HOME/leo_deploy && cd $HOME/leo_deploy
+leo new $NAME
 
-            echo "[Unit]
-            Description=StarkNet
-            After=network.target
-            [Service]
-            User=$USER
-            Type=simple
-            WorkingDirectory=$HOME/pathfinder/py
-            ExecStart=/bin/bash -c \"source $HOME/pathfinder/py/.venv/bin/activate && /usr/local/bin/pathfinder --http-rpc=\"0.0.0.0:9545\" --ethereum.url $ALCHEMY\"
-            Restart=on-failure
-            LimitNOFILE=65535
-            [Install]
-            WantedBy=multi-user.target" > $HOME/starknetd.service
-            mv $HOME/starknetd.service /etc/systemd/system/
+# faucet link
+enter_val "Faucet Link" QUOTE_LINK
 
-            sudo systemctl restart systemd-journald
-            sudo systemctl daemon-reload
-            sudo systemctl enable starknetd
-            sudo systemctl restart starknetd
-                  
-        break
-        ;;
+CIPHERTEXT=$(curl -s $QUOTE_LINK | jq -r '.execution.transitions[0].outputs[0].value')
+
+RECORD=$(snarkos developer decrypt --ciphertext $CIPHERTEXT --view-key $VK)
 
 
-        ######################################## Delete ########################################
+#################################### Deploy ####################################
 
-        "Delete")
-        
-        systemctl stop starknetd
-        systemctl disable starknetd
-        rm -rf ~/pathfinder/
-        rm -rf /etc/systemd/system/starknetd.service
-        rm -rf /usr/local/bin/pathfinder
-        
-        break
-        ;;
+snarkos developer deploy "$NAME.aleo" \
+--private-key "$PK" \
+--query "https://vm.aleo.org/api" \
+--path "$HOME/leo_deploy/$NAME/build/" \
+--broadcast "https://vm.aleo.org/api/testnet3/transaction/broadcast" \
+--fee 4000000 \
+--record "$RECORD"
 
 
-        ######################################## Update ########################################
-        
-        "Update")
 
-            cd ~/pathfinder
-            rustup update
-            git fetch
-            git checkout v0.5.5
-            source $HOME/.cargo/env
-            cargo build --release --bin pathfinder
-            mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
-            cd py
-            source .venv/bin/activate
-            PIP_REQUIRE_VIRTUALENV=true pip install -e .[dev]
-            pip install --upgrade pip
-            systemctl restart starknetd
+#################################### Execute ####################################
 
-        break
-        ;;
+read -p "Enter Deployment TX Hash: " DH
+DL="https://vm.aleo.org/api/testnet3/transaction/"$DH
+echo 'export DH='$DH >> $HOME/.bash_profile
+
+CIPHERTEXT=$(curl -s $DL | jq -r '.fee.transition.outputs[].value')
+RECORD=$(snarkos developer decrypt --ciphertext $CIPHERTEXT --view-key $VK)
 
 
-        ######################################## Check Logs ########################################
-
-        "Check Logs")
-            journalctl -u starknetd -f
-        break
-        ;;
-
-
-        ######################################## Restart ########################################
-
-        "Restart")
-            systemctl restart starknetd
-        break
-        ;;
-
-
-    
-    esac
-
-done
-done
+snarkos developer execute "$NAME.aleo" "hello" "1u32" "2u32" \
+--private-key "$PK" \
+--query "https://vm.aleo.org/api" \
+--broadcast "https://vm.aleo.org/api/testnet3/transaction/broadcast" \
+--fee 4000000 \
+--record "$RECORD"

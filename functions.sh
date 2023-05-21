@@ -7,4 +7,5 @@ function enter_val(){
         v=$vn
     done
     echo 'export '$2'='$v >> $HOME/.bashrc
+    source $HOME/.bashrc
 }

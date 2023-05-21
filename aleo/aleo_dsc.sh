@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#bash_profile=$HOME/.bash_profile
-#if [ -f "$bash_profile" ]; then
-#    . $HOME/.bash_profile
-#fi
+bash_profile=$HOME/.bash_profile
+if [ -f "$bash_profile" ]; then
+    . $HOME/.bash_profile
+fi
 
 sudo apt update && sudo apt upgrade -y
 sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw mc -y

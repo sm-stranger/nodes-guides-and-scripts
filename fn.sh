@@ -9,3 +9,9 @@ function enter_val(){
     echo 'export '$2'='$v >> $HOME/.bash_profile
     source $HOME/.bash_profile
 }
+
+function check_install(){
+    s=$(dpkg -s $1 grep Status)
+    if [ s !="Status: install ok installed" ]; then
+        sudo apt install $1 -y
+}

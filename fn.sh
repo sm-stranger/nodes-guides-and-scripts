@@ -14,4 +14,5 @@ function check_install(){
     s=$(dpkg -s $1 grep Status)
     if [ s !="Status: install ok installed" ]; then
         sudo apt install $1 -y
+    fi
 }

@@ -7,7 +7,7 @@ function enter_val(){
         v=$vn
     done
     echo 'export '$2'='$v >> $HOME/.bash_profile
-    source $HOME/.bash_profile
+    source $HOME/.bashrc
 }
 
 function check_install(){

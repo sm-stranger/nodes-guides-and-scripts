@@ -44,6 +44,7 @@ fi
 
 # contract name
 enter_val "Contract Name" NAME
+source $HOME/.bashrc
 
 if ! [ -d /root/leo_deploy ]; then
     mkdir $HOME/leo_deploy

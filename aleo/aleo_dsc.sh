@@ -20,9 +20,15 @@ if ! [ -f /root/fn.sh ]; then
 fi
 source fn.sh
 
-if [ -z "$PK" ]; then enter_val "Private Key" PK
-if [ -z "$VK" ]; then enter_val "View Key" VK
-if [ -z "$PK" ]; then enter_val "Address" ADDRESS
+if [ -z "$PK" ]; then
+    enter_val "Private Key" PK
+fi
+if [ -z "$VK" ]; then
+    enter_val "View Key" VK
+fi
+if [ -z "$PK" ];
+    then enter_val "Address" ADDRESS
+fi
 
 
 if ! [ -d /root/snarkOS ]; then

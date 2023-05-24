@@ -26,7 +26,7 @@ fi
 if [ -z "$VK" ]; then
     enter_val "View Key" VK
 fi
-if [ -z "$PK" ];
+if [ -z "$ADDRESS" ];
     then enter_val "Address" ADDRESS
 fi
 
@@ -54,8 +54,8 @@ fi
 cd $HOME/leo_deploy
 leo new $NAME
 
-# faucet link
-enter_val "Faucet Link" QUOTE_LINK
+# tx link
+enter_val "Link" QUOTE_LINK
 
 CIPHERTEXT=$(curl -s $QUOTE_LINK | jq -r '.execution.transitions[0].outputs[0].value')
 

@@ -8,33 +8,15 @@ sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils g
 #fi
 #source fn.sh
 
-#!/bin/bash
-
-function enter_val(){
-    vn=$2
-    v=''
-    until [ ${#v} -gt 0 ]
-    do
-        read -p "Enter Your $1: " vn
-        v=$vn
-    done
-    echo 'export '$2'='${v} >> $HOME/.bashrc
-    source $HOME/.bashrc
-}
-
-function check_install(){
-    s=$(dpkg -s $1 grep Status)
-    if [ s !="Status: install ok installed" ]; then
-        sudo apt install $1 -y
-    fi
-}
+#curl -s https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
 
 
-if [ -z "$PK" ]; then enter_val "Private Key" PK
+
+if [ -z "$PK" ]; then read -p "Private Key: " PK
 fi
-if [ -z "$VK" ]; then enter_val "View Key" VK
+if [ -z "$VK" ]; then read -p "View Key: " VK
 fi
-if [ -z "$ADDRESS" ]; then enter_val "Address" ADDRESS
+if [ -z "$ADDRESS" ]; then read -p "Address: " ADDRESS
 fi
 
 
@@ -53,7 +35,7 @@ cd $HOME/leo
 cargo install --path .
 
 # contract name
-enter_val "Contract Name" NAME
+read -p "Enter Your Contract Name: " NAME
 
 if ! [ -d /root/leo_deploy ]; then
     mkdir $HOME/leo_deploy
@@ -62,7 +44,7 @@ cd $HOME/leo_deploy
 leo new $NAME
 
 # tx link
-enter_val "Link" QUOTE_LINK
+read -p "Link" QUOTE_LINK
 
 CIPHERTEXT=$(curl -s $QUOTE_LINK | jq -r '.execution.transitions[0].outputs[0].value')
 

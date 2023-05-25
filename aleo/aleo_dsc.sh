@@ -11,18 +11,17 @@ sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils g
 #curl -s https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
 
 
-
 if [ -z "$PK" ]; then 
     read -p "Private Key: " PK
-    echo 'export PK='${PK} >> $HOME/.bashrc
+    echo 'export PK='${PK} >> $HOME/.bash_profile
 fi
 if [ -z "$VK" ]; then 
     read -p "View Key: " VK
-    echo 'export VK='${VK} >> $HOME/.bashrc
+    echo 'export VK='${VK} >> $HOME/.bash_profile
 fi
 if [ -z "$ADDRESS" ]; then 
     read -p "Address: " ADDRESS
-    echo 'export ADDRESS='${ADDRESS} >> $HOME/.bashrc
+    echo 'export ADDRESS='${ADDRESS} >> $HOME/.bash_profile
 fi
 
 
@@ -31,6 +30,7 @@ if ! [ -d /root/snarkOS ]; then
     cd $HOME/snarkOS
     bash ./build_ubuntu.sh
 fi
+source $HOME/.bash_profile
 source $HOME/.bashrc
 source $HOME/.cargo/env
 
@@ -42,7 +42,8 @@ cargo install --path .
 
 # contract name
 read -p "Enter Your Contract Name: " NAME
-echo 'export NAME='${NAME} >> $HOME/.bashrc
+echo 'export NAME='${NAME} >> $HOME/.bash_profile
+source $HOME/.bash_profile
 
 if ! [ -d /root/leo_deploy ]; then
     mkdir $HOME/leo_deploy
@@ -52,7 +53,8 @@ leo new $NAME
 
 # tx link
 read -p "Link" QUOTE_LINK
-echo 'export QUOTE_LINK='${QUOTE_LINK} >> $HOME/.bashrc
+echo 'export QUOTE_LINK='${QUOTE_LINK} >> $HOME/.bash_profile
+source $HOME/.bash_profile
 
 CIPHERTEXT=$(curl -s $QUOTE_LINK | jq -r '.execution.transitions[0].outputs[0].value')
 
@@ -61,6 +63,7 @@ RECORD=$(snarkos developer decrypt --ciphertext $CIPHERTEXT --view-key $VK)
 
 #################################### Deploy ####################################
 
+source $HOME/.bash_profile
 snarkos developer deploy "$NAME.aleo" \
 --private-key "$PK" \
 --query "https://vm.aleo.org/api" \

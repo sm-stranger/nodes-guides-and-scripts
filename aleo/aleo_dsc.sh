@@ -1,25 +1,18 @@
 #!/bin/bash
 
-. $HOME/.bashrc
-
 sudo apt update && sudo apt upgrade -y
 sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw mc -y
-#deps=( make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw mc )
-#for dep in $deps
-#do
-#    check_install $deps[i]
-#done
 
-curl -s https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
+if [ -f /root/fn.sh ]; then
+    wget -O fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
+fi
+source fn.sh
 
-if [ -z "$PK" ]; then
-    enter_val "Private Key" PK
+if [ -z "$PK" ]; then enter_val "Private Key" PK
 fi
-if [ -z "$VK" ]; then
-    enter_val "View Key" VK
+if [ -z "$VK" ]; then enter_val "View Key" VK
 fi
-if [ -z "$ADDRESS" ];then
-    enter_val "Address" ADDRESS
+if [ -z "$ADDRESS" ];then enter_val "Address" ADDRESS
 fi
 
 

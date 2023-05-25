@@ -12,11 +12,17 @@ sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils g
 
 
 
-if [ -z "$PK" ]; then read -p "Private Key: " PK
+if [ -z "$PK" ]; then 
+    read -p "Private Key: " PK
+    echo 'export PK='${PK} >> $HOME/.bashrc
 fi
-if [ -z "$VK" ]; then read -p "View Key: " VK
+if [ -z "$VK" ]; then 
+    read -p "View Key: " VK
+    echo 'export VK='${VK} >> $HOME/.bashrc
 fi
-if [ -z "$ADDRESS" ]; then read -p "Address: " ADDRESS
+if [ -z "$ADDRESS" ]; then 
+    read -p "Address: " ADDRESS
+    echo 'export ADDRESS='${ADDRESS} >> $HOME/.bashrc
 fi
 
 
@@ -36,6 +42,7 @@ cargo install --path .
 
 # contract name
 read -p "Enter Your Contract Name: " NAME
+echo 'export NAME='${NAME} >> $HOME/.bashrc
 
 if ! [ -d /root/leo_deploy ]; then
     mkdir $HOME/leo_deploy
@@ -45,6 +52,7 @@ leo new $NAME
 
 # tx link
 read -p "Link" QUOTE_LINK
+echo 'export QUOTE_LINK='${QUOTE_LINK} >> $HOME/.bashrc
 
 CIPHERTEXT=$(curl -s $QUOTE_LINK | jq -r '.execution.transitions[0].outputs[0].value')
 

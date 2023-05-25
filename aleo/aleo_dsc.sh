@@ -3,10 +3,32 @@
 sudo apt update && sudo apt upgrade -y
 sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw mc -y
 
-if ! [ -f /root/fn.sh ]; then
-    wget -O fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
-fi
-source fn.sh
+#if ! [ -f /root/fn.sh ]; then
+#    wget -O fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
+#fi
+#source fn.sh
+
+#!/bin/bash
+
+function enter_val(){
+    vn=$2
+    v=''
+    until [ ${#v} -gt 0 ]
+    do
+        read -p "Enter Your $1: " vn
+        v=$vn
+    done
+    echo 'export '$2'='${v} >> $HOME/.bashrc
+    source $HOME/.bashrc
+}
+
+function check_install(){
+    s=$(dpkg -s $1 grep Status)
+    if [ s !="Status: install ok installed" ]; then
+        sudo apt install $1 -y
+    fi
+}
+
 
 if [ -z "$PK" ]; then enter_val "Private Key" PK
 fi
@@ -20,15 +42,15 @@ if ! [ -d /root/snarkOS ]; then
     cd && git clone https://github.com/AleoHQ/snarkOS.git --depth 1
     cd $HOME/snarkOS
     bash ./build_ubuntu.sh
-    source $HOME/.bashrc
-    source $HOME/.cargo/env
 fi
+source $HOME/.bashrc
+source $HOME/.cargo/env
 
 if ! [ -d /root/leo ]; then
     cd && git clone https://github.com/AleoHQ/leo.git
-    cd $HOME/leo
-    cargo install --path .
 fi
+cd $HOME/leo
+cargo install --path .
 
 # contract name
 enter_val "Contract Name" NAME

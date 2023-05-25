@@ -10,8 +10,7 @@ sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils g
 #    check_install $deps[i]
 #done
 
-
-curl -s fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
+curl -s https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
 
 if [ -z "$PK" ]; then
     enter_val "Private Key" PK
@@ -19,8 +18,8 @@ fi
 if [ -z "$VK" ]; then
     enter_val "View Key" VK
 fi
-if [ -z "$ADDRESS" ];
-    then enter_val "Address" ADDRESS
+if [ -z "$ADDRESS" ];then
+    enter_val "Address" ADDRESS
 fi
 
 

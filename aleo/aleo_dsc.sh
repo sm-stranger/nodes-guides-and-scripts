@@ -11,10 +11,7 @@ sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils g
 #done
 
 
-if ! [ -f /root/fn.sh ]; then
-    wget -O fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
-fi
-source fn.sh
+curl -s fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
 
 if [ -z "$PK" ]; then
     enter_val "Private Key" PK

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function enter_val(){
     vn=$2
     v=''

@@ -43,7 +43,6 @@ if ! [ -d /root/leo ]; then
 fi
 
 # contract name
-source fn.sh
 enter_val "Contract Name" NAME
 
 if ! [ -d /root/leo_deploy ]; then

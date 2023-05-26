@@ -11,6 +11,23 @@ sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils g
 #curl -s https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
 
 
+if ! [ -d /root/snarkOS ]; then
+    cd && git clone https://github.com/AleoHQ/snarkOS.git --depth 1
+    cd $HOME/snarkOS
+    bash ./build_ubuntu.sh
+fi
+source $HOME/.bash_profile
+source $HOME/.bashrc
+source $HOME/.cargo/env
+
+
+
+if ! [ -d /root/leo ]; then
+    cd && git clone https://github.com/AleoHQ/leo.git
+fi
+cd $HOME/leo
+cargo install --path .
+
 if [ -z "$PK" ]; then 
     read -p "Private Key: " PK
     echo 'export PK='${PK} >> $HOME/.bash_profile
@@ -24,22 +41,6 @@ if [ -z "$ADDRESS" ]; then
     echo 'export ADDRESS='${ADDRESS} >> $HOME/.bash_profile
 fi
 
-
-if ! [ -d /root/snarkOS ]; then
-    cd && git clone https://github.com/AleoHQ/snarkOS.git --depth 1
-    cd $HOME/snarkOS
-    bash ./build_ubuntu.sh
-fi
-source $HOME/.bash_profile
-source $HOME/.bashrc
-source $HOME/.cargo/env
-
-if ! [ -d /root/leo ]; then
-    cd && git clone https://github.com/AleoHQ/leo.git
-fi
-cd $HOME/leo
-cargo install --path .
-
 # contract name
 read -p "Enter Your Contract Name: " NAME
 echo 'export NAME='${NAME} >> $HOME/.bash_profile
@@ -52,11 +53,11 @@ cd $HOME/leo_deploy
 leo new $NAME
 
 # tx link
-read -p "Link" QUOTE_LINK
+read -p "Link: " QUOTE_LINK
 echo 'export QUOTE_LINK='${QUOTE_LINK} >> $HOME/.bash_profile
 source $HOME/.bash_profile
 
-CIPHERTEXT=$(curl -s $QUOTE_LINK | jq -r '.execution.transitions[0].outputs[0].value')
+CIPHERTEXT=$(curl -s "$QUOTE_LINK" | jq -r '.execution.transitions[0].outputs[0].value')
 
 RECORD=$(snarkos developer decrypt --ciphertext $CIPHERTEXT --view-key $VK)
 
@@ -78,7 +79,8 @@ snarkos developer deploy "$NAME.aleo" \
 
 read -p "Enter Deployment TX Hash: " DH
 DL="https://vm.aleo.org/api/testnet3/transaction/"$DH
-echo 'export DH='$DH >> $HOME/.bash_profile
+echo 'export DL='$DL >> $HOME/.bash_profile
+source $HOME/.bash_profile
 
 CIPHERTEXT=$(curl -s $DL | jq -r '.fee.transition.outputs[].value')
 RECORD=$(snarkos developer decrypt --ciphertext $CIPHERTEXT --view-key $VK)

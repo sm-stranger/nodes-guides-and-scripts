@@ -1,5 +1,3 @@
-#!/bin/bash
-
 function enter_val(){
     vn=$2
     v=''
@@ -8,8 +6,6 @@ function enter_val(){
         read -p "Enter Your $1: " vn
         v=$vn
     done
-    echo 'export '$2'='${v} >> $HOME/.bashrc
-    source $HOME/.bashrc
 }
 
 function check_install(){

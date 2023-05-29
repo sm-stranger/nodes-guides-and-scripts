@@ -1,4 +1,5 @@
 function enter_val(){
+    echo $1 $2
     vn=$2
     v=''
     until [ ${#v} -gt 0 ]

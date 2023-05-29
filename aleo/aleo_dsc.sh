@@ -11,9 +11,10 @@ source fn.sh
 
 # install snarkOS
 if ! [ -d /root/snarkOS ]; then
-    cd && git clone https://github.com/AleoHQ/snarkOS.git --depth 1
+    cd
+    git clone https://github.com/AleoHQ/snarkOS.git --depth 1
     cd $HOME/snarkOS
-    bash ./build_ubuntu.sh
+    cargo build
 fi
 source $HOME/.bashrc
 source $HOME/.cargo/env

@@ -19,10 +19,8 @@ curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/inst
 # enter project name
 enter_val "Project Name" NAME
 
-source $HOME/.bashrc
-
 # initialize
-if [ protostar ]; then
+if [ -f protostar ]; then
     source $HOME/.bashrc
     protostar init $NAME
 else
@@ -57,13 +55,3 @@ protostar declare ./build/main.json \
 --max-fee auto \
 --private-key-path ./.env \
 --network mainnet
-
-
-
-#############
-
-if ! [ protostar ]; then
-    echo "no"
-else
-    echo "yes"
-fi

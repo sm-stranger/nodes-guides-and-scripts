@@ -1,5 +1,5 @@
 <h1>Starknet Smart Contract</h1>
 
-<pre style="padding:30px"><code>https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/starknet/Smart_Contract/starknet_sc.sh</code></pre>
+<pre style="padding:30px"><code style="padding:30px">https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/starknet/Smart_Contract/starknet_sc.sh</code></pre>
 
 <p style="padding:30px">В этом гайде мы рассмотрим деплой и исполнение смарт контракта Starknet</p>

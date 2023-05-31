@@ -18,6 +18,8 @@ curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/inst
 
 # enter project name
 enter_val "Project Name" NAME
+echo 'export NAME='$NAME >> $HOME/.bashrc
+source $HOME/.bashrc
 
 # initialize
 if [ -f protostar ]; then

@@ -19,10 +19,11 @@ curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/inst
 # enter project name
 enter_val "Project Name" NAME
 
-sleep 3 && source $HOME/.bashrc
+source $HOME/.bashrc
 
 # initialize
 if [ protostar ]; then
+    source $HOME/.bashrc
     protostar init $NAME
 else
     source $HOME/.bashrc

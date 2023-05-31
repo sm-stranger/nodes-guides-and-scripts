@@ -1,12 +1,13 @@
+#!/bin/bash
+
 function enter_val(){
-    echo $1 $2
-    vn=$2
     v=''
     until [ ${#v} -gt 0 ]
     do
-        read -p "Enter Your $1: " vn
-        v=$vn
+        read -p "Enter Your $1: " v
     done
+    eval ${2}=$v
+
 }
 
 function check_install(){

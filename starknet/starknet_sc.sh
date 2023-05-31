@@ -14,7 +14,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install mc -y
 
 # install Protostar
-curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash
+curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh
 
 # update profile
 source $HOME/.bashrc

@@ -22,6 +22,8 @@ source $HOME/.bashrc
 # enter project name
 enter_val "Project Name" NAME
 
+source $HOME/.bashrc
+
 # initialize
 protostar init $NAME
 

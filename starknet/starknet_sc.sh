@@ -53,4 +53,3 @@ protostar declare ./build/main.json \
 --max-fee auto \
 --private-key-path ./.env \
 --network mainnet
-

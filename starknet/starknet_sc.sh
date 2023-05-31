@@ -16,6 +16,8 @@ sudo apt install mc -y
 # install Protostar
 curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh
 
+sleep 1
+
 # update profile
 source $HOME/.bashrc
 
@@ -23,6 +25,7 @@ source $HOME/.bashrc
 enter_val "Project Name" NAME
 
 source $HOME/.bashrc
+
 # initialize
 protostar init $NAME
 

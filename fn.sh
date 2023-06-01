@@ -6,7 +6,7 @@ enter_val(){
     do
         read -p "Enter Your $1: " v
     done
-    eval ${2}=$v
+    ${2}=$v
 
 }
 

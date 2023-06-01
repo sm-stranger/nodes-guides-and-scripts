@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function enter_val(){
+enter_val(){
     v=''
     until [ ${#v} -gt 0 ]
     do
@@ -10,9 +10,7 @@ function enter_val(){
 
 }
 
-function check_install(){
-    s=$(dpkg -s $1 grep Status)
-    if [ s !="Status: install ok installed" ]; then
-        sudo apt install $1 -y
-    fi
+exists()
+{
+  command -v "$1" >/dev/null 2>&1
 }

@@ -11,7 +11,7 @@ source fn.sh
 sudo apt update && sudo apt upgrade -y
 
 # install dependencies
-if [ !exists mc ]; then 
+if ! [ exists mc ]; then 
     sudo apt install mc -y
 fi
 

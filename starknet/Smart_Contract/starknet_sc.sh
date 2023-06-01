@@ -11,19 +11,26 @@ source fn.sh
 sudo apt update && sudo apt upgrade -y
 
 # install dependencies
-if ! [ exists mc ]; then 
+if [ exists mc ]; then
+    echo ''
+else
     sudo apt install mc -y
 fi
 
 # install Protostar
-if ! [ -d /root/protostar ]; then
-    curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | sh
-    source $HOME/.bashrc
+if exists protostar; then
+    echo ''
+else
+    curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash
 fi
+source $HOME/.bashrc
 
-if ! [ exists scarb ]; then
+if exists scarb; then
+    echo ''
+else
     curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
 fi
+source $HOME/.bashrc
 
 
 # enter project name

@@ -46,15 +46,13 @@ protostar build $NAME
 enter_val "Private Key" PK
 echo 'export PK='$PK >> $HOME/.bashrc
 source $HOME/.bashrc
+# record private key in .env
+echo $PK > .env
 
 # Enter Address
 enter_val "Address" ADDRESS
 echo 'export PK='$PK >> $HOME/.bashrc
 source $HOME/.bashrc
-
-
-# record private key in .env
-echo $PK > .env
 
 
 # declare contract

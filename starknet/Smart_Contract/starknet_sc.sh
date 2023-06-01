@@ -35,9 +35,12 @@ source $HOME/.bashrc
 
 # enter project name
 enter_val "Project Name" NAME
+echo 'export NAME='$NAME >> $HOME/.bashrc
+source $HOME/.bashrc
 
 # initialize
-cd $NAME && protostar init $NAME
+protostar init $NAME
+cd $NAME
 
 # build
 protostar build $NAME

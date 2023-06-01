@@ -18,6 +18,7 @@ fi
 # install Protostar
 if ! [ -d /root/protostar ]; then
     curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | sh
+    source $HOME/.bashrc
 fi
 
 if ! [ exists scarb ]; then

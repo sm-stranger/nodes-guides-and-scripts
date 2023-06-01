@@ -1,38 +1,35 @@
-
 #!/bin/bash
 
 # load functions
-if ! [ -f /root/fn.sh ]; then
-    wget -O fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
-fi
-#curl -S fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
-source fn.sh
+#if ! [ -f /root/fn.sh ]; then
+#    wget -O fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
+#fi
+curl -S fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh | bash
+#source fn.sh
 
 # update && upgrade
 sudo apt update && sudo apt upgrade -y
 
 # install dependencies
-sudo apt install mc -y
+if [ !exists mc ]; then 
+    sudo apt install mc -y
+fi
 
 # install Protostar
-curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash
+if ! [ -d /root/protostar ]; then
+    curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | sh
+fi
+
+if ! [ exists scarb ]; then
+    curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+fi
+
 
 # enter project name
 enter_val "Project Name" NAME
-echo 'export NAME='$NAME >> $HOME/.bashrc
-source $HOME/.bashrc
 
 # initialize
-if [ -f protostar ]; then
-    source $HOME/.bashrc
-    protostar init $NAME
-else
-    source $HOME/.bashrc
-    protostar init $NAME
-fi
-
-# Change Directory
-cd $NAME
+cd $NAME && protostar init $NAME
 
 # build
 protostar build $NAME

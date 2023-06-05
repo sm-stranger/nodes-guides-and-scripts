@@ -43,9 +43,10 @@ if [ -z "$ADDRESS" ]; then
     read -p "Enter Your Address: " ADDRESS
     echo 'export ADDRESS='$ADDRESS >> $HOME/.bashrc
 fi
+source $HOME/.bashrc
 
 # contract name
-enter_val "Enter Your Contract Name: " NAME
+read-p "Enter Your Contract Name: " NAME
 
 if ! [ -d /root/leo_deploy ]; then
     mkdir $HOME/leo_deploy
@@ -59,7 +60,7 @@ leo new $NAME
 
 # Link
 if [ -z "$QUOTE_LINK" ]; then
-    enter_val "Enter Your Link: " QUOTE_LINK
+    read -p "Enter Your Link: " QUOTE_LINK
     echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bashrc
 fi
 

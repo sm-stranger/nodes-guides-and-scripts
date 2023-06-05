@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo apt update && sudo apt upgrade -y
-sudo curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+#sudo curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw mc -y
 

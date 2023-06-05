@@ -14,9 +14,10 @@ source fn.sh
 
 # install snarkOS
 if ! [ -d /root/snarkOS ]; then
-    cd && git clone https://github.com/AleoHQ/snarkOS.git --depth 1 && cd snarkOS
+    cd && git clone https://github.com/AleoHQ/snarkOS.git --depth 1 && cd cd $HOME/snarkOS
     git pull
-    bash ./build_ubuntu.sh
+    #bash ./build_ubuntu.sh
+    cargo install --path .
     
 fi
 source $HOME/.bashrc
@@ -46,7 +47,7 @@ fi
 source $HOME/.bashrc
 
 # contract name
-read-p "Enter Your Contract Name: " NAME
+read -p "Enter Your Contract Name: " NAME
 
 if ! [ -d /root/leo_deploy ]; then
     mkdir $HOME/leo_deploy
@@ -101,5 +102,10 @@ echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bash_profile
 source $HOME/.bash_profile
 
 
+
+
 # Scan
-# snarkos developer scan --endpoint https://vm.aleo.org/api --start 50000 --end 104550 --view-key $VK
+snarkos developer scan --endpoint https://vm.aleo.org/api --start 100000 --end 104550 --view-key $VK
+
+# Create Account
+snarkos account new

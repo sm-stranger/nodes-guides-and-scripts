@@ -1,8 +1,11 @@
 #!/bin/bash
 
 sudo apt update && sudo apt upgrade -y
+sudo curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+
 sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw mc -y
 
+#curl -s https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
 if ! [ -f /root/fn.sh ]; then
     wget -O fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
 fi
@@ -11,9 +14,7 @@ source fn.sh
 
 # install snarkOS
 if ! [ -d /root/snarkOS ]; then
-    cd
-    git clone https://github.com/AleoHQ/snarkOS.git --depth 1
-    cd $HOME/snarkOS
+    cd && git clone https://github.com/AleoHQ/snarkOS.git --depth 1 && cd snarkOS
     cargo build
 fi
 source $HOME/.bashrc
@@ -29,15 +30,15 @@ cargo install --path .
 
 # keys
 if [ -z "$PK" ]; then
-    enter_val "Enter Your Private Key: " PK
+    read -p "Enter Your Private Key: " "PK"
     echo 'export PK='$PK >> $HOME/.bashrc
 fi
 if [ -z "$VK" ]; then
-    enter_val "Enter Your View Key: " VK
+    read -p "Enter Your View Key: " VK
     echo 'export VK='$VK >> $HOME/.bashrc
 fi
 if [ -z "$ADDRESS" ]; then
-    enter_val "Enter Your Address: " ADDRESS
+    read -p "Enter Your Address: " ADDRESS
     echo 'export ADDRESS='$ADDRESS >> $HOME/.bashrc
 fi
 
@@ -95,3 +96,7 @@ read -p "Enter Execution TX Hash Or Link: " EH
 QUOTE_LINK="https://vm.aleo.org/api/testnet3/transaction/"$EH
 echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bash_profile
 source $HOME/.bash_profile
+
+
+# Scan
+# snarkos developer scan --endpoint https://vm.aleo.org/api --start 50000 --end 104550 --view-key $VK

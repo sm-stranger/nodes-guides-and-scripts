@@ -1,8 +1,6 @@
 #!/bin/bash
 
 sudo apt update && sudo apt upgrade -y
-sudo curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf --nightly | sh
-
 sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw mc -y
 
 #curl -s https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
@@ -14,9 +12,9 @@ source fn.sh
 
 # install snarkOS
 if ! [ -d /root/snarkOS ]; then
-    cd && git clone https://github.com/AleoHQ/snarkOS.git && cd snarkOS
+    cd && git clone https://github.com/AleoHQ/snarkOS.git --depth 1 && cd snarkOS
     git pull
-    cargo build
+    bash ./build_ubuntu.sh
 fi
 source $HOME/.bashrc
 source $HOME/.cargo/env

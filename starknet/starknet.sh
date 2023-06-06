@@ -55,6 +55,7 @@ do
                 echo "[Unit]
                 Description=StarkNet
                 After=network.target
+
                 [Service]
                 User=$USER
                 Type=simple
@@ -62,6 +63,7 @@ do
                 ExecStart=/bin/bash -c \"source $HOME/pathfinder/py/.venv/bin/activate && /usr/local/bin/pathfinder --http-rpc=\"0.0.0.0:9545\" --ethereum.url $ALCHEMY\"
                 Restart=on-failure
                 LimitNOFILE=65535
+                
                 [Install]
                 WantedBy=multi-user.target" > $HOME/starknetd.service
                 mv $HOME/starknetd.service /etc/systemd/system/

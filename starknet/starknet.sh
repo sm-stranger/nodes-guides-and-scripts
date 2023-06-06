@@ -93,7 +93,15 @@ do
             
             "Update")
 
+                sudo apt update && sudo apt-get install software-properties-common -y
+                sudo add-apt-repository ppa:deadsnakes/ppa -y
+                sudo apt update && sudo apt install curl git tmux python3.10 python3.10-venv python3.10-dev build-essential libgmp-dev pkg-config libssl-dev -y
+                sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
+                source $HOME/.cargo/env
+                rustup update stable --force
+                
                 cd ~/pathfinder
+                rustup update
                 git pull
                 git fetch --all
                 git checkout v0.5.6

@@ -33,7 +33,7 @@ do
                 git clone https://github.com/eqlabs/pathfinder.git
                 cd pathfinder
                 git fetch
-                git checkout v0.5.5
+                git checkout v0.5.6
                 cd $HOME/pathfinder/py
                 python3.10 -m venv .venv
                 source .venv/bin/activate
@@ -94,8 +94,8 @@ do
             "Update")
 
                 cd ~/pathfinder
-                rustup update
-                git fetch
+                git pull
+                git fetch --all
                 git checkout v0.5.6
                 source $HOME/.cargo/env
                 cargo build --release --bin pathfinder
@@ -103,7 +103,7 @@ do
                 cd py
                 python3.10 -m venv .venv
                 source .venv/bin/activate
-                PIP_REQUIRE_VIRTUALENV=true pip install -e .[dev]
+                PIP_REQUIRE_VIRTUALENV=true pip install -r requirements-dev.txt
                 pip install --upgrade pip
                 systemctl restart starknetd
 

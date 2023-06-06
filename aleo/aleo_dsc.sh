@@ -1,9 +1,8 @@
 #!/bin/bash
 
 sudo apt update && sudo apt upgrade -y
-#sudo curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
-
 sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw mc -y
+sudo curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 #curl -s https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
 if ! [ -f /root/fn.sh ]; then
@@ -14,7 +13,7 @@ source fn.sh
 
 # install snarkOS
 if ! [ -d /root/snarkOS ]; then
-    cd && git clone https://github.com/AleoHQ/snarkOS.git --depth 1 && cd cd $HOME/snarkOS
+    cd && git clone https://github.com/AleoHQ/snarkOS.git --depth 1 && cd $HOME/snarkOS
     git pull
     #bash ./build_ubuntu.sh
     cargo install --path .
@@ -49,6 +48,7 @@ source $HOME/.bashrc
 # contract name
 read -p "Enter Your Contract Name: " NAME
 
+# Make Directory Leo Deploy And Create New Project
 if ! [ -d /root/leo_deploy ]; then
     mkdir $HOME/leo_deploy
 fi
@@ -56,14 +56,15 @@ cd $HOME/leo_deploy
 leo new $NAME
 
 
+# Link
+if [ -z "$QUOTE_LINK" ]; then
+    read -p "Enter Your Hash: " QUOTE_LINK
+    echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bashrc
+fi
+
 
 #################################### Deploy ####################################
 
-# Link
-if [ -z "$QUOTE_LINK" ]; then
-    read -p "Enter Your Link: " QUOTE_LINK
-    echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bashrc
-fi
 
 CIPHERTEXT=$(curl -s "$QUOTE_LINK" | jq -r '.execution.transitions[0].outputs[0].value')
 RECORD=$(snarkos developer decrypt --ciphertext $CIPHERTEXT --view-key $VK)

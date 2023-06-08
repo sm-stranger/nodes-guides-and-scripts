@@ -1,3 +1,9 @@
+<style>
+   h1{
+    color: red
+  }
+</style>
+
 <h1>Starknet node</h1>
 
 <pre><code>wget -O starknet.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/starknet/starknet.sh && chmod +x starknet.sh && ./starknet.sh</code></pre>

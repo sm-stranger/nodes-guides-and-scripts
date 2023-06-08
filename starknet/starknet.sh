@@ -1,14 +1,5 @@
 #!/bin/bash
 
-#if [ -f $HOME/.bash_profile ]; then bash='.bash_profile'
-#else bash='.bashrc'
-#fi
-
-bash_profile=$HOME/.bash_profile
-if [ -f ".bash_profile_profile" ]; then
-    . $HOME/.bash_profile
-fi
-
 while true
 do
 
@@ -53,13 +44,13 @@ do
                 cargo +stable build --release --bin pathfinder
                 cd $home
 
-                source $HOME/.bash_profile
+                source $HOME/.bashrc
                 mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
 
 
                 read -p "Enter Your Alchemy HTTP : " ALCHEMY
-                echo 'export ALCHEMY='${ALCHEMY} >> $HOME/.bash_profile
-                source $HOME/.bash_profile
+                echo 'export ALCHEMY='${ALCHEMY} >> $HOME/.bashrc
+                source $HOME/.bashrc
 
                 echo "[Unit]
                 Description=StarkNet

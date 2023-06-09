@@ -3,6 +3,9 @@
 if [ -f ~/.bashrc ]; then profile=".bashrc"
 else profile=".bash_profile"
 fi
+echo 'export profile='$profile >> $HOME/$profile
+source $HOME/$profile
+
 
 # load functions
 #if ! [ -f /root/fn.sh ]; then
@@ -17,23 +20,10 @@ sudo apt update && sudo apt upgrade -y
 # install dependencies
 sudo apt install mc -y
 
-# install Protostar
-curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash
-
-# update profile
-source $HOME/$profile
-
 # enter project name
 read -p "Project Name:" NAME
-
-# initialize
-protostar init $NAME
-
-# Change Directory
-cd $NAME
-
-# build
-protostar build $NAME
+echo 'export NAME='$NAME >> $HOME/$profile
+source $HOME/$profile
 
 # Enter Private Key
 read -p "Private Key: " PK
@@ -48,6 +38,20 @@ read -p "Address: " ADDRESS
 echo 'export ADDRESS='$ADDRESS >> $HOME/$profile
 source $HOME/$profile
 
+# install Protostar
+curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash
+
+# update profile
+source $HOME/$profile
+
+# initialize
+protostar init $NAME
+
+# Change Directory
+cd $NAME
+
+# build
+protostar build $NAME
 
 
 # declare contract

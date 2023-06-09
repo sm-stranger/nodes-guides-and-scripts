@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ -f ~/.bashrc ]; then $profile=".bashrc"
-else $profile=".bash_profile"
+if [ -f ~/.bashrc ]; then profile=".bashrc"
+else profile=".bash_profile"
 fi
 
 # load functions

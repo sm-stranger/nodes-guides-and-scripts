@@ -20,14 +20,18 @@ echo 'export NAME='$NAME >> $HOME/.bashrc
 source $HOME/.bashrc
 
 # Enter Private Key
-read -p "Private Key: " PK
-echo 'export PK='$PK >> $HOME/.bashrc
-source $HOME/.bashrc
+if [ -z "$PK" ]; then
+    read -p "Private Key: " PK
+    echo 'export PK='$PK >> $HOME/.bashrc
+    source $HOME/.bashrc
+fi
 
 # Enter Address
-read -p "Address: " ADDRESS
-echo 'export ADDRESS='$ADDRESS >> $HOME/.bashrc
-source $HOME/.bashrc
+if [ -z "$ADDRESS" ]; then
+    read -p "Address: " ADDRESS
+    echo 'export ADDRESS='$ADDRESS >> $HOME/.bashrc
+    source $HOME/.bashrc
+fi
 
 # install Protostar
 curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash

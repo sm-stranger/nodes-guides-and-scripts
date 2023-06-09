@@ -1,12 +1,10 @@
 #!/bin/bash
 
-if ! [ -f ~/.bashrc ]; then sudo : | tee >> $HOME/.bashrc ;fi
+if ! [ -f ~/.bashrc ]; then sudo touch $HOME/.bashrc ;fi
 
 
 # load functions
-#if ! [ -f /root/fn.sh ]; then
-#    wget -O fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
-#fi
+#if ! [ -f /root/fn.sh ]; then wget -O fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh ;fi
 #curl -S fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
 #source fn.sh
 

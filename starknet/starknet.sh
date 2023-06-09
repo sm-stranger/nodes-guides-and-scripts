@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -f ~/.bashrc ]; then source ~/.bashrc
+else source ~/.bash_profile
+fi
+
 while true
 do
 

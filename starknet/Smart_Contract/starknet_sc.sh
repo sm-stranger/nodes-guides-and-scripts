@@ -1,66 +1,59 @@
 #!/bin/bash
 
+if [ -f ~/.bashrc ]; then $profile=".bashrc"
+else $profile=".bash_profile"
+fi
+
 # load functions
 if ! [ -f /root/fn.sh ]; then
     wget -O fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
 fi
-#curl -S fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh | bash
+#curl -S fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
 source fn.sh
 
 # update && upgrade
 sudo apt update && sudo apt upgrade -y
 
 # install dependencies
-if exists mc; then
-    echo ''
-else
-    sudo apt install mc -y
-fi
+sudo apt install mc -y
 
 # install Protostar
-if exists protostar; then
-    echo ''
-else
-    curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash
-fi
-source $HOME/.bashrc
+curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash
 
-if exists scarb; then
-    echo ''
-else
-    curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
-fi
-source $HOME/.bashrc
-
+# update profile
+source $HOME/$profile
 
 # enter project name
-enter_val "Project Name" NAME
-echo 'export NAME='$NAME >> $HOME/.bashrc
-source $HOME/.bashrc
+read -p "Project Name:" NAME
 
 # initialize
 protostar init $NAME
+
+# Change Directory
 cd $NAME
 
 # build
 protostar build $NAME
 
 # Enter Private Key
-enter_val "Private Key" PK
-echo 'export PK='$PK >> $HOME/.bashrc
-source $HOME/.bashrc
+read -p "Private Key: " PK
+echo 'export PK='$PK >> $HOME/$profile
+source $HOME/$profile
+
 # record private key in .env
 echo $PK > .env
 
 # Enter Address
-enter_val "Address" ADDRESS
-echo 'export PK='$PK >> $HOME/.bashrc
-source $HOME/.bashrc
+read -p "Address: " ADDRESS
+echo 'export ADDRESS='$ADDRESS >> $HOME/$profile
+source $HOME/$profile
+
 
 
 # declare contract
 protostar declare ./build/main.json \
---account-address $ADDR \
+--account-address $ADDRESS \
 --max-fee auto \
 --private-key-path ./.env \
 --network mainnet
+

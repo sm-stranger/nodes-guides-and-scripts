@@ -5,11 +5,11 @@ else profile=".bash_profile"
 fi
 
 # load functions
-if ! [ -f /root/fn.sh ]; then
-    wget -O fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
-fi
+#if ! [ -f /root/fn.sh ]; then
+#    wget -O fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
+#fi
 #curl -S fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh
-source fn.sh
+#source fn.sh
 
 # update && upgrade
 sudo apt update && sudo apt upgrade -y

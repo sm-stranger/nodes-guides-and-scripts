@@ -43,11 +43,11 @@ protostar init $NAME
 # Change Directory
 cd $NAME
 
-# record private key in .env
-echo $PK > .env
-
 # build
 protostar build $NAME
+
+# record private key in .env
+echo $PK > .env
 
 
 # declare contract

@@ -26,9 +26,6 @@ read -p "Private Key: " PK
 echo 'export PK='$PK >> $HOME/.bashrc
 source $HOME/.bashrc
 
-# record private key in .env
-echo $PK > .env
-
 # Enter Address
 read -p "Address: " ADDRESS
 echo 'export ADDRESS='$ADDRESS >> $HOME/.bashrc
@@ -45,6 +42,9 @@ protostar init $NAME
 
 # Change Directory
 cd $NAME
+
+# record private key in .env
+echo $PK > .env
 
 # build
 protostar build $NAME

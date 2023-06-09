@@ -1,10 +1,6 @@
 #!/bin/bash
 
-if [ -f ~/.bashrc ]; then profile=".bashrc"
-else profile=".bash_profile"
-fi
-echo 'export profile='$profile >> $HOME/$profile
-source $HOME/$profile
+if ! [ -f ~/.bashrc ]; then sudo : | tee >> $HOME/.bashrc ;fi
 
 
 # load functions
@@ -22,27 +18,27 @@ sudo apt install mc -y
 
 # enter project name
 read -p "Project Name:" NAME
-echo 'export NAME='$NAME >> $HOME/$profile
-source $HOME/$profile
+echo 'export NAME='$NAME >> $HOME/.bashrc
+source $HOME/.bashrc
 
 # Enter Private Key
 read -p "Private Key: " PK
-echo 'export PK='$PK >> $HOME/$profile
-source $HOME/$profile
+echo 'export PK='$PK >> $HOME/.bashrc
+source $HOME/.bashrc
 
 # record private key in .env
 echo $PK > .env
 
 # Enter Address
 read -p "Address: " ADDRESS
-echo 'export ADDRESS='$ADDRESS >> $HOME/$profile
-source $HOME/$profile
+echo 'export ADDRESS='$ADDRESS >> $HOME/.bashrc
+source $HOME/.bashrc
 
 # install Protostar
 curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash
 
 # update profile
-source $HOME/$profile
+source $HOME/.bashrc
 
 # initialize
 protostar init $NAME

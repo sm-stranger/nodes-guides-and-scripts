@@ -1,0 +1,1 @@
+<pre><code>wget -q -O shardeum_autostart.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/shardeum_autostart.sh && chmod +x shardeum_autostart.sh && ./shardeum_autostart.sh</code></pre>

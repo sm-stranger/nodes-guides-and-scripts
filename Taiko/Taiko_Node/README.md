@@ -23,7 +23,7 @@
   <h2>Ручная установка</h2>
   
   <p>
-    Обновляем систему
+    <b>Обновляем систему</b>
     <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
   </p>
   

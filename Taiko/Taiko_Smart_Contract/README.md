@@ -20,14 +20,14 @@
   <br>
   
   <p>
-    <b>Создаем проект с Foundry</b>
+    <b>Создаем проект с Foundry и переходим в созданную директорию</b>
     <pre><code>forge init hello_foundry && cd hello_foundry</code></pre>
   </p>
 
   <br>
 
   <p>
-    <b>Разворачиваем (делаем деплой) контракта</b>
+    <b>Разворачиваем (делаем деплой) контракт</b>
     <pre><code>forge create --rpc-url https://rpc.test.taiko.xyz --private-key YOUR_PRIVATE_KEY src/Counter.sol:Counter</code></pre>
   </p>
 

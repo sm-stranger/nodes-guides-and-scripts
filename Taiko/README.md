@@ -14,6 +14,6 @@
   
 </p>
 
-<p name="ьфтгфд_install">
+<p name="manual_install">
   
 </p>

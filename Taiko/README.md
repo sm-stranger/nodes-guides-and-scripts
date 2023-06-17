@@ -14,6 +14,6 @@
   
 </p>
 
-<p name="automatic_install">
+<p name="ьфтгфд_install">
   
 </p>

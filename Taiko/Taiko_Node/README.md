@@ -16,8 +16,13 @@
  <br>
  
  <p>
-  <b>Обновляем систему</b>
- <pre><code>sudo apt update && sudo apt upgrade -y</code></pre> </p> <p>
+   <b>Обновляем систему</b>
+   <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
+ </p>
+
+ <br>
+ 
+ <p>
  
   <b>Устанавливаем Docker</b>
   <pre><code>sudo apt install ca-certificates curl gnupg</code></pre>

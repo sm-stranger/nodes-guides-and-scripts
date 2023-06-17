@@ -16,12 +16,15 @@
  <br>
  
  <p>
-  <h3>Обновляем систему</h3>
+  <b>Обновляем систему</b>
  <pre><code>sudo apt update && sudo apt upgrade -y</code></pre> </p> <p>
  
-  <h3>Устанавливаем Docker</h3>
-  <b>Установка пакетов</b>
+  <b>Устанавливаем Docker</b>
   <pre><code>sudo apt install ca-certificates curl gnupg</code></pre>
+  <pre><code>sudo install -m 0755 -d/etc/apt/keyrings curl -fsSL https://download.docker.com/linux/ubuntu/gpg</pre></code>code>
+  <pre><code>sudo gpg --dearmor -o/etc/apt/keyrings/docker.gpg/<pre></code>
+  <pre><code>sudo chmod a+r/etc/apt/keyrings/docker.gpg</code></pre>
   
-  <h3>Добавляем ключ GPG</h3>
-  <pre><code>sudo install -m 0755 -d/etc/apt/keyrings curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o/etc/apt/keyrings/docker.gpg | sudo chmod a+r/etc/apt/keyrings/docker.gpg</code></pre> </p> </div>
+  </p>
+  
+  </div>

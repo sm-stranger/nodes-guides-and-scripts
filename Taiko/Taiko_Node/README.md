@@ -14,7 +14,7 @@
   
 </p>
 
-<div name="manual_install">
+<div style="padding-top:50px" name="manual_install">
   
   <h2>Ручная установка</h2>
   

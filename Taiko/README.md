@@ -6,8 +6,8 @@
 </p>
 
 <ul>
-  <li><a href="#automatic_install">Автоматическая установка</a><li>
-  <li><a href="#manual_install">Ручная установка</a><li>
+  <li><a href="#automatic_install">Автоматическая установка</a></li>
+  <li><a href="#manual_install">Ручная установка</a></li>
 </ul>
 
 <p name="automatic_install">

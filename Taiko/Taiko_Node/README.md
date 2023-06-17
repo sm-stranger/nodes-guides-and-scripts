@@ -14,9 +14,10 @@
   
 </p>
 
-<p name="manual_install">
-   
-Обновляем систему
-<pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
- 
-</p>
+<div name="manual_install">
+
+  <p>
+    Обновляем систему
+    <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
+  </p>
+</div>

@@ -7,6 +7,8 @@
 
 <div>
 
+  <br>
+  
   <p>
     <b>Сначала установим Foundry</b>
     <pre><code>curl -L https://foundry.paradigm.xyz | bash </code></pre>

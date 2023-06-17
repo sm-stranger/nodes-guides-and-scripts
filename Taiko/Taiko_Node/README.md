@@ -16,6 +16,7 @@
 
 <p name="manual_install">
    
-  
+Обновляем систему
+<pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
  
 </p>

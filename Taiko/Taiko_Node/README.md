@@ -29,12 +29,10 @@
   <pre><code>sudo install -m 0755 -d/etc/apt/keyrings curl -fsSL https://download.docker.com/linux/ubuntu/gpg</code></pre>
   <pre><code>sudo gpg --dearmor -o/etc/apt/keyrings/docker.gpg</code></pre>
   <pre><code>sudo chmod a+r/etc/apt/keyrings/docker.gpg</code></pre>
-  <pre><code>
-   echo \
+  <pre><code>echo \
   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  </code></pre>
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null</code></pre>
   
   </p>
   

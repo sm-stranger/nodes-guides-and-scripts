@@ -36,6 +36,8 @@
   
   </p>
 
+  <br>
+  
   <p>
    <b>Устанавливаем ноду</b>
    <pre><code>git clone https://github.com/taikoxyz/simple-taiko-node.git && cd simple-taiko-node</code></pre>

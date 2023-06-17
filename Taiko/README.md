@@ -15,5 +15,7 @@
 </p>
 
 <p name="manual_install">
+   
   
+ 
 </p>

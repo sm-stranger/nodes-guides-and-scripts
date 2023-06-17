@@ -15,9 +15,12 @@
 </p>
 
 <div name="manual_install">
-
+  
+  <h2>Ручная установка</h2>
+  
   <p>
     Обновляем систему
     <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
   </p>
+  
 </div>

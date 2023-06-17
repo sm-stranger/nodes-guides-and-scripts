@@ -29,4 +29,15 @@
     <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
   </p>
   
+  <p>
+    <h3>Устанавливаем Docker</h3>
+    <b>Установка пакетов</b>
+    <pre><code>sudo apt install ca-certificates curl gnupg</code></pre>
+    <b>Добавляем ключ GPG</b>
+    <pre><code>
+      sudo install -m 0755 -d /etc/apt/keyrings
+      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+      sudo chmod a+r /etc/apt/keyrings/docker.gpg</code></pre>
+    </p>
+  
 </div>

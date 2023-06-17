@@ -24,7 +24,7 @@
   <br>
 
   <p>
-    <b>Разворачиваем (делаем деплой) контракт</b>
+    <b>Разворачиваем (делаем деплой) контракта</b>
     <pre><code>forge create --rpc-url https://rpc.test.taiko.xyz --private-key YOUR_PRIVATE_KEY src/Counter.sol:Counter</code></pre>
   </p>
   

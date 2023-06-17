@@ -21,8 +21,8 @@
  
   <b>Устанавливаем Docker</b>
   <pre><code>sudo apt install ca-certificates curl gnupg</code></pre>
-  <pre><code>sudo install -m 0755 -d/etc/apt/keyrings curl -fsSL https://download.docker.com/linux/ubuntu/gpg</pre></code>code>
-  <pre><code>sudo gpg --dearmor -o/etc/apt/keyrings/docker.gpg/<pre></code>
+  <pre><code>sudo install -m 0755 -d/etc/apt/keyrings curl -fsSL https://download.docker.com/linux/ubuntu/gpg</code></pre>
+  <pre><code>sudo gpg --dearmor -o/etc/apt/keyrings/docker.gpg</code></pre>
   <pre><code>sudo chmod a+r/etc/apt/keyrings/docker.gpg</code></pre>
   
   </p>

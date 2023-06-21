@@ -8,6 +8,8 @@
  <li><a href="#manual_install">Ручная установка</a></li> 
 </ul>
 
+<br>
+
 <div name="automatic_install">
   
   ## Автоматическая установка

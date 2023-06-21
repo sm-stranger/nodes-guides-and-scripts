@@ -20,9 +20,10 @@
   ```
   sudo apt update && sudo apt upgrade -y
   ```
- 
   
-#### Устанавливаем Docker
+  <br>
+  
+  #### Устанавливаем Docker
   
   ```
   sudo apt install ca-certificates curl gnupg && \
@@ -35,13 +36,17 @@
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
   ```
   
-   #### Устанавливаем ноду и переходим в созданный каталог
+  <br>
+  
+  #### Устанавливаем ноду и переходим в созданный каталог
    
-   ```
-   git clone https://github.com/taikoxyz/simple-taiko-node.git && \
-   cd simple-taiko-node
-   ```
+  ```
+  git clone https://github.com/taikoxyz/simple-taiko-node.git && \
+  cd simple-taiko-node
+  ```
 
+  <br>
+  
   #### Запускаем ноду
   
   ```

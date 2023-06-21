@@ -23,10 +23,10 @@
 
 <div name="manual_install">
  
- 
+ ## Ручная установка
  
   
-    #### Обновляем систему
+    ### Обновляем систему
     
     ```
     sudo apt update && sudo apt upgrade -y

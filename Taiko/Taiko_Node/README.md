@@ -16,7 +16,7 @@
   ## Ручная установка
  
   <p>
-    
+
   #### Обновляем систему
     
   ```
@@ -43,7 +43,25 @@
   git clone https://github.com/taikoxyz/simple-taiko-node.git && \
   cd simple-taiko-node
   ```
-    
+  
+  #### Копируем файл окружения
+  ```
+  cp .env.sample .env
+  ```
+
+  ####  Устанавливаем переменные L1_ENDPOINT_HTTP, L1_ENDPOINT_WS, L1_PROVER_PRIVATE_KEY
+  ```
+  L1_ENDPOINT_HTTP=
+  ```
+  
+  ```
+  L1_ENDPOINT_WS=
+  ```
+
+  ```
+  L1_PROVER_PRIVATE_KEY=
+  ```
+
   #### Запускаем ноду
     
   ```

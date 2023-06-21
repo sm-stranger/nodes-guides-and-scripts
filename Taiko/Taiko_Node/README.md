@@ -9,6 +9,7 @@
 </ul>
 
 <div name="automatic_install">
+  
   ## Автоматическая установка
   
   ```

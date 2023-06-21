@@ -46,8 +46,14 @@
   <p>
    <b>Устанавливаем ноду и переходим в созданный каталог</b>
    ```
-   git clone https://github.com/taikoxyz/simple-taiko-node.git && cd simple-taiko-node
+   git clone https://github.com/taikoxyz/simple-taiko-node.git && \
+   cd simple-taiko-node
    ```
   </p>
+
+  Запускаем ноду
+  ```
+  docker compose up -d
+  ```
   
   </div>

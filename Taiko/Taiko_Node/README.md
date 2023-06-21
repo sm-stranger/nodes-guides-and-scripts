@@ -1,27 +1,18 @@
 # Install Taiko Node
 В этом руководстве мы рассмотрим установку ноды Taiko. Предполагается что вы уже арендовали сервер или уже есть существующий и подключились к нему с помощью терминала или другого консольного клиента.
 
-<br/> 
-
-<ul> 
- <li><a href="#automatic_install">Автоматическая установка</a></li> 
- <li><a href="#manual_install">Ручная установка</a></li> 
-</ul>
-
 <br>
 
-<div name="automatic_install">
   
   ## Автоматическая установка
   
   ```
   wget -O Taiko_Node_Install.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/Taiko/Taiko_Node/Taiko_Node_Install.sh && chmod +x Taiko_Node_Install.sh && ./Taiko_Node_Install.sh
   ```
-</div>
 
 <br/>
 
-<div name="manual_install">
+
  
  ## Ручная установка
  
@@ -59,4 +50,4 @@
     docker compose up -d
     ```
   
-  </div>
+

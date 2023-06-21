@@ -25,14 +25,11 @@
  
  ## Ручная установка
  
- <br>
    
   #### Обновляем систему
   ```
   sudo apt update && sudo apt upgrade -y
   ```
-  
-  <br>
   
   #### Устанавливаем Docker
   
@@ -47,16 +44,12 @@
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
   ```
   
-  <br>
-  
   #### Устанавливаем ноду и переходим в созданный каталог
    
   ```
   git clone https://github.com/taikoxyz/simple-taiko-node.git && \
   cd simple-taiko-node
   ```
-
-  <br>
   
   #### Запускаем ноду
   

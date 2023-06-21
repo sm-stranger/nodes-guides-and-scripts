@@ -8,12 +8,13 @@
  <li><a href="#manual_install">Ручная установка</a></li> 
 </ul>
 
-<p name="automatic_install">
+<div name="automatic_install">
+  ## Автоматическая установка
   
   ```
   wget -O Taiko_Node_Install.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/Taiko/Taiko_Node/Taiko_Node_Install.sh && chmod +x Taiko_Node_Install.sh && ./Taiko_Node_Install.sh
   ```
-</p>
+</div>
 
 <br/>
 

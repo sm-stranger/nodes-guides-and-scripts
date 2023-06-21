@@ -12,16 +12,15 @@
 
 <br/>
 
-
  
-    ## Ручная установка
+  ## Ручная установка
  
   
-    #### Обновляем систему
+  #### Обновляем систему
     
-    ```
-    sudo apt update && sudo apt upgrade -y
-    ```
+  ```
+  sudo apt update && sudo apt upgrade -y
+  ```
 
   
     #### Устанавливаем Docker

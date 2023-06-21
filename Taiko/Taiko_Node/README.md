@@ -20,9 +20,7 @@
   ```
   sudo apt update && sudo apt upgrade -y
   ```
-  
   <br>
-  
   #### Устанавливаем Docker
   
   ```

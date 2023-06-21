@@ -45,6 +45,7 @@
   
   <p>
    <b>Устанавливаем ноду и переходим в созданный каталог</b>
+   
    ```
    git clone https://github.com/taikoxyz/simple-taiko-node.git && \
    cd simple-taiko-node

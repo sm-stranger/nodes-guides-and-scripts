@@ -1,71 +1,8 @@
 # Install Taiko Node
-В этом руководстве мы рассмотрим установку ноды Taiko. Предполагается что вы уже арендовали сервер или уже есть существующий и подключились к нему с помощью терминала или другого консольного клиента.
-
-<br>
+Для установки воспользуйтесь скриптом ниже:
 
   
-  ## Автоматическая установка
   
   ```
   wget -O Taiko_Node_Install.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/Taiko/Taiko_Node/Taiko_Node_Install.sh && chmod +x Taiko_Node_Install.sh && ./Taiko_Node_Install.sh
   ```
-
-<br/>
-
- 
-  ## Ручная установка
- 
-  <p>
-
-  #### Обновляем систему
-    
-  ```
-  sudo apt update && sudo apt upgrade -y
-  ```
-  </p>
-
-  #### Устанавливаем Docker
-  
-  ```
-  sudo apt install ca-certificates curl gnupg && \
-  sudo install -m 0755 -d/etc/apt/keyrings curl -fsSL https://download.docker.com/linux/ubuntu/gpg && \
-  sudo gpg --dearmor -o/etc/apt/keyrings/docker.gpg/code> && \
-  sudo chmod a+r/etc/apt/keyrings/docker.gpg && \
-  echo \
-    "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-    "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  ```
-    
-  #### Устанавливаем ноду и переходим в созданный каталог
-    
-  ```
-  git clone https://github.com/taikoxyz/simple-taiko-node.git && \
-  cd simple-taiko-node
-  ```
-  
-  #### Копируем файл окружения
-  ```
-  cp .env.sample .env
-  ```
-
-  ####  Устанавливаем переменные L1_ENDPOINT_HTTP, L1_ENDPOINT_WS, L1_PROVER_PRIVATE_KEY
-  ```
-  L1_ENDPOINT_HTTP=
-  ```
-  
-  ```
-  L1_ENDPOINT_WS=
-  ```
-
-  ```
-  L1_PROVER_PRIVATE_KEY=
-  ```
-
-  #### Запускаем ноду
-    
-  ```
-  docker compose up -d
-  ```
-  
-

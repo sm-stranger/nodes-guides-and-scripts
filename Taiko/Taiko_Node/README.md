@@ -5,6 +5,8 @@
 <img width="800px" align="center" src="https://github.com/sm-stranger/nodes-guides-and-scripts/blob/main/Taiko/Taiko_Node/src/Taiko_Install_1.png">
 <br>
 <img width="800px" align="center" src="https://github.com/sm-stranger/nodes-guides-and-scripts/blob/main/Taiko/Taiko_Node/src/Taiko_Install_2.png">
+<br>
+<img width="800px" align="center" src="https://github.com/sm-stranger/nodes-guides-and-scripts/blob/main/Taiko/Taiko_Node/src/Taiko_Install_3.png">
 Также вам нужен приватный ключ <b>L1_PROVER_PRIVATE_KEY</b>
   
 ```

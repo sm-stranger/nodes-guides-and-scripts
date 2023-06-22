@@ -7,6 +7,7 @@
 <img width="800px" src="https://github.com/sm-stranger/nodes-guides-and-scripts/blob/main/Taiko/Taiko_Node/src/Taiko_Install_2.png" target="_blank">
 <br>
 <img width="800px" src="https://github.com/sm-stranger/nodes-guides-and-scripts/blob/main/Taiko/Taiko_Node/src/Taiko_Install_3.png" target="_blank">
+
 Также вам нужен приватный ключ <b>L1_PROVER_PRIVATE_KEY</b>
   
 ```

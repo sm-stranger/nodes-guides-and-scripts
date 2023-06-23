@@ -8,7 +8,7 @@ Endpoint-ы вы можете получить вы на сайте https://app.
 
 <br>
 
-Получаем L1_ENDPOINT_HTTP
+#### Получаем L1_ENDPOINT_HTTP
 <img width="800px" src="https://github.com/sm-stranger/nodes-guides-and-scripts/blob/main/Taiko/Taiko_Node/src/Taiko_Node_Install_3.png" target="_blank">
 Записываем куда-нибудь скопированное значение
 

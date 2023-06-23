@@ -8,6 +8,7 @@
 <br>
 <img width="800px" src="https://github.com/sm-stranger/nodes-guides-and-scripts/blob/main/Taiko/Taiko_Node/src/Taiko_Node_Install_3.png" target="_blank">
 Записываем скопированное значение в переменную L1_ENDPOINT_HTTP
+
 ```
 L1_ENDPOINT_HTTP=скопированное_значение
 ```

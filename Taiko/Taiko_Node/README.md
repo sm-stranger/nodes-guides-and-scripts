@@ -19,8 +19,8 @@ L1_ENDPOINT_HTTP=https://sepolia.infura.io/v3/********
 ```
 L1_ENDPOINT_WS=wss://sepolia.infura.io/ws/v3/********
 ```
-
-<p>Также вам нужен приватный ключ <b>L1_PROVER_PRIVATE_KEY</b>. Брать мы его будем из метамаска.</p>
+<br>
+Также вам нужен приватный ключ <b>L1_PROVER_PRIVATE_KEY</b>. Брать мы его будем из метамаска.
 <img width="800px" src="https://github.com/sm-stranger/nodes-guides-and-scripts/blob/main/Taiko/Taiko_Node/src/Taiko_Node_Install_5.png" target="_blank">
 <br>
 <img width="800px" src="https://github.com/sm-stranger/nodes-guides-and-scripts/blob/main/Taiko/Taiko_Node/src/Taiko_Node_Install_6.png" target="_blank">

@@ -10,12 +10,22 @@
 Записываем скопированное значение в переменную L1_ENDPOINT_HTTP
 
 ```
-L1_ENDPOINT_HTTP=скопированное_значение
+L1_ENDPOINT_HTTP=https://sepolia.infura.io/v3/********
 ```
 <br>
 <img width="800px" src="https://github.com/sm-stranger/nodes-guides-and-scripts/blob/main/Taiko/Taiko_Node/src/Taiko_Node_Install_4.png" target="_blank">
+Записываем скопированное значение в переменную L1_ENDPOINT_WS
 
-Также вам нужен приватный ключ <b>L1_PROVER_PRIVATE_KEY</b>
+```
+L1_ENDPOINT_WS=wss://sepolia.infura.io/ws/v3/********
+```
+
+Также вам нужен приватный ключ <b>L1_PROVER_PRIVATE_KEY</b>. Брать мы его будем из метамаска.
+<img width="800px" src="https://github.com/sm-stranger/nodes-guides-and-scripts/blob/main/Taiko/Taiko_Node/src/Taiko_Node_Install_5.png" target="_blank">
+<br>
+<img width="800px" src="https://github.com/sm-stranger/nodes-guides-and-scripts/blob/main/Taiko/Taiko_Node/src/Taiko_Node_Install_6.png" target="_blank">
+
+
   
 ```
 wget -O Taiko_Node_Install.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/Taiko/Taiko_Node/Taiko_Node_Install.sh && chmod +x Taiko_Node_Install.sh && ./Taiko_Node_Install.sh

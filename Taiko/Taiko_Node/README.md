@@ -26,7 +26,7 @@ Endpoint-ы вы можете получить на сайте https://app.infur
 <img width="800px" src="https://github.com/sm-stranger/nodes-guides-and-scripts/blob/main/Taiko/Taiko_Node/src/Taiko_Node_Install_6.png" target="_blank">
 
 Опять же записываем куда-нибудь.
-<br>
+<br><br>
 ### Далее устанавливаем ноду скриптом
   
 ```

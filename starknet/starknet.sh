@@ -1,9 +1,5 @@
 #!/bin/bash
 
-if [ -f ~/.bashrc ]; then source ~/.bashrc
-else source ~/.bash_profile
-fi
-
 while true
 do
 
@@ -23,7 +19,7 @@ do
                 # install dependencies
                 sudo apt update && sudo apt install software-properties-common -y
                 sudo add-apt-repository ppa:deadsnakes/ppa -y
-                sudo apt update && sudo apt install curl git tmux python3.10 python3.10-venv python3.10-dev build-essential libgmp-dev pkg-config libssl-dev mc -y
+                sudo apt update && sudo apt install curl git tmux python3.10 python3.10-venv python3.10-dev python3-pip build-essential libgmp-dev pkg-config libssl-dev mc -y
                 
                 # install Rust
                 sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
@@ -37,7 +33,7 @@ do
                 git clone https://github.com/eqlabs/pathfinder.git
                 cd pathfinder
                 git fetch
-                git checkout v0.5.6
+                git checkout v0.6.1
                 cd $HOME/pathfinder/py
                 python3.10 -m venv .venv
                 source .venv/bin/activate
@@ -110,7 +106,7 @@ do
                 rustup update
                 git pull
                 git fetch --all
-                git checkout v0.5.6
+                git checkout v0.6.1
                 source $HOME/.cargo/env
                 cargo build --release --bin pathfinder
                 mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
@@ -146,3 +142,4 @@ do
     done
 
 done
+

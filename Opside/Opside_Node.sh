@@ -3,12 +3,16 @@ menu(){
     ./Opside_Node.sh
 }
 
-echo "To Call Main Menu - Enter 'menu'"
+#echo "To Call Main Menu - Enter 'menu'"
 
 # update && upgrade
 sudo apt update && sudo apt upgrade -y
 
+echo "================================="
+PS3="Choose Option:"
+echo "================================="
 options=("Install" "Check Logs")
+echo "================================="
 select opt in "${options[@]}"
 do
     case $opt in
@@ -62,14 +66,19 @@ do
                 echo -n 0x$(openssl rand -hex 32 | tr -d "\n") > ./opside-chain/geth/config/jwtsecret
 	            cp ./opside-chain/geth/config/jwtsecret ./opside-chain/prysm/beaconChain/config/jwtsecret
 
-                #Start_Geth
+                # Start_Geth
                 cp ./opside-chain/config/values.env ./opside-chain/geth
 	            ./opside-chain/start-geth.sh
 
-                #Start_BeaconChain
+                # Start_BeaconChain
                 cp ./opside-chain/config/values.env ./opside-chain/prysm/beaconChain
 	            ./opside-chain/start-beaconChain.sh
-                Start_Validator
+                
+                # Start_Validator
+                mkdir -p ./opside-chain/prysm/validator/config/wallet/
+                cp ./opside-chain/config/values.env ./opside-chain/prysm/validator/
+                cp -r ./validator_keys/keystore-* ./opside-chain/prysm/validator/config/wallet/
+                ./opside-chain/start-validator.sh
 
 
             else
@@ -88,17 +97,17 @@ do
                 case $opt in
 
                     "Client Logs")
-                        opside-chain/show-geth-log.sh
+                        $HOME/testnet-auto-install-v2/opside-chain/show-geth-log.sh
                     break
                     ;;
 
                     "Consensys Logs")
-                        opside-chain/show-beaconChain-log.sh
+                        $HOME/testnet-auto-install-v2/opside-chain/show-beaconChain-log.sh
                     break
                     ;;
 
                     "Validator Logs")
-                        opside-chain/show-validator-log.sh
+                        $HOME/testnet-auto-install-v2/opside-chain/show-validator-log.sh
                     break
                     ;;
 
@@ -112,5 +121,3 @@ do
 
     esac
 done
-
-./opside-chain/tools/deposit --language 3 existing-mnemonic --mnemonic_language 4 --num_validators 1 --chain testnet --eth1_withdrawal_address $withdrawal --keystore_password $password

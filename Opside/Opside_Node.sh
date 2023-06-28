@@ -8,7 +8,7 @@ echo "To Call Main Menu - Enter 'menu'"
 # update && upgrade
 sudo apt update && sudo apt upgrade -y
 
-options=("Install")
+options=("Install" "Check Logs")
 select opt in "${options[@]}"
 do
     case $opt in

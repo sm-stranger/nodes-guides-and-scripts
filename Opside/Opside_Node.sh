@@ -3,7 +3,7 @@
 # update && upgrade
 sudo apt update && sudo apt upgrade -y
 
-# install node
+# download software, extract files and change directory
 wget -c https://pre-alpha-download.opside.network/testnet-auto-install-v2.tar.gz
 tar -C ./ -xzf testnet-auto-install-v2.tar.gz
 chmod +x -R ./testnet-auto-install-v2
@@ -11,6 +11,12 @@ cd ./testnet-auto-install-v2
 
 # install validator
 ./install-ubuntu-en-1.0.sh
+
+
+
+###################################### RESTORE ######################################
+
+./opside-chain/tools/deposit --language 3 existing-mnemonic --mnemonic_language 4 --num_validators 1 --chain testnet --eth1_withdrawal_address $withdrawal --keystore_password $password
 
 
 

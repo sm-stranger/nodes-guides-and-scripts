@@ -33,7 +33,7 @@ do
                 git clone https://github.com/eqlabs/pathfinder.git
                 cd pathfinder
                 git fetch
-                git checkout v0.6.1
+                git checkout v0.6.3
                 cd $HOME/pathfinder/py
                 python3.10 -m venv .venv
                 source .venv/bin/activate
@@ -42,7 +42,7 @@ do
                 pytest
                 cd $HOME/pathfinder/
                 cargo +stable build --release --bin pathfinder
-                cd $home
+                cd
 
                 source $HOME/.bashrc
                 mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
@@ -106,7 +106,7 @@ do
                 rustup update
                 git pull
                 git fetch --all
-                git checkout v0.6.1
+                git checkout v0.6.3
                 source $HOME/.cargo/env
                 cargo build --release --bin pathfinder
                 mv ~/pathfinder/target/release/pathfinder /usr/local/bin/

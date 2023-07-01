@@ -1,6 +1,20 @@
-menu(){
+Opside(){
     cd $HOME
     ./Opside_Node.sh
+}
+
+Enter_Val(){
+    vn=$2
+    v=''
+    until [ ${#v} -gt 0 ]
+    do
+        read -p "Enter Your $1: " vn
+        v=$vn
+    done
+}
+
+Install(){
+    echo "Hello"
 }
 
 #echo "To Call Main Menu - Enter 'menu'"
@@ -8,11 +22,12 @@ menu(){
 # update && upgrade
 sudo apt update && sudo apt upgrade -y
 
-echo "================================="
+
 PS3="Choose Option:"
-echo "================================="
-options=("Install" "Check Logs")
-echo "================================="
+options=(
+    "Install"
+    "Run Control Dashboard"
+    "Check Logs")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -21,7 +36,7 @@ do
 
         "Install")
             # download software, extract files and change directory
-            if ! [ -d /root/./testnet-auto-install-v2 ]; then
+            if ! [ -d /root/./testnet-auto-install-v2 ] then
 
                 wget -c https://pre-alpha-download.opside.network/testnet-auto-install-v2.tar.gz
                 tar -C ./ -xzf testnet-auto-install-v2.tar.gz
@@ -53,7 +68,12 @@ do
                         ;;
 
                         "Restore")
-                            ./opside-chain/tools/deposit --language 3 existing-mnemonic --mnemonic_language 4 --num_validators 1 --chain testnet --eth1_withdrawal_address $withdrawal --keystore_password $password
+                            ./opside-chain/tools/deposit --language 3 existing-mnemonic \
+                            --mnemonic_language 4 \
+                            --num_validators 1 \
+                            --chain testnet \
+                            --eth1_withdrawal_address $withdrawal \
+                            --keystore_password $password
                         break
                         ;;
 
@@ -82,11 +102,23 @@ do
 
 
             else
-                echo "Your Node Already Installed"
+                read -p "Your Node Already Installed. Reinstall? (Yes/No)" answer
+                while [ $answer!=="Yes" || $answer!=="No" ]
+                do
+                    echo "Your Node Already Installed. Reinstall? (Yes/No): " answer
+                done
+
+                if [ $answer=="Yes" ] then
+                    Install
+                else
+                    Opside
+                fi
+
             fi
         break
         ;;
 
+        
         
         ###################################### LOGS ######################################
 
@@ -116,7 +148,6 @@ do
             done
         break
         ;;
-
 
 
     esac

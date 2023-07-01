@@ -118,8 +118,15 @@ do
         break
         ;;
 
+
+        ###################################### DASHBOARD ######################################
+
+        "Run Control Dashboard")
+            cd testnet-auto-install-v2/opside-chain && bash ./control-panel.sh
+        break
+        ;;
         
-        
+
         ###################################### LOGS ######################################
 
         "Check Logs")

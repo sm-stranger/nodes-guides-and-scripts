@@ -26,7 +26,7 @@ read -p "Enter L1_PROVER_PRIVATE_KEY: " L1_PROVER_PRIVATE_KEY
 echo "L1_PROVER_PRIVATE_KEY=${L1_PROVER_PRIVATE_KEY}" >> .env
 
 # replace ENABLE_PROVER с false на true
-sed -i 's/ENABLE_PROVER=false/ENABLE_PROVER=true/' .env
+sed -i 's/ENABLE_PROVER=false/ENABLE_PROPOSER=true/' .env
 
 # start
 docker compose up -d

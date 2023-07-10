@@ -35,6 +35,8 @@ PK=
 echo 'PK='$PK >> $HOME/.bashrc && source $HOME/.bashrc
 ```
 
+<br>
+
 #### По такому же принципу устанавливаем переменные ADDRESS (Адрес кошелька) и NAME (Project Name, имя проекта)
 ```
 ADDRESS=

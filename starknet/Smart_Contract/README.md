@@ -30,10 +30,22 @@ PK=
 
 <br>
 
-#### По такому же принципу устанавливаем переменные VK (View Key) и NAME (Project Name, имя проекта)
+#### Записываем ее в .bashrc
 ```
-VK=
+echo 'PK='$PK >> $HOME/.bashrc && source $HOME/.bashrc
+```
+
+#### По такому же принципу устанавливаем переменные ADDRESS (Адрес кошелька) и NAME (Project Name, имя проекта)
+```
+ADDRESS=
 ```
 ```
 NAME=
+```
+
+<br>
+
+#### Также записываем эти переменные в файл профиля .bashrc
+```
+echo 'ADDRESS='$ADDRESS >> $HOME/.bashrc && echo 'NAME='$NAME >> $HOME/.bashrc source $HOME/.bashrc
 ```

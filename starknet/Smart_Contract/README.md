@@ -46,8 +46,10 @@ NAME=
 ```
 
 <p>
-#### Также записываем эти переменные в файл профиля .bashrc
-```
-echo 'ADDRESS='$ADDRESS >> $HOME/.bashrc && echo 'NAME='$NAME >> $HOME/.bashrc source $HOME/.bashrc
-```
+
+    #### Также записываем эти переменные в файл профиля .bashrc
+    ```
+    echo 'ADDRESS='$ADDRESS >> $HOME/.bashrc && echo 'NAME='$NAME >> $HOME/.bashrc source $HOME/.bashrc
+    ```
+    
 </p>

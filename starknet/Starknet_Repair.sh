@@ -1,3 +1,5 @@
+#!/bin/bash
+
 sudo systemctl stop starknetd
 sudo rm -rf /etc/systemd/system/starknetd.service
 

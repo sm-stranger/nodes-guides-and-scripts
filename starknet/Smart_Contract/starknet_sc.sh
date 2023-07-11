@@ -33,7 +33,10 @@ if ! [ -d /root/.protostar ]; then curl -L https://raw.githubusercontent.com/sof
 
 # install Scarb
 if exists scarb; then echo ''
-else curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh && source $HOME/.bashrc && scarb --version
+else
+    curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+    source $HOME/.bashrc
+    scarb --version
 fi
 
 # Enter Private Key

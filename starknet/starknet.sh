@@ -33,7 +33,7 @@ do
                 git clone https://github.com/eqlabs/pathfinder.git
                 cd pathfinder
                 git fetch
-                git checkout v0.6.5
+                git checkout v0.6.6
                 cd $HOME/pathfinder/py
                 python3.10 -m venv .venv
                 source .venv/bin/activate
@@ -66,7 +66,7 @@ do
                 
                 [Install]
                 WantedBy=multi-user.target" > $HOME/starknetd.service
-                
+
                 mv $HOME/starknetd.service /etc/systemd/system/
 
                 sudo systemctl restart systemd-journald
@@ -107,7 +107,7 @@ do
                 rustup update
                 git pull
                 git fetch --all
-                git checkout v0.6.5
+                git checkout v0.6.6
                 source $HOME/.cargo/env
                 cargo build --release --bin pathfinder
                 mv ~/pathfinder/target/release/pathfinder /usr/local/bin/

@@ -27,10 +27,10 @@ else curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/insta
 fi
 
 # Enter Private Key
-if [ -z "$PK" ]; then read -p "Private Key: " PK && echo 'PK='$PK >> $HOME/.bashrc ;fi
+if [ -z "$PK" ]; then read -p "Private Key: " PK && echo 'export PK='$PK >> $HOME/.bashrc ;fi
 
 # Enter Address
-if [ -z "$ADDRESS" ]; then read -p "Address: " ADDRESS && echo 'ADDRESS='$ADDRESS >> $HOME/.bashrc ;fi
+if [ -z "$ADDRESS" ]; then read -p "Address: " ADDRESS && echo 'export ADDRESS='$ADDRESS >> $HOME/.bashrc ;fi
 
 # enter project name
 read -p "Project Name:" NAME
@@ -42,8 +42,8 @@ source $HOME/.bashrc
 
 ###################################### INITIALIZE ######################################
 
-echo -e '\033[93m' &&
-echo '########################## Initializing Project ########################## ' && sleep 1
+echo -e '\033[92m' && \
+echo '########################## Initializing Project ... ########################## ' && sleep 1
 
 # initialize
 protostar init $NAME && cd $NAME
@@ -53,8 +53,8 @@ protostar init $NAME && cd $NAME
 
 ###################################### BUILD ######################################
 
-echo -e '\033[93m' &&
-echo '########################## Building Project ########################## ' && sleep 1
+echo -e '\033[92m'
+echo '########################## Building Project ... ########################## ' && sleep 1
 
 # build
 protostar build --contract-name $NAME
@@ -62,13 +62,15 @@ protostar build --contract-name $NAME
 # record private key in .env
 echo $PK > .env
 
+echo '\033[39m'
 
 
 
-###################################### DEPLOY ######################################
 
-echo -e '\033[93m' &&
-echo '########################## Deploying Project ########################## ' && sleep 1
+###################################### DECLARE ######################################
+
+echo -e '\033[93m'
+echo '########################## Declaring Contract ... ########################## ' && sleep 1
 
 # declare contract
 protostar declare $NAME \
@@ -77,7 +79,20 @@ protostar declare $NAME \
 --private-key-path ./.env \
 --network testnet
 
+echo '\033[39m'
 
+
+
+
+###################################### DEPLOY ######################################
+echo -e '\033[93m'
+echo '########################## Deploying Contract ... ########################## ' && sleep 1
 
 # Deploy
-protostar deploy $hash --account-address <адрес вашего кошелька> --max-fee auto --private-key-path ./.env --network mainnet
+protostar deploy $HASH \
+--account-address $ADDRESS \
+--max-fee auto \
+--private-key-path ./.env \
+--network mainnet
+
+echo '\033[39m'

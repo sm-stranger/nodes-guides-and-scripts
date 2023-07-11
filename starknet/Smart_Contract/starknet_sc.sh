@@ -1,14 +1,24 @@
 #!/bin/bash
 
+# FN
+
+enter_val(){
+    v=''
+    until [ ${#v} -gt 0 ]
+    do
+        read -p "Enter Your $1: " v
+    done
+    ${2}=$v
+
+}
+
+exists()
+{
+  command -v "$1" >/dev/null 2>&1
+}
+
 
 if ! [ -f ~/.bashrc ]; then sudo touch $HOME/.bashrc ;fi
-
-
-# load functions
-#if ! [ -f /root/fn.sh ]; then wget -O fn.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh ;fi
-#curl https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/fn.sh | bash
-#source fn.sh
-
 
 
 # update && upgrade
@@ -42,13 +52,13 @@ source $HOME/.bashrc
 
 ###################################### INITIALIZE ######################################
 
-echo -e '\033[92m' && \
+echo -e '\033[92m'
 echo '########################## Initializing Project ... ########################## ' && sleep 1
 
 # initialize
 protostar init $NAME && cd $NAME
 
-
+echo -e '\033[39m'
 
 
 ###################################### BUILD ######################################
@@ -62,14 +72,14 @@ protostar build --contract-name $NAME
 # record private key in .env
 echo $PK > .env
 
-echo '\033[39m'
+echo -e '\033[39m'
 
 
 
 
 ###################################### DECLARE ######################################
 
-echo -e '\033[93m'
+echo -e '\033[92m'
 echo '########################## Declaring Contract ... ########################## ' && sleep 1
 
 # declare contract
@@ -79,13 +89,13 @@ protostar declare $NAME \
 --private-key-path ./.env \
 --network testnet
 
-echo '\033[39m'
+echo -e '\033[39m'
 
 
 
 
 ###################################### DEPLOY ######################################
-echo -e '\033[93m'
+echo -e '\033[92m'
 echo '########################## Deploying Contract ... ########################## ' && sleep 1
 
 # Deploy
@@ -95,4 +105,4 @@ protostar deploy $HASH \
 --private-key-path ./.env \
 --network mainnet
 
-echo '\033[39m'
+echo -e '\033[39m'

@@ -32,17 +32,29 @@ if [ -z "$PK" ]; then read -p "Private Key: " PK && echo 'PK='$PK >> $HOME/.bash
 # Enter Address
 if [ -z "$ADDRESS" ]; then read -p "Address: " ADDRESS && echo 'ADDRESS='$ADDRESS >> $HOME/.bashrc ;fi
 
-source $HOME/.bashrc
-
 # enter project name
 read -p "Project Name:" NAME
 
+source $HOME/.bashrc
+
+
+
+
+###################################### INITIALIZE ######################################
+
+echo -e '\033[93m' &&
+echo '########################## Initializing Project ########################## ' && sleep 1
+
 # initialize
-protostar init $NAME
+protostar init $NAME && cd $NAME
 
-# Change Directory
-cd $NAME
 
+
+
+###################################### BUILD ######################################
+
+echo -e '\033[93m' &&
+echo '########################## Building Project ########################## ' && sleep 1
 
 # build
 protostar build --contract-name $NAME
@@ -51,6 +63,13 @@ protostar build --contract-name $NAME
 echo $PK > .env
 
 
+
+
+###################################### DEPLOY ######################################
+
+echo -e '\033[93m' &&
+echo '########################## Deploying Project ########################## ' && sleep 1
+
 # declare contract
 protostar declare $NAME \
 --account-address $ADDRESS \
@@ -58,3 +77,7 @@ protostar declare $NAME \
 --private-key-path ./.env \
 --network testnet
 
+
+
+# Deploy
+protostar deploy $hash --account-address <адрес вашего кошелька> --max-fee auto --private-key-path ./.env --network mainnet

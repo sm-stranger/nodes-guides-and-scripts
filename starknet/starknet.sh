@@ -66,6 +66,7 @@ do
                 
                 [Install]
                 WantedBy=multi-user.target" > $HOME/starknetd.service
+                
                 mv $HOME/starknetd.service /etc/systemd/system/
 
                 sudo systemctl restart systemd-journald

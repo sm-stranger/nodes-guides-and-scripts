@@ -17,27 +17,71 @@ exists()
   command -v "$1" >/dev/null 2>&1
 }
 
+sudo apt update && sudo apt upgrade -y
+sudo apt install mc -y
 
 if ! [ -f ~/.bashrc ]; then sudo touch $HOME/.bashrc ;fi
 
 
-# update && upgrade
-sudo apt update && sudo apt upgrade -y
+while true
+do
+    PS3 "Choose Option And Press Enter"
+    options=(
+        "Install Dependencies"
+        "Init"
+        "Build"
+        "Declare"
+        "Deploy"
+        )
+    select opt in "${options[@]}"
+    do
+        case $opt in
+            
+            ###################################### INSTALL DEPENDENCIES ######################################
+            "Install Software")
+                
+            # install Protostar
+            if ! [ -d /root/.protostar ]; then curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash && source $HOME/.bashrc ;fi
 
-# install dependencies
-sudo apt install mc -y
+            # install Scarb
+            if exists scarb; then echo ''
+            else
+                curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+                source $HOME/.bashrc
+                scarb --version
+            fi
+
+            ;;
 
 
-# install Protostar
-if ! [ -d /root/.protostar ]; then curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash && source $HOME/.bashrc ;fi
+            
+            ###################################### SHOW KEYS ######################################
+            "Show keys")
 
-# install Scarb
-if exists scarb; then echo ''
-else
-    curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
-    source $HOME/.bashrc
-    scarb --version
-fi
+            ;;
+
+
+
+            ###################################### INITIALIZE ######################################
+            "Init")
+
+                echo -e '\033[92m'
+                echo '########################## Initializing Project ########################## ' && sleep 1
+
+                # initialize
+                protostar init $NAME && cd $NAME
+
+                echo -e '\033[39m'
+
+            ;;
+
+
+
+        esac
+    done
+done
+
+
 
 # Enter Private Key
 if [ -z "$PK" ]; then read -p "Private Key: " PK && echo 'export PK='$PK >> $HOME/.bashrc ;fi
@@ -50,18 +94,6 @@ read -p "Project Name:" NAME
 
 source $HOME/.bashrc
 
-
-
-
-###################################### INITIALIZE ######################################
-
-echo -e '\033[92m'
-echo '########################## Initializing Project ... ########################## ' && sleep 1
-
-# initialize
-protostar init $NAME && cd $NAME
-
-echo -e '\033[39m'
 
 
 ###################################### BUILD ######################################

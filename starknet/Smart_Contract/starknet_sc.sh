@@ -24,7 +24,7 @@ if ! [ -f ~/.bashrc ]; then sudo touch $HOME/.bashrc ;fi
 
 while true
 do
-    PS3 "Choose Option And Press Enter"
+    PS3="Choose Option And Press Enter"
     options=( "Install Software" "Show Keys" "Init" "Build" "Declare" "Deploy" )
     select opt in "${options[@]}"
     do

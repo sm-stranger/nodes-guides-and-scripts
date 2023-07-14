@@ -1,8 +1,8 @@
 #!/bin/bash
 
+default='\033[39m'
 red='\033[91m'
 green='\033[92m'
-default='\033[39m'
 
 # FN
 

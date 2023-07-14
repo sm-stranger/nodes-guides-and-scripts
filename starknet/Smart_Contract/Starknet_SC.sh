@@ -67,7 +67,7 @@ do
 
                     echo -e $green"Private Key: " $default None
                     echo -e $green"Address:     " $default None
-                fi
+                fi;
 
 
                 echo ""

@@ -61,7 +61,7 @@ do
                 echo -e $green "=======================" $default "Data Management" $green "======================="
                 echo ""
 
-                if ! [ -d /root/Starknet_SC ] then
+                if ! [ -d /root/Starknet_SC ]; then
                     mkdir $HOME/Starknet_SC
                     echo "" > $HOME/Starknet_SC/.data
 
@@ -157,4 +157,6 @@ do
         esac
     done
 done
+
+
 

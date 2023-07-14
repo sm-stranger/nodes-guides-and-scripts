@@ -37,18 +37,18 @@ do
             ###################################### INSTALL DEPENDENCIES ######################################
             "Install Software")
 
-            sudo apt update && sudo apt upgrade -y
-                
-            # install Protostar
-            if ! [ -d /root/.protostar ]; then curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash && source $HOME/.bashrc ;fi
+                sudo apt update && sudo apt upgrade -y
+                    
+                # install Protostar
+                if ! [ -d /root/.protostar ]; then curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash && source $HOME/.bashrc ;fi
 
-            # install Scarb
-            if exists scarb; then echo ''
-            else
-                curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
-                source $HOME/.bashrc
-                scarb --version
-            fi
+                # install Scarb
+                if exists scarb; then echo ''
+                else
+                    curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+                    source $HOME/.bashrc
+                    scarb --version
+                fi
 
             ;;
 
@@ -61,17 +61,19 @@ do
                 echo -e $green "=======================" $default "Data Management" $green "======================="
                 echo ""
 
-                echo -e $green"Private Key: " $default None
-                echo -e $green"Address:     " $default None
+                if ! [ -d /root/Starknet_SC ] then
+                    mkdir $HOME/Starknet_SC
+                    echo "" > $HOME/Starknet_SC/.data
+
+                    echo -e $green"Private Key: " $default None
+                    echo -e $green"Address:     " $default None
+                fi
+
 
                 echo ""
                 echo -e $green "==================================================================================="
                 echo ""
 
-                if ! [ -d /root/Starknet_SC ] then
-                    mkdir $HOME/Starknet_SC
-                    echo "" > $HOME/Starknet_SC/.data
-                fi
 
                 # Enter Private Key
                 if [ -z "$PK" ]; then read -p "Private Key: " PK && echo 'export PK='$PK >> $HOME/.bashrc ;fi

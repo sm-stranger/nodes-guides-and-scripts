@@ -16,6 +16,7 @@ do
         "Deploy" 
         "Execute" 
         )
+        
     select opt in "${options[@]}"
     do
         case $opt in
@@ -61,9 +62,11 @@ do
 
                 if ! [ -f /root/Aleo_SC/.data ]
                 then
+                    mkdir $HOME/Aleo_SC
+
                     PS3="You Don't Have Any Data. Generate New Keys Or Enter Existing?"
                     options=("Generate New" "Enter Existing")
-                    select $opt in "${options[@]}"
+                    select opt in "${options[@]}"
                     do
                         case $opt in
 
@@ -80,7 +83,15 @@ do
                         esac
                     done
 
-                    mkdir $HOME/Aleo_SC
+                    # Contract Name
+                    read -p "Enter Your Contract Name: " NAME
+
+                    # QUOTE_LINK
+                    if [ -z "$QUOTE_LINK" ]; then
+                        read -p "Enter Your Hash: " QUOTE_LINK
+                        echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bashrc
+                    fi
+
                     echo "" > Aleo_SC/.data
                 else
                     echo -e $green "Private Key:" $default $PK
@@ -90,23 +101,8 @@ do
                 fi
 
 
-
                 echo ""
 
-                # Keys
-                if [ -z "$PK" ]; then read -p "Enter Your Private Key: " "PK" && echo 'export PK='$PK >> $HOME/.bashrc ;fi
-                if [ -z "$VK" ]; then read -p "Enter Your View Key: " VK && echo 'export VK='$VK >> $HOME/.bashrc ;fi
-                if [ -z "$ADDRESS" ]; then read -p "Enter Your Address: " ADDRESS && echo 'export ADDRESS='$ADDRESS >> $HOME/.bashrc ;fi
-                source $HOME/.bashrc
-
-                # Contract Name
-                read -p "Enter Your Contract Name: " NAME
-
-                # QUOTE_LINK
-                if [ -z "$QUOTE_LINK" ]; then
-                    read -p "Enter Your Hash: " QUOTE_LINK
-                    echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bashrc
-                fi
 
             ;;
 

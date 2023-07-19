@@ -23,7 +23,7 @@ exists()
 
 sudo apt install mc -y
 
-if ! [ -f ~/.bashr ]; then sudo touch $HOME/.bashrc ;fi
+if ! [ -f ~/.bashrc ]; then sudo touch $HOME/.bashrc; fi
 
 
 while true
@@ -97,6 +97,9 @@ do
 
                 # initialize
                 protostar init $NAME && cd $NAME
+
+                sed -i 's/hello_starknet/$NAME/' Scarb.toml
+                sed -i 's/hello_starknet/$NAME/' protostar.toml
 
                 echo -e '\033[39m'
 

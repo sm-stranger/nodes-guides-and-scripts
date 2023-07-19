@@ -6,6 +6,7 @@
 ```
 sudo apt update && sudo apt upgrade -y
 ```
+<img width="100px" height="100px" src="img/img-1.png">
 
 <br>
 
@@ -70,3 +71,24 @@ cd $NAME
 ```
 
 
+#### Меняем название контракта на свое
+```
+sed -i 's/hello_starknet/'$NAME'/' Scarb.toml && \
+sed -i 's/hello_starknet/'$NAME'/' protostar.toml && \
+sed -i 's/hello_starknet/'$NAME'/' src/contract.cairo && \
+sudo cat 'src/contract/hello_starknet.cairo' >> src/contract/$NAME.cairo && \
+sudo rm -rf src/contract/hello_starknet.cairo && \
+sed -i 's/hello_starknet/'$NAME'/' src/contract/$NAME.cairo && \
+sed -i 's/Hello_Starknet/'$NAME'/' src/contract/$NAME.cairo
+```
+
+#### Билдим проект
+protostar build --contract-name $NAME
+
+
+#### Записываем полученный хэш
+```
+HASH="0x......"
+
+
+```

@@ -14,6 +14,7 @@ sudo apt update && sudo apt upgrade -y
 ```
 curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash && source $HOME/.bashrc
 ```
+<img width="600px" height="300px" src="img/img-2.png">
 
 <br>
 

@@ -23,9 +23,9 @@ curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh
 
 <br>
 
-#### Далее устанавливаем переменные PK (Private Key). После знака = вставляете свой приватный ключ
+#### Далее устанавливаем переменные PK (Private Key).
 ```
-PK=
+PK="Your_Private_Key"
 ```
 
 <br>
@@ -39,7 +39,7 @@ echo 'export PK='$PK >> $HOME/.bashrc && source $HOME/.bashrc
 
 #### По такому же принципу устанавливаем переменные ADDRESS (Адрес кошелька) и NAME (Project Name, имя проекта)
 ```
-ADDRESS=
+ADDRESS="Your_Address"
 ```
 ```
 NAME=

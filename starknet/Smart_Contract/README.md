@@ -6,7 +6,7 @@
 ```
 sudo apt update && sudo apt upgrade -y
 ```
-<img width="300px" height="300px" src="img/img-1.png">
+<img width="400px" height="300px" src="img/img-1.png">
 
 <br>
 

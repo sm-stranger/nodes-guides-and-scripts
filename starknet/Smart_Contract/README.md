@@ -7,7 +7,6 @@
 sudo apt update && sudo apt upgrade -y
 ```
 <img width="600px" height="300px" src="img/img-1.png">
-
 <br>
 
 #### Устанавливаем Protostar, набор инструментов для разработки смарт-контарктов для Starknet на языке Cairo

@@ -46,18 +46,22 @@ echo 'export PK='$PK >> $HOME/.bashrc && source $HOME/.bashrc
 ADDRESS="Your_Address"
 ```
 <img width="600px" height="300px" src="img/img-6.png">
-```
-NAME=
-```
 
-<p>
+```
+NAME="contract_name"
+```
+<img width="600px" height="300px" src="img/img-7.png">
+
+
+<br>
 
 #### Также записываем эти переменные в файл профиля .bashrc
 ```
 echo 'export ADDRESS='$ADDRESS >> $HOME/.bashrc && echo 'export NAME='$NAME >> $HOME/.bashrc source $HOME/.bashrc
 ```
-</p>
+<img width="600px" height="300px" src="img/img-8.png">
 
+<br>
 
 #### Записываем имя контракта в переменную NAME. 
 ```

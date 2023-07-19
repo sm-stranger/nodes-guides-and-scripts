@@ -22,6 +22,7 @@ curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/inst
 ```
 curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh && source $HOME/.bashrc && scarb --version
 ```
+<img width="600px" height="300px" src="img/img-3.png">
 
 <br>
 
@@ -29,6 +30,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh
 ```
 PK="Your_Private_Key"
 ```
+<img width="600px" height="300px" src="img/img-4.png">
 
 <br>
 
@@ -36,10 +38,11 @@ PK="Your_Private_Key"
 ```
 echo 'export PK='$PK >> $HOME/.bashrc && source $HOME/.bashrc
 ```
+<img width="600px" height="300px" src="img/img-5.png">
 
 <br>
 
-#### По такому же принципу устанавливаем переменные ADDRESS (Адрес кошелька) и NAME (Project Name, имя проекта)
+#### По такому же принципу устанавливаем переменные ADDRESS (Адрес кошелька) и NAME (Имя контракта)
 ```
 ADDRESS="Your_Address"
 ```

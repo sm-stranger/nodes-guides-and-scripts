@@ -41,10 +41,11 @@ echo 'export PK='$PK >> $HOME/.bashrc && source $HOME/.bashrc
 
 <br>
 
-#### По такому же принципу устанавливаем переменные ADDRESS (Адрес кошелька) и NAME (Имя контракта)
+#### По такому же принципу записываем адрес кошелька и имя контракта в переменные ADDRESS и NAME
 ```
 ADDRESS="Your_Address"
 ```
+<img width="600px" height="300px" src="img/img-6.png">
 ```
 NAME=
 ```

@@ -1,4 +1,4 @@
-В этом гайде мы рассмотрим деплой смарт контракта Starknet. Мы будем использовать Protostar, набор инструментов для разработки смарт контарктов для Starknet на языке Cairo. Можно воспользоваться скриптом. Для тех кому интересен пошаговый процесс - расписано ниже. Предполагается что у вас уже есть сервер.
+В этом гайде мы рассмотрим деплой смарт контракта Starknet с помощью Protostar, набора инструментов для разработки смарт контарктов Starknet на языке Cairo. Предполагается что у вас уже есть сервер и вы подключились к нему с помощью какого-либо SSH-клиента.
 
 <br>
 
@@ -73,8 +73,9 @@ protostar init $NAME
 cd $NAME
 ```
 
+<br>
 
-#### Меняем название контракта на свое
+#### Записываем свое имя смарт контракта
 ```
 sed -i 's/hello_starknet/'$NAME'/' Scarb.toml && \
 sed -i 's/hello_starknet/'$NAME'/' protostar.toml && \
@@ -84,9 +85,15 @@ sudo rm -rf src/contract/hello_starknet.cairo && \
 sed -i 's/hello_starknet/'$NAME'/' src/contract/$NAME.cairo && \
 sed -i 's/Hello_Starknet/'$NAME'/' src/contract/$NAME.cairo
 ```
+<img width="600px" height="300px" src="img/img-10.png">
+
+<br>
 
 #### Билдим проект
+```
 protostar build --contract-name $NAME
+```
+<img width="600px" height="300px" src="img/img-11.png">
 
 
 #### Записываем полученный хэш

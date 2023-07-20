@@ -126,4 +126,4 @@ protostar deploy $HASH \
     --network mainnet
 ```
 
-<img width="600px" height="600px" src="img/img-13.png">
+<img width="900px" height="600px" src="img/img-13.png">

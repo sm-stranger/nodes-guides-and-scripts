@@ -85,7 +85,7 @@ sudo rm -rf src/contract/hello_starknet.cairo && \
 sed -i 's/hello_starknet/'$NAME'/' src/contract/$NAME.cairo && \
 sed -i 's/Hello_Starknet/'$NAME'/' src/contract/$NAME.cairo
 ```
-<img width="600px" height="900px" src="img/img-10.png">
+<img width="600px" height="300px" src="img/img-10.png">
 
 <br>
 

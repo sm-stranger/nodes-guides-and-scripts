@@ -52,7 +52,6 @@ NAME="contract_name"
 ```
 <img width="600px" height="300px" src="img/img-7.png">
 
-
 <br>
 
 #### Также записываем эти переменные в файл профиля .bashrc
@@ -63,15 +62,11 @@ echo 'export ADDRESS='$ADDRESS >> $HOME/.bashrc && echo 'export NAME='$NAME >> $
 
 <br>
 
-#### Записываем имя контракта в переменную NAME. 
-```
-NAME="Your_Project_Name"
-```
-
 #### Инициализируем контракт
 ```
 protostar init $NAME
 ```
+<img width="600px" height="300px" src="img/img-9.png">
 
 #### Переходим в директорию созданного проекта
 ```

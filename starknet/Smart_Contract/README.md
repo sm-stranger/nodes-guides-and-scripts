@@ -100,7 +100,7 @@ protostar build --contract-name $NAME
 ```
 HASH="0x......"
 ```
-<img width="600px" height="600px" src="img/img-12.png">
+<img width="900px" height="300px" src="img/img-12.png">
 
 
 #### Записываем переменную $PK в файл .env

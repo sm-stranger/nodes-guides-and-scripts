@@ -9,6 +9,7 @@ do
 
     echo ""
     PS3="Choose option and press Enter: "
+    echo ""
     options=(
         "Install Software" 
         "Data Management" 
@@ -28,6 +29,7 @@ do
 
                 sudo apt install make clang pkg-config libssl-dev build-essential gcc xz-utils git curl vim tmux ntp jq llvm ufw mc -y
                 sudo curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+                source $HOME/.cargo/env
 
                 # Install SnarkOS
                 if ! [ -d /root/snarkOS ]; then
@@ -57,48 +59,64 @@ do
                 clear
 
                 echo ""
-                echo -e $default "******************************************" $green "Data Management" $default "******************************************"
+                echo -e $default "******************************************" $green "Account Management" $default "******************************************"
                 echo ""
+
 
                 if ! [ -f /root/Aleo_SC/.data ]
                 then
-                    mkdir $HOME/Aleo_SC
+                    mkdir $HOME/Aleo_SC && cd Aleo_SC
+                    echo "PK=None" >> .data && \
+                    echo "VK=None" >> .data && \
+                    echo "ADDRESS=None" >> .data && \
+                    echo "QUOTE_LINK=None" >> .data
 
-                    PS3="You Don't Have Any Data. Generate New Keys Or Enter Existing?"
-                    options=("Generate New" "Enter Existing")
-                    select opt in "${options[@]}"
-                    do
-                        case $opt in
+                fi
 
-                            "Generate New")
-                                leo generate new
-                            ;;
+                source $HOME/Aleo_SC/.data
 
-                            "Enter Existing")
-                                read -p "Enter Your Private Key: " "PK" && echo 'export PK='$PK >> $HOME/Aleo_SC/.data
-                                read -p "Enter Your View Key: " "VK" && echo 'export VK='$VK >> $HOME/Aleo_SC/.data
-                                read -p "Enter Your Address: " "Address" && echo 'export ADDRESS='$ADDRESS >> $HOME/Aleo_SC/.data
-                            ;;
+                echo " =================== Keys =================== "
+                echo ""
+                echo -e $green "Private Key:" $default $PK
+                echo -e $green "   View Key:" $default $VK
+                echo -e $green "    Address:" $default $ADDRESS
+                echo -e $green "       Link:" $default $QUOTE_LINK
+                                
 
-                        esac
-                    done
+                    
+                PS3="Edit Keys: "
+                options=( "Private Key" "View Key" "Address" )
+                select opt in "${options[@]}"
+                do
+                    case $opt in
+                        
+                        "Private Key")
+                            read -p "Enter Your Private Key: " NEW_PK
+                            sed -i '/^PK/s/'$PK'/'$NEW_PK'/g' $HOME/Aleo_SC/.data
+                        ;;
+                        
+                        "View Key")
+                            read -p "Enter Your View Key: " NEW_VK
+                            sed -i '/^VK/s/'$VK'/'$NEW_VK'/g' $HOME/Aleo_SC/.data
+                        ;;
+
+                        "Address")
+                            read -p "Enter Your Address: " NEW_ADDRESS
+                            sed -i '/^ADDRESS/s/'$ADDRESS'/'$NEW_ADDRESS'/g' $HOME/Aleo_SC/.data
+                        ;;
+
+                    esac
+                done
+
+                read -p "Enter Your Private Key: " "PK" && echo 'export PK='$PK >> $HOME/Aleo_SC/.data
+                read -p "Enter Your View Key: " "VK" && echo 'export VK='$VK >> $HOME/Aleo_SC/.data
+                read -p "Enter Your Address: " "Address" && echo 'export ADDRESS='$ADDRESS >> $HOME/Aleo_SC/.data
 
                     # Contract Name
                     read -p "Enter Your Contract Name: " NAME
 
                     # QUOTE_LINK
-                    if [ -z "$QUOTE_LINK" ]; then
-                        read -p "Enter Your Hash: " QUOTE_LINK
-                        echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bashrc
-                    fi
-
-                    echo "" > Aleo_SC/.data
-                else
-                    echo -e $green "Private Key:" $default $PK
-                    echo -e $green "View Key:" $default $VK
-                    echo -e $green "Address:" $default $ADDRESS
-                    echo -e $green "Link:" $default $QUOTE_LINK
-                fi
+                    if [ -z "$QUOTE_LINK" ]; then read -p "Enter Your Hash: " QUOTE_LINK && echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bashrc; fi
 
 
                 echo ""
@@ -168,3 +186,5 @@ do
         esac
     done
 done
+
+

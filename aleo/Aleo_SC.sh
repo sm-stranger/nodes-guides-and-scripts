@@ -142,6 +142,7 @@ do
                 echo -e $default "******************************************" $dark_red "Creating Project" $default "******************************************"
                 echo ""
 
+
                 # contract name
                 read -p "Enter Your Contract Name: " NAME
 
@@ -161,6 +162,13 @@ do
 
             #################################### Deploy ####################################
             "Deploy")
+
+                clear
+
+                echo ""
+                echo -e $default "******************************************" $dark_red "DEPLOYING" $default "******************************************"
+                echo ""
+
                 
                 QUOTE_LINK="https://vm.aleo.org/api/testnet3/transaction/"$QUOTE_LINK
                 CIPHERTEXT=$(curl -s "$QUOTE_LINK" | jq -r '.execution.transitions[0].outputs[0].value')
@@ -180,6 +188,7 @@ do
                 echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bash_profile
                 source $HOME/.bash_profile
 
+
             break    
             ;;
 
@@ -187,6 +196,14 @@ do
             
             #################################### Execute ####################################
             "Execute")
+
+                clear
+
+                echo ""
+                echo -e $default "******************************************" $dark_red "EXECUTING" $default "******************************************"
+                echo ""
+
+
                 CIPHERTEXT=$(curl -s $QUOTE_LINK | jq -r '.fee.transition.outputs[].value')
                 RECORD=$(snarkos developer decrypt --ciphertext $CIPHERTEXT --view-key $VK)
 

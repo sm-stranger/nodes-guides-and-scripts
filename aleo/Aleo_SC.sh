@@ -3,6 +3,7 @@
 red='\033[91m'
 green='\033[92m'
 default='\033[39m'
+dark_red='\033[31m'
 
 while true
 do
@@ -59,7 +60,7 @@ do
                 clear
 
                 echo ""
-                echo -e $default "******************************************" $green "Account Management" $default "******************************************"
+                echo -e $default "******************************************" $dark_red "Keys Management" $default "******************************************"
                 echo ""
 
 
@@ -75,34 +76,36 @@ do
 
                 source $HOME/Aleo_SC/.data
 
-                echo " =================== Keys =================== "
                 echo ""
                 echo -e $green "Private Key:" $default $PK
                 echo -e $green "   View Key:" $default $VK
                 echo -e $green "    Address:" $default $ADDRESS
                 echo -e $green "       Link:" $default $QUOTE_LINK
                                 
-
-                    
-                PS3="Edit Keys: "
-                options=( "Private Key" "View Key" "Address" )
+                
+                echo ""
+                options=( "Edit Private Key" "Edit View Key" "Edit Address" "Edit Link" "Main Menu" )
                 select opt in "${options[@]}"
                 do
                     case $opt in
                         
-                        "Private Key")
+                        "Edit Private Key")
                             read -p "Enter Your Private Key: " NEW_PK
                             sed -i '/^PK/s/'$PK'/'$NEW_PK'/g' $HOME/Aleo_SC/.data
                         ;;
                         
-                        "View Key")
+                        "Edit View Key")
                             read -p "Enter Your View Key: " NEW_VK
                             sed -i '/^VK/s/'$VK'/'$NEW_VK'/g' $HOME/Aleo_SC/.data
                         ;;
 
-                        "Address")
+                        "Edit Address")
                             read -p "Enter Your Address: " NEW_ADDRESS
                             sed -i '/^ADDRESS/s/'$ADDRESS'/'$NEW_ADDRESS'/g' $HOME/Aleo_SC/.data
+                        ;;
+
+                        "Quit")
+                            ./Aleo_SC.sh
                         ;;
 
                     esac

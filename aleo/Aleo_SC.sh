@@ -9,8 +9,8 @@ while true
 do
 
     echo ""
-    PS3="Choose option and press Enter: "
     echo ""
+    PS3="Choose Option: "
     options=(
         "Install Software" 
         "Data Management" 
@@ -50,6 +50,7 @@ do
                 cd $HOME/leo
                 cargo install --path .
 
+            break
             ;;
 
 
@@ -84,55 +85,68 @@ do
                                 
                 
                 echo ""
-                options=( "Edit Private Key" "Edit View Key" "Edit Address" "Edit Link" "Main Menu" )
-                select opt in "${options[@]}"
-                do
-                    case $opt in
-                        
-                        "Edit Private Key")
-                            read -p "Enter Your Private Key: " NEW_PK
-                            sed -i '/^PK/s/'$PK'/'$NEW_PK'/g' $HOME/Aleo_SC/.data
-                        ;;
-                        
-                        "Edit View Key")
-                            read -p "Enter Your View Key: " NEW_VK
-                            sed -i '/^VK/s/'$VK'/'$NEW_VK'/g' $HOME/Aleo_SC/.data
-                        ;;
+                    
+                    PS3="Choose Key To Edit: "
+                    options=( "Edit Private Key" "Edit View Key" "Edit Address" "Edit Link" "Main Menu" )
+                    select opt in "${options[@]}"
+                    do
+                        case $opt in
+                            
+                            "Edit Private Key")
+                                read -p "Enter Your Private Key: " NEW_PK
+                                sed -i '/^PK/s/'$PK'/'$NEW_PK'/g' $HOME/Aleo_SC/.data
+                            
+                            break
+                            ;;
+                            
+                            "Edit View Key")
+                                read -p "Enter Your View Key: " NEW_VK
+                                sed -i '/^VK/s/'$VK'/'$NEW_VK'/g' $HOME/Aleo_SC/.data
 
-                        "Edit Address")
-                            read -p "Enter Your Address: " NEW_ADDRESS
-                            sed -i '/^ADDRESS/s/'$ADDRESS'/'$NEW_ADDRESS'/g' $HOME/Aleo_SC/.data
-                        ;;
+                            break
+                            ;;
 
-                        "Quit")
-                            ./Aleo_SC.sh
-                        ;;
+                            "Edit Address")
+                                read -p "Enter Your Address: " NEW_ADDRESS
+                                sed -i '/^ADDRESS/s/'$ADDRESS'/'$NEW_ADDRESS'/g' $HOME/Aleo_SC/.data
 
-                    esac
-                done
+                            break
+                            ;;
 
-                read -p "Enter Your Private Key: " "PK" && echo 'export PK='$PK >> $HOME/Aleo_SC/.data
-                read -p "Enter Your View Key: " "VK" && echo 'export VK='$VK >> $HOME/Aleo_SC/.data
-                read -p "Enter Your Address: " "Address" && echo 'export ADDRESS='$ADDRESS >> $HOME/Aleo_SC/.data
+                            "Edit Link")
+                                read -p "Enter Your Link From SMS: " NEW_QUOTE_LINK
+                                NEW_QUOTE_LINK="$NEW_QUOTE_LINK"
+                                sed -i '/^QUOTE_LINK/s/'$QUOTE_LINK'/'$NEW_QUOTE_LINK'/g' $HOME/Aleo_SC/.data
 
-                    # Contract Name
-                    read -p "Enter Your Contract Name: " NAME
+                            break
+                            ;;
 
-                    # QUOTE_LINK
-                    if [ -z "$QUOTE_LINK" ]; then read -p "Enter Your Hash: " QUOTE_LINK && echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bashrc; fi
+                            "Main Menu")
+                                ./Aleo_SC.sh
+                            ;;
 
-
-                echo ""
-
-
+                        esac
+                    done
+                
+            break
             ;;
 
 
 
             ######################################## Create Project ########################################
             "Create Project")
+
+                clear
+
+                echo ""
+                echo -e $default "******************************************" $dark_red "Creating Project" $default "******************************************"
+                echo ""
+
                 # contract name
                 read -p "Enter Your Contract Name: " NAME
+
+                source $HOME/Aleo_SC/.data
+                source $HOME/.cargo/env
 
                 # Make Directory Leo Deploy And Create New Project
                 if ! [ -d /root/leo_deploy ]; then
@@ -140,16 +154,19 @@ do
                 fi
                 cd $HOME/leo_deploy
                 leo new $NAME
+            break
             ;;
 
             
 
             #################################### Deploy ####################################
             "Deploy")
-
+                
+                QUOTE_LINK="https://vm.aleo.org/api/testnet3/transaction/"$QUOTE_LINK
                 CIPHERTEXT=$(curl -s "$QUOTE_LINK" | jq -r '.execution.transitions[0].outputs[0].value')
                 RECORD=$(snarkos developer decrypt --ciphertext $CIPHERTEXT --view-key $VK)
 
+                source $HOME/Aleo_SC/.data
                 snarkos developer deploy "$NAME.aleo" \
                 --private-key "$PK" \
                 --query "https://vm.aleo.org/api" \
@@ -162,6 +179,8 @@ do
                 QUOTE_LINK="https://vm.aleo.org/api/testnet3/transaction/"$DH
                 echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bash_profile
                 source $HOME/.bash_profile
+
+            break    
             ;;
 
 
@@ -183,6 +202,8 @@ do
                 QUOTE_LINK="https://vm.aleo.org/api/testnet3/transaction/"$EH
                 echo 'export QUOTE_LINK='$QUOTE_LINK >> $HOME/.bash_profile
                 source $HOME/.bash_profile
+
+            break    
             ;;
 
 

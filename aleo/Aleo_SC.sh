@@ -50,6 +50,7 @@ do
                 cd $HOME/leo
                 cargo install --path .
 
+
             break
             ;;
 
@@ -86,46 +87,62 @@ do
                 
                 echo ""
                     
-                    PS3="Choose Key To Edit: "
-                    options=( "Edit Private Key" "Edit View Key" "Edit Address" "Edit Link" "Main Menu" )
-                    select opt in "${options[@]}"
+                    while true
                     do
-                        case $opt in
-                            
-                            "Edit Private Key")
-                                read -p "Enter Your Private Key: " NEW_PK
-                                sed -i '/^PK/s/'$PK'/'$NEW_PK'/g' $HOME/Aleo_SC/.data
-                            
-                            break
-                            ;;
-                            
-                            "Edit View Key")
-                                read -p "Enter Your View Key: " NEW_VK
-                                sed -i '/^VK/s/'$VK'/'$NEW_VK'/g' $HOME/Aleo_SC/.data
+                        echo ""
+                        echo "Choose"
+                        
+                        options=( "Edit Private Key" "Edit View Key" "Edit Address" "Edit Link" "Main Menu" )
+                        select opt in "${options[@]}"
+                        do
+                            case $opt in
+                                
+                                "Edit Private Key")
 
-                            break
-                            ;;
+                                    read -p "Enter Your Private Key: " NEW_PK
+                                    sed -i '/^PK/s/'$PK'/'$NEW_PK'/g' $HOME/Aleo_SC/.data
+                                
+                                break
+                                ;;
 
-                            "Edit Address")
-                                read -p "Enter Your Address: " NEW_ADDRESS
-                                sed -i '/^ADDRESS/s/'$ADDRESS'/'$NEW_ADDRESS'/g' $HOME/Aleo_SC/.data
+                                
+                                "Edit View Key")
 
-                            break
-                            ;;
+                                    read -p "Enter Your View Key: " NEW_VK
+                                    sed -i '/^VK/s/'$VK'/'$NEW_VK'/g' $HOME/Aleo_SC/.data
 
-                            "Edit Link")
-                                read -p "Enter Your Link From SMS: " NEW_QUOTE_LINK
-                                NEW_QUOTE_LINK="$NEW_QUOTE_LINK"
-                                sed -i '/^QUOTE_LINK/s/'$QUOTE_LINK'/'$NEW_QUOTE_LINK'/g' $HOME/Aleo_SC/.data
+                                break
+                                ;;
 
-                            break
-                            ;;
 
-                            "Main Menu")
-                                ./Aleo_SC.sh
-                            ;;
+                                "Edit Address")
 
-                        esac
+                                    read -p "Enter Your Address: " NEW_ADDRESS
+                                    sed -i '/^ADDRESS/s/'$ADDRESS'/'$NEW_ADDRESS'/g' $HOME/Aleo_SC/.data
+
+                                break
+                                ;;
+
+
+                                "Edit Link")
+
+                                    read -p "Enter Your Link From SMS: " NEW_QUOTE_LINK
+                                    NEW_QUOTE_LINK="$NEW_QUOTE_LINK"
+                                    sed -i '/^QUOTE_LINK/s/'$QUOTE_LINK'/'$NEW_QUOTE_LINK'/g' $HOME/Aleo_SC/.data
+
+                                break
+                                ;;
+
+
+                                "Main Menu")
+                                    cd
+                                    ./Aleo_SC.sh
+
+                                
+                                ;;
+
+                            esac
+                        done
                     done
                 
             break
@@ -155,6 +172,8 @@ do
                 fi
                 cd $HOME/leo_deploy
                 leo new $NAME
+
+
             break
             ;;
 
@@ -168,13 +187,17 @@ do
                 echo ""
                 echo -e $default "******************************************" $dark_red "DEPLOYING" $default "******************************************"
                 echo ""
-
                 
+
                 QUOTE_LINK="https://vm.aleo.org/api/testnet3/transaction/"$QUOTE_LINK
                 CIPHERTEXT=$(curl -s "$QUOTE_LINK" | jq -r '.execution.transitions[0].outputs[0].value')
                 RECORD=$(snarkos developer decrypt --ciphertext $CIPHERTEXT --view-key $VK)
 
+                echo "Project Name: " $NAME
+                echo "Project Name: " $NAME
+
                 source $HOME/Aleo_SC/.data
+
                 snarkos developer deploy "$NAME.aleo" \
                 --private-key "$PK" \
                 --query "https://vm.aleo.org/api" \

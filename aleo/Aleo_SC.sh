@@ -11,13 +11,8 @@ do
     echo ""
     echo ""
     echo "Aleo Smart Contract Management"
-    options=(
-        "Install Software"
-        "Data Management"
-        "Create Project"
-        "Deploy"
-        "Execute"
-        )
+
+    options=("Install Software" "Data Management" "Create Project" "Deploy" "Execute")
         
     select opt in "${options[@]}"
     do

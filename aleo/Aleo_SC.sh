@@ -10,13 +10,13 @@ do
 
     echo ""
     echo ""
-    PS3="Choose Option: "
+    echo "Aleo Smart Contract Management"
     options=(
-        "Install Software" 
-        "Data Management" 
-        "Create Project" 
-        "Deploy" 
-        "Execute" 
+        "Install Software"
+        "Data Management"
+        "Create Project"
+        "Deploy"
+        "Execute"
         )
         
     select opt in "${options[@]}"
@@ -92,7 +92,13 @@ do
                         echo ""
                         echo "Choose"
                         
-                        options=( "Edit Private Key" "Edit View Key" "Edit Address" "Edit Link" "Main Menu" )
+                        options=(
+                            "Edit Private Key"
+                            "Edit View Key"
+                            "Edit Address"
+                            "Edit Link"
+                            "Main Menu"
+                            )
                         select opt in "${options[@]}"
                         do
                             case $opt in
@@ -194,7 +200,7 @@ do
                 RECORD=$(snarkos developer decrypt --ciphertext $CIPHERTEXT --view-key $VK)
 
                 echo "Project Name: " $NAME
-                echo "Project Name: " $NAME
+                echo "Record: " $RECORD
 
                 source $HOME/Aleo_SC/.data
 

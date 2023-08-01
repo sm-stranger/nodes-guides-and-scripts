@@ -99,7 +99,6 @@ do
                             case $opt in
                                 
                                 "Edit Private Key")
-
                                     read -p "Enter Your Private Key: " NEW_PK
                                     sed -i '/^PK/s/'$PK'/'$NEW_PK'/g' $HOME/Aleo_SC/.data
                                 
@@ -138,8 +137,6 @@ do
                                 "Main Menu")
                                     cd
                                     ./Aleo_SC.sh
-
-                                
                                 ;;
 
                             esac
@@ -189,23 +186,43 @@ do
                 echo -e $default "******************************************" $dark_red "DEPLOYING" $default "******************************************"
                 echo ""
                 
-
-                QUOTE_LINK="https://vm.aleo.org/api/testnet3/transaction/"$QUOTE_LINK
-                CIPHERTEXT=$(curl -s "$QUOTE_LINK" | jq -r '.execution.transitions[0].outputs[0].value')
-                RECORD=$(snarkos developer decrypt --ciphertext $CIPHERTEXT --view-key $VK)
-
                 echo "Project Name: " $NAME
+                echo "Link: " $QUOTE_LINK
                 echo "Record: " $RECORD
 
-                source $HOME/Aleo_SC/.data
+                #QUOTE_LINK="https://vm.aleo.org/api/testnet3/transaction/"$QUOTE_LINK
 
-                snarkos developer deploy "$NAME.aleo" \
-                --private-key "$PK" \
-                --query "https://vm.aleo.org/api" \
-                --path "$HOME/leo_deploy/$NAME/build/" \
-                --broadcast "https://vm.aleo.org/api/testnet3/transaction/broadcast" \
-                --fee 4000000 \
-                --record "$RECORD"
+                echo "Deploy?"
+                options=( "Get Record" "Deploy" )
+                select opt in "${options[@]}"
+                do
+                    case $opt in
+
+                        "Get Record")
+                            CIPHERTEXT=$(curl -s "$QUOTE_LINK" | jq -r '.execution.transitions[0].outputs[0].value')
+                            RECORD=$(snarkos developer decrypt --ciphertext $CIPHERTEXT --view-key $VK)
+                        
+                        break
+                        ;;
+
+                        "Deploy")
+
+                            source $HOME/Aleo_SC/.data
+
+                            snarkos developer deploy "$NAME.aleo" \
+                            --private-key "$PK" \
+                            --query "https://vm.aleo.org/api" \
+                            --path "$HOME/leo_deploy/$NAME/build/" \
+                            --broadcast "https://vm.aleo.org/api/testnet3/transaction/broadcast" \
+                            --fee 4000000 \
+                            --record "$RECORD"
+
+                        break
+                        ;;
+                    
+                    esac
+                done
+
 
                 read -p "Enter Deployment TX Hash: " DH
                 QUOTE_LINK="https://vm.aleo.org/api/testnet3/transaction/"$DH

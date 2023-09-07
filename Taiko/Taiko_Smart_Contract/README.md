@@ -13,11 +13,10 @@ https://taiko.xyz/docs/guides/build-on-taiko/receive-tokens#receive-sepolia-eth.
 
 
 #### 2. Деплой
-Переходим на сайт https://remix.ethereum.org
-Выбираем смарт контракт storage.sol
+Переходим на сайт https://remix.ethereum.org и выбираем смарт контракт storage.sol
 <img src="img/Taiko_SC_Select_SC.png" width="auto" height="400px">
 <br>
-Компилируем контракт
+<p>Компилируем контракт</p>
 <img src="img/Taiko_SC_Compile_SC.png" width="auto" height="400px">
 
 И последний шаг - деплой. 

@@ -13,27 +13,25 @@ https://taiko.xyz/docs/guides/build-on-taiko/receive-tokens#receive-sepolia-eth.
 <img src="img/Taiko_SC_Login_Alchemy.png" width="auto" height="400px">
 <img src="img/Taiko_SC_Login_Alchemy_Google.png" width="auto" height="400px">
 
-Вставляем свой адерс и нажимаем Send Me ETH
+<p>Вставляем свой адерс и нажимаем Send Me ETH</p>
 <img src="img/Taiko_SC_Enter_Address.png" width="auto" height="400px">
 
 
 #### 2. Деплой
-Переходим на сайт https://remix.ethereum.org и выбираем смарт контракт storage.sol
+<p>Переходим на сайт https://remix.ethereum.org и выбираем смарт контракт storage.sol</p>
 <img src="img/Taiko_SC_Select_SC.png" width="auto" height="400px">
 <br>
 <p>Компилируем контракт</p>
 <img src="img/Taiko_SC_Compile_SC.png" width="auto" height="400px">
 
+<p>
 И последний шаг - деплой. 
 В списке Environment выбираем Injected Provider - Metamask и нажимаем Deploy
+</p>
 <img src="img/Taiko_SC_Compile_Deploy.png" width="auto" height="400px">
 
-Подтверждаем транзакцию
+<p>Подтверждаем транзакцию</p>
 <img src="img/Taiko_SC_Compile_Deploy_Approove.png" width="auto" height="400px">
 
-Деплой успешно выполнен. Можно посмотреть транзакцию в Etherscan. Еще раз подтверждаем транзакцию
+<p>Деплой успешно выполнен. Можно посмотреть транзакцию в Etherscan. Еще раз подтверждаем транзакцию</p>
 <img src="img/Taiko_SC_Compile_Deploy_Succ.png" width="auto" height="400px">
-
-
-
-#### 

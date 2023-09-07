@@ -14,10 +14,24 @@ https://taiko.xyz/docs/guides/build-on-taiko/receive-tokens#receive-sepolia-eth
 <img src="img/Taiko_SC_Enter_Address.png" width="auto" height="400px">
 
 
+#### 2. Деплой
+Переходим на сайт https://remix.ethereum.org
+Выбираем смарт контракт storage.sol
+<img src="img/Taiko_SC_Select_SC.png" width="auto" height="400px">
+
+Компилируем контракт
+<img src="img/Taiko_SC_Compile_SC.png" width="auto" height="400px">
+
+И последний шаг - деплой. 
+В списке Environment выбираем Injected Provider - Metamask и нажимаем Deploy
+<img src="img/Taiko_SC_Compile_Deploy.png" width="auto" height="400px">
+
+Подтверждаем транзакцию
+<img src="img/Taiko_SC_Compile_Deploy_Approove.png" width="auto" height="400px">
+
+Деплой успешно выполнен. Можно посмотреть транзакцию в Etherscan. Еще раз подтверждаем транзакцию
+<img src="img/Taiko_SC_Compile_Deploy_Succ.png" width="auto" height="400px">
 
 
-
-#### Переходим на сайт https://remix.ethereum.org
-<img src="img/Taiko_SC_1.png" width="auto" height="400px">
 
 #### 

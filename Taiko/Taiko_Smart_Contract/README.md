@@ -1,5 +1,12 @@
 # Деплой Смарт Контракта Taiko
 
 
-#### 1. Переходим на сайт https://remix.ethereum.org
+#### Перым делом нам надо получить тестовые токены для оплаты комиссии на газ за деплой. Если у вас уже есть тестовые токены - пропускайте этот шаг и переходите к следующему.
+#### На выбор у нас несколько тестовых кранов:
+https://taiko.xyz/docs/guides/build-on-taiko/receive-tokens#receive-sepolia-eth
+
+
+#### Переходим на сайт https://remix.ethereum.org
 <img src="img/Taiko_SC_1.png" width="auto" height="400px">
+
+#### 

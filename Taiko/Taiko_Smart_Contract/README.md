@@ -5,7 +5,16 @@
 Перым делом нам надо получить Sepolia ETH для оплаты комиссии на газ за деплой. Если у вас уже есть тестовые токены - пропускайте этот шаг и переходите к следующему.
 На выбор у нас несколько кранов:
 https://taiko.xyz/docs/guides/build-on-taiko/receive-tokens#receive-sepolia-eth
-Воспользуемся https://faucet-sepolia.rockx.com/
+Воспользуемся https://sepoliafaucet.com
+Логинимся через свой Google Аккаунт
+<img src="img/Taiko_SC_Login_Alchemy.png" width="auto" height="400px">
+<img src="img/Taiko_SC_Login_Alchemy_Google.png" width="auto" height="400px">
+
+Вставляем свой адерс и нажимаем Send Me ETH
+<img src="img/Taiko_SC_Enter_Address.png" width="auto" height="400px">
+
+
+
 
 
 #### Переходим на сайт https://remix.ethereum.org

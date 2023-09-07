@@ -16,7 +16,7 @@ https://taiko.xyz/docs/guides/build-on-taiko/receive-tokens#receive-sepolia-eth.
 Переходим на сайт https://remix.ethereum.org
 Выбираем смарт контракт storage.sol
 <img src="img/Taiko_SC_Select_SC.png" width="auto" height="400px">
-
+<br>
 Компилируем контракт
 <img src="img/Taiko_SC_Compile_SC.png" width="auto" height="400px">
 

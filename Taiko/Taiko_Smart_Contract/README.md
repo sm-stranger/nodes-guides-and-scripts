@@ -17,7 +17,19 @@ https://taiko.xyz/docs/guides/build-on-taiko/receive-tokens#receive-sepolia-eth.
 <img src="img/Taiko_SC_Enter_Address.png" width="auto" height="400px">
 
 
-#### 2. Деплой
+#### 2. Бридж
+<p>
+    Теперь нам надо перегнать токены из сети Sepolia в сеть Taiko. Переходим на сайт https://bridge.test.taiko.xyz, коннектим кошелек, указываем сумму для перевода и нажимаем Bridge.
+</p>
+<img src="img/Taiko_SC_Bridge.png" width="auto" height="400px">
+
+<p>
+    Далее переходим во вкладку Transaction и нажимаем Claim
+</p>
+<img src="img/Taiko_SC_Bridge_Claim.png" width="auto" height="400px">
+
+
+#### 3. Деплой
 <p>Переходим на сайт https://remix.ethereum.org и выбираем смарт контракт storage.sol</p>
 <img src="img/Taiko_SC_Select_SC.png" width="auto" height="400px">
 <br>

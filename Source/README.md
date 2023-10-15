@@ -32,7 +32,7 @@ go version
 git clone https://github.com/Source-Protocol-Cosmos/source.git
 ```
 
-#### Компилируем бинарник
+#### Компилируем
 ```
 cd ~/source && \
 git fetch && \
@@ -40,15 +40,16 @@ git checkout v3.0.0 && \
 make build && make install
 ```
 
-#### Инициалируем директорию Source и создаем генезис файл с правильным идентификатором цепочки. Вместо <moniker-name> вставляете свое имя валидатора.
+#### Инициалируем Source и создаем генезис файл. <moniker-name> заменить свое имя валидатора.
 ```
 MONIKER=<moniker-name>
 sourced init $MONIKER --chain-id=source-1
 ```
 
-#### Если у вас уже есть установленная нода то нужно восстановить существующие ключи. <walletname> - ваше имя кошелька
+#### Если у вас уже есть установленная нода то нужно восстановить существующие ключи. <walletname> также заменить на свое имя кошелька
 ```
-sourced keys add <walletName> --recover
+WALLET=<walletName>
+sourced keys add $WALLET --recover
 ```
 
 #### Или создать новые
@@ -80,7 +81,7 @@ wget -O $HOME/.source/config/app.toml https://raw.githubusercontent.com/sm-stran
 sourced start
 ```
 
-#### Создаем валидатора. <key-name> - ваше имя валидатора
+#### Создаем валидатора.
 ```
 sourced tx staking create-validator \
 --amount 1000000000usource \
@@ -94,4 +95,40 @@ sourced tx staking create-validator \
 --chain-id source-1 \
 --fees=50000usource \
 --from $MONIKER
+```
+
+### Запуск производителя блоков
+
+#### Создаем сервис
+```
+echo "Description=Source daemon
+After=network-online.target
+
+[Service]
+User=<YOUR_USERNAME>
+ExecStart=${HOME}/${USER}/go/bin/sourced start --home $HOME/${USER}/.source
+Restart=on-failure
+RestartSec=3
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target" >> /etc/systemd/system/sourced.service
+```
+
+#### Включаем и запускаем сервис
+```
+sudo systemctl enable sourced
+```
+```
+sudo systemctl start sourced
+```
+
+#### Проверка статуса
+```
+sourced status
+```
+
+#### Проверка логов
+```
+journalctl -u sourced -f
 ```

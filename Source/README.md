@@ -1,3 +1,5 @@
+### В этом руководстве мы рассмотрим установку ноду Surce в mainnet. 
+
 #### Если у вас уже есть установленная нода Source - нужно удалить ее. Для этого выполним
 ```
 sudo systemctl stop sourced && \
@@ -60,22 +62,18 @@ sourced keys add $WALLET
 curl -s  https://raw.githubusercontent.com/Source-Protocol-Cosmos/mainnet/master/source-1/genesis.json > ~/.source/config/genesis.json
 ```
 
-#### Проверяем контрольную сумму. Должно получиться ba2261082818227073bd8b49717a9781bf5c440c8e34e21ec72fb15806f047cc
+#### Сверяем контрольную сумму. Должно получиться ba2261082818227073bd8b49717a9781bf5c440c8e34e21ec72fb15806f047cc
 ```
 sha256sum ~/.source/config/genesis.json
 # ba2261082818227073bd8b49717a9781bf5c440c8e34e21ec72fb15806f047cc
 ```
 
-#### Добавляем сид ноды в файл конфигурации config.toml
+#### Скачиваем файлы config.toml и app.toml
 ```
-echo '# Comma separated list of nodes to keep persistent connections to persistent_peers = 
-seeds = "96d63849a529a15f037a28c276ea6e3ac2449695@34.222.1.252:26656,0107ac60e43f3b3d395fea706cb54877a3241d21@35.87.85.162:26656"' >> ~/.source/config/config.toml
+wget -O $HOME/.source/config/config.toml https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/Source/.source/config/config.toml && \
+wget -O $HOME/.source/config/app.toml https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/Source/.source/config/app.toml
 ```
 
-#### Устанавливаем минимальную цену газа
-```
-echo '0.25usource' >> ~/.source/config/app.toml
-```
 
 #### Запускаем ноду
 ```
@@ -92,13 +90,8 @@ sourced tx staking create-validator \
 --min-self-delegation "1" \
 --details "validators write bios too" \
 --pubkey=$(sourced tendermint show-validator) \
---moniker “<key-name>” \
+--moniker $MONIKER \
 --chain-id source-1 \
 --fees=50000usource \
---from <key-name>
-```
-
-#### Запуск производителя блоков
-```
-
+--from $MONIKER
 ```

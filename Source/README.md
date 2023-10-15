@@ -2,7 +2,7 @@
 
 <br>
 
-<p>Если у вас уже есть установленная нода Source - нужно удалить ее. Для этого выполним</p>
+#### Если у вас уже есть установленная нода Source - нужно удалить ее. Для этого выполним
 
 ```
 sudo systemctl stop sourced && \
@@ -12,7 +12,7 @@ rm -rf source && \
 rm -rf $(which sourced)
 ```
 
-<p>Подготовка сервера</p>
+#### Подготовка сервера
 ```
 sudo apt update && sudo apt upgrade -y && \
 sudo apt install curl tar wget clang pkg-config libssl-dev libleveldb-dev jq build-essential bsdmainutils git make ncdu htop screen unzip bc fail2ban htop -y

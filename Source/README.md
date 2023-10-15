@@ -12,7 +12,7 @@ rm -rf source && \
 rm -rf $(which sourced)
 ```
 
-#### Подготовка сервера
+<p>Подготовка сервера</p>
 ```
 sudo apt update && sudo apt upgrade -y && \
 sudo apt install curl tar wget clang pkg-config libssl-dev libleveldb-dev jq build-essential bsdmainutils git make ncdu htop screen unzip bc fail2ban htop -y

@@ -96,26 +96,37 @@ do
             
             "Update")
 
-                sudo apt update && sudo apt-get install software-properties-common -y
-                sudo add-apt-repository ppa:deadsnakes/ppa -y
-                sudo apt update && sudo apt install curl git tmux python3.10 python3.10-venv python3.10-dev build-essential libgmp-dev pkg-config libssl-dev -y
+                #sudo apt update && sudo apt-get install software-properties-common -y
+                #sudo add-apt-repository ppa:deadsnakes/ppa -y
+                #sudo apt update && sudo apt install curl git tmux python3.10 python3.10-venv python3.10-dev build-essential libgmp-dev pkg-config libssl-dev -y
                 sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
                 source $HOME/.cargo/env
                 rustup update stable --force
                 
                 cd ~/pathfinder
-                rustup update
                 git pull
                 git fetch --all
                 git checkout v0.9.2
                 source $HOME/.cargo/env
                 cargo build --release --bin pathfinder
                 mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
-                cd py
-                python3.10 -m venv .venv
-                source .venv/bin/activate
-                PIP_REQUIRE_VIRTUALENV=true pip install -r requirements-dev.txt
-                pip install --upgrade pip
+                
+                echo "[Unit]
+                Description=StarkNet
+                After=network.target
+
+                [Service]
+                User=$USER
+                Type=simple
+                ExecStart=/usr/local/bin/pathfinder --http-rpc=\"0.0.0.0:9545\" --ethereum.url \"$ALCHEMY\"
+                Restart=on-failure
+                LimitNOFILE=65535
+
+                [Install]
+                WantedBy=multi-user.target" > $HOME/starknetd.service
+                sudo mv $HOME/starknetd.service /etc/systemd/system/
+                
+                systemctl daemon-reload
                 systemctl restart starknetd
 
             break

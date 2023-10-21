@@ -165,15 +165,15 @@ systemctl restart sourced && journalctl -u sourced -f -o cat
 
 ### Снэпшот (размер: ~200мб). Обновляется каждые 5 часов
 ```
-cd $HOME
-apt install lz4
-sudo systemctl stop sourced
-sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1false|" ~/.source/config/config.toml
-cp $HOME/.source/data/priv_validator_state.json $HOME/.source/priv_validator_state.json.backup
-rm -rf $HOME/.source/data
-curl -o - -L https://source-m.snapshot.stavr.tech/source/source-snap.tar.lz4 | lz4 -c -d - | tar -x -C $HOME/.source --strip-components 2
-wget -O $HOME/.source/config/addrbook.json "https://raw.githubusercontent.com/obajay/nodes-Guides/main/Projects/Source/addrbook.json"
-mv $HOME/.source/priv_validator_state.json.backup $HOME/.source/data/priv_validator_state.json
+cd $HOME && \
+apt install lz4 && \
+sudo systemctl stop sourced && \
+sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1false|" ~/.source/config/config.toml && \
+cp $HOME/.source/data/priv_validator_state.json $HOME/.source/priv_validator_state.json.backup && \
+rm -rf $HOME/.source/data &&  \
+curl -o - -L https://source-m.snapshot.stavr.tech/source/source-snap.tar.lz4 | lz4 -c -d - | tar -x -C $HOME/.source --strip-components 2 && \
+wget -O $HOME/.source/config/addrbook.json "https://raw.githubusercontent.com/obajay/nodes-Guides/main/Projects/Source/addrbook.json" && \
+mv $HOME/.source/priv_validator_state.json.backup $HOME/.source/data/priv_validator_state.json && \
 sudo systemctl restart sourced && journalctl -u sourced -f -o cat
 ```
 

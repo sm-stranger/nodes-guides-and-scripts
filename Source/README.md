@@ -130,7 +130,7 @@ After=network-online.target
 
 [Service]
 User=${USER}
-ExecStart=${HOME}/${USER}/go/bin/sourced start --home $HOME/${USER}/.source
+ExecStart=${HOME}/${USER}/go/bin/sourced start --home ${USER}/.source
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=4096

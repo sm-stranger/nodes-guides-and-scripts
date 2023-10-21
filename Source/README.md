@@ -161,7 +161,7 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.source/config/config.toml
 sourced tendermint unsafe-reset-all
-systemctl restart sourced && journalctl -u sourced -f -o cat
+systemctl restart sourced
 ```
 
 <br>
@@ -177,7 +177,7 @@ rm -rf $HOME/.source/data &&  \
 curl -o - -L https://source-m.snapshot.stavr.tech/source/source-snap.tar.lz4 | lz4 -c -d - | tar -x -C $HOME/.source --strip-components 2 && \
 wget -O $HOME/.source/config/addrbook.json "https://raw.githubusercontent.com/obajay/nodes-Guides/main/Projects/Source/addrbook.json" && \
 mv $HOME/.source/priv_validator_state.json.backup $HOME/.source/data/priv_validator_state.json && \
-sudo systemctl restart sourced && journalctl -u sourced -f -o cat
+sudo systemctl restart sourced
 ```
 
 <br>

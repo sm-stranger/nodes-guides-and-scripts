@@ -79,7 +79,7 @@ sourced keys add $WALLET --recover
 
 <br>
 
-### Или создать новые
+### Или создать новый
 ```
 sourced keys add $WALLET
 ```

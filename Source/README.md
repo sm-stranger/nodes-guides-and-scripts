@@ -12,7 +12,7 @@ rm -rf $(which sourced)
 
 <br>
 
-<p>
+<p style="padding-bottom:20px">
 
 ### Подготовка сервера
 ```

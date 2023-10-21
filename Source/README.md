@@ -19,7 +19,7 @@ sudo apt install curl tar wget clang pkg-config libssl-dev libleveldb-dev jq bui
 ```
 
 
-<p>### Установка GO</p>
+### Установка GO
 ```
 ver="1.19" && \
 wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz" && \
@@ -37,7 +37,6 @@ go version
 git clone https://github.com/Source-Protocol-Cosmos/source.git
 ```
 
-<br>
 
 ### Компилируем
 ```
@@ -47,7 +46,6 @@ git checkout v3.0.0 && \
 make build && make install
 ```
 
-<br>
 
 ### Придумываем имя валидатора и записываем ее в переменную MONIKER. your_moniker_name заменить на свое.
 ```
@@ -59,35 +57,30 @@ MONIKER=your_moniker_name
 sourced init $MONIKER --chain-id=source-1
 ```
 
-<br>
 
 ### Придумываем имя кошелька. your_wallet_name также заменить а свое
 ```
 WALLET=your_wallet_name
 ```
 
-<br>
 
 ### Если у вас уже есть установленная нода то нужно восстановить существующие ключи. <walletname> также заменить на свое имя кошелька
 ```
 sourced keys add $WALLET --recover
 ```
 
-<br>
 
 ### Или создать новые
 ```
 sourced keys add $WALLET
 ```
 
-<br>
 
 ### Загружаем генезис-файл
 ```
 curl -s  https://raw.githubusercontent.com/Source-Protocol-Cosmos/mainnet/master/source-1/genesis.json > ~/.source/config/genesis.json
 ```
 
-<br>
 
 ### Сверяем контрольную сумму. Должно получиться ba2261082818227073bd8b49717a9781bf5c440c8e34e21ec72fb15806f047cc
 ```
@@ -95,7 +88,6 @@ sha256sum ~/.source/config/genesis.json
 # ba2261082818227073bd8b49717a9781bf5c440c8e34e21ec72fb15806f047cc
 ```
 
-<br>
 
 ### Устанавливаем минимальную цену газа, сиды, пиры и фильтры пиров
 ```
@@ -110,14 +102,12 @@ sed -i 's/max_num_inbound_peers =.*/max_num_inbound_peers = 50/g' $HOME/.source/
 sed -i 's/max_num_outbound_peers =.*/max_num_outbound_peers = 50/g' $HOME/.source/config/config.toml
 ```
 
-<br>
 
 ### Загружаем  адресную книгу
 ```
 wget -O $HOME/.source/config/addrbook.json "https://raw.githubusercontent.com/obajay/nodes-Guides/main/Projects/Source/addrbook.json"
 ```
 
-<br>
 
 ### Создаем сервис
 ```
@@ -135,7 +125,6 @@ LimitNOFILE=4096
 WantedBy=multi-user.target" >> /etc/systemd/system/sourced.service
 ```
 
-<br>
 
 ### Синхронизация состояния цепочки
 ```
@@ -157,7 +146,6 @@ sourced tendermint unsafe-reset-all
 systemctl restart sourced && journalctl -u sourced -f -o cat
 ```
 
-<br>
 
 ### Снэпшот (размер: ~200мб). Обновляется каждые 5 часов
 ```
@@ -173,7 +161,6 @@ mv $HOME/.source/priv_validator_state.json.backup $HOME/.source/data/priv_valida
 sudo systemctl restart sourced && journalctl -u sourced -f -o cat
 ```
 
-<br>
 
 ### Запускаем ноду
 ```

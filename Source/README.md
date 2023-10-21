@@ -56,7 +56,7 @@ make build && make install
 MONIKER=<moniker-name>
 ```
 
-### Инициалируем Source и создаем генезис файл. <moniker-name> заменить свое имя валидатора.
+### Инициалируем Source и создаем генезис файл. "<moniker-name>" заменить свое имя валидатора.
 ```
 sourced init $MONIKER --chain-id=source-1
 ```

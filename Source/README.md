@@ -90,7 +90,7 @@ sed -i 's/max_num_outbound_peers =.*/max_num_outbound_peers = 50/g' $HOME/.sourc
 ```
 wget -O $HOME/.source/config/addrbook.json "https://raw.githubusercontent.com/obajay/nodes-Guides/main/Projects/Source/addrbook.json"
 ```
-
+<br>
 #### Создаем сервис
 ```
 echo "Description=Source daemon

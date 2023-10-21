@@ -144,7 +144,7 @@ EOF
 
 <br>
 
-### Синхронизация состояния цепочки
+### Синхронизация состояния цепочки. После выполнения команды нажать ctrl+c для выхода из логов.
 ```
 SNAP_RPC=https://source.rpc.m.stavr.tech:443 && \
 peers="3c729ffe80393abd430a7c723fab2e8aa60ffa46@source.peers.stavr.tech:20056" && \
@@ -166,7 +166,7 @@ systemctl restart sourced && journalctl -u sourced -f -o cat
 
 <br>
 
-### Снэпшот (размер: ~200мб). Обновляется каждые 5 часов
+### Снэпшот (размер: ~200мб). Обновляется каждые 5 часов. Для выходы из логов также нажать ctrl+c
 ```
 cd $HOME && \
 apt install lz4 && \
@@ -191,7 +191,7 @@ sudo systemctl restart sourced && sudo journalctl -u sourced -f -o cat
 
 <br>
 
-## После того как нода набрала нужную высоту - переходим к созданию валидатора
+## После того как нода синхронизирована ( catching up - false, см. команду првоерки статуса ниже) - переходим к созданию валидатора
 
 ### Создаем валидатора.
 ```
@@ -213,7 +213,7 @@ sourced tx staking create-validator \
 
 #### Проверка статуса
 ```
-sourced status
+sourced status | jq
 ```
 
 <br>

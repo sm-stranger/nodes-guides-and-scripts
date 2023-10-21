@@ -58,7 +58,7 @@ sourced init $MONIKER --chain-id=source-1
 ```
 
 
-### Придумываем имя кошелька. your_wallet_name также заменить а свое
+### Придумываем имя кошелька. your_wallet_name также заменить на свое
 ```
 WALLET=your_wallet_name
 ```
@@ -168,6 +168,8 @@ sudo systemctl daemon-reload &&
 sudo systemctl enable sourced &&
 sudo systemctl restart sourced && sudo journalctl -u sourced -f -o cat
 ```
+
+<br>
 
 ## После того как нода набрала нужную высоту - переходим к следующему шагу - создание валидатора
 

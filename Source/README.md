@@ -72,13 +72,24 @@ sha256sum ~/.source/config/genesis.json
 # ba2261082818227073bd8b49717a9781bf5c440c8e34e21ec72fb15806f047cc
 ```
 
-#### Устанавливаем минимальную цену газа и пиры
+#### Устанавливаем минимальную цену газа, сиды, пиры и фильтры пиров
 ```
+sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.25usource\"/;" ~/.source/config/app.toml && \
+external_address=$(wget -qO- eth0.me) &&  \
+sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/" $HOME/.source/config/config.toml && \
 peers="96d63849a529a15f037a28c276ea6e3ac2449695@34.222.1.252:26656,0107ac60e43f3b3d395fea706cb54877a3241d21@35.87.85.162:26656" && \
 sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.source/config/config.toml && \
-sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.25usource\"/;" ~/.source/config/app.toml
+seeds="" && \
+sed -i.bak -e "s/^seeds =.*/seeds = \"$seeds\"/" $HOME/.source/config/config.toml && \
+sed -i 's/max_num_inbound_peers =.*/max_num_inbound_peers = 50/g' $HOME/.source/config/config.toml && \
+sed -i 's/max_num_outbound_peers =.*/max_num_outbound_peers = 50/g' $HOME/.source/config/config.toml
 ```
 
+
+#### Загружаем  addrbook
+```
+wget -O $HOME/.source/config/addrbook.json "https://raw.githubusercontent.com/obajay/nodes-Guides/main/Projects/Source/addrbook.json"
+```
 
 #### Создаем сервис
 ```
@@ -86,7 +97,7 @@ echo "Description=Source daemon
 After=network-online.target
 
 [Service]
-User=<YOUR_USERNAME>
+User=${USER}
 ExecStart=${HOME}/${USER}/go/bin/sourced start --home $HOME/${USER}/.source
 Restart=on-failure
 RestartSec=3

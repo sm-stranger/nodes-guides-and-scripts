@@ -21,6 +21,8 @@ sudo apt install curl tar wget clang pkg-config libssl-dev libleveldb-dev jq bui
 ```
 </p>
 
+<p>
+
 ### Установка GO
 ```
 ver="1.19" && \
@@ -32,6 +34,7 @@ echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile &
 source $HOME/.bash_profile && \
 go version
 ```
+</p>
 
 
 ### Клонируем репозиторий Source

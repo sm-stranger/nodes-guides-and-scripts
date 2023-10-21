@@ -15,7 +15,7 @@ rm -rf $(which sourced)
 ### Подготовка сервера
 ```
 sudo apt update && sudo apt upgrade -y && \
-sudo apt install curl tar wget clang pkg-config libssl-dev libleveldb-dev jq build-essential bsdmainutils git make ncdu htop screen unzip bc fail2ban htop -y
+sudo apt install curl tar wget clang pkg-config libssl-dev libleveldb-dev jq build-essential bsdmainutils git make ncdu htop screen unzip bc fail2ban htop lz4 mc -y
 ```
 
 <br>
@@ -125,18 +125,21 @@ wget -O $HOME/.source/config/addrbook.json "https://raw.githubusercontent.com/ob
 
 ### Создаем сервис
 ```
-echo "Description=Source daemon
+sudo tee /etc/systemd/system/sourced.service > /dev/null <<EOF
+[Unit]
+Description=source
 After=network-online.target
 
 [Service]
-User=${USER}
-ExecStart=${HOME}/${USER}/go/bin/sourced start --home ${USER}/.source
+User=$USER
+ExecStart=$(which sourced) start
 Restart=on-failure
 RestartSec=3
-LimitNOFILE=4096
+LimitNOFILE=65535
 
 [Install]
-WantedBy=multi-user.target" >> /etc/systemd/system/sourced.service
+WantedBy=multi-user.target
+EOF
 ```
 
 <br>

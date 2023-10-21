@@ -65,14 +65,14 @@ sourced init $MONIKER --chain-id=source-1
 
 <br>
 
-### Придумываем имя кошелька. your_wallet_name также заменить на свое
+### Придумываем имя кошелька. your_wallet_name также заменить на свое.
 ```
 WALLET=your_wallet_name
 ```
 
 <br>
 
-### Если у вас уже есть кошелек то нужно восстановить его или создать новый.
+### Если у вас уже есть кошелек то нужно восстановить его.
 ```
 sourced keys add $WALLET --recover
 ```

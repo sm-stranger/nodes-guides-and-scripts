@@ -12,7 +12,7 @@ rm -rf source && \
 rm -rf $(which sourced)
 ```
 
-<br
+<br>
 
 ### Подготовка сервера
 ```

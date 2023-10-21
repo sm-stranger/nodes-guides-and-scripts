@@ -51,21 +51,21 @@ make build && make install
 
 <br>
 
-### Придумываем имя валидатора и записываем ее в переменную MONIKER. <moniker-name> заменить на свое.
+### Придумываем имя валидатора и записываем ее в переменную MONIKER. your_moniker_name заменить на свое.
 ```
-MONIKER=<moniker-name>
+MONIKER=your_moniker_name
 ```
 
-### Инициалируем Source и создаем генезис файл. "<moniker-name>" заменить свое имя валидатора.
+### Инициалируем Source и создаем генезис файл.
 ```
 sourced init $MONIKER --chain-id=source-1
 ```
 
 <br>
 
-### Придумываем имя кошелька. <wallet-name> также заменить а свое
+### Придумываем имя кошелька. your_wallet_name также заменить а свое
 ```
-WALLET=<walletName>
+WALLET=your_wallet_name
 ```
 
 <br>
@@ -114,7 +114,7 @@ sed -i 's/max_num_outbound_peers =.*/max_num_outbound_peers = 50/g' $HOME/.sourc
 
 <br>
 
-### Загружаем  addrbook
+### Загружаем  адресную книгу
 ```
 wget -O $HOME/.source/config/addrbook.json "https://raw.githubusercontent.com/obajay/nodes-Guides/main/Projects/Source/addrbook.json"
 ```
@@ -177,7 +177,7 @@ sudo systemctl restart sourced && journalctl -u sourced -f -o cat
 
 <br>
 
-### Включаем и запускаем сервис
+### Запускаем ноду
 ```
 sudo systemctl daemon-reload &&
 sudo systemctl enable sourced &&

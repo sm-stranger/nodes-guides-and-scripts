@@ -12,6 +12,8 @@ rm -rf source && \
 rm -rf $(which sourced)
 ```
 
+<br
+
 ### Подготовка сервера
 ```
 sudo apt update && sudo apt upgrade -y && \

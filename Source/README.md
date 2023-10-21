@@ -1,4 +1,4 @@
-# Fleek Mainnet Node Install Guide
+# Source Mainnet Node Install Guide
 
 ## В этом руководстве мы рассмотрим установку ноду Source в mainnet. 
 

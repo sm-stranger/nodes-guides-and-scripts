@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-options=('Delete Old Node' 'Install' 'Node Status' )
+options=( "Delete Old Node" "Install" "Node Status" )
 select opt in "${options[@]}"
 do
     case $opt in

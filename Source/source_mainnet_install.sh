@@ -2,7 +2,7 @@
 
 
 PS3="Choose Option And Press Enter: "
-options=( "Delete Old Node" "Install" "Node Status" )
+options=("Delete Old Node" "Install" "Node Status")
 select opt in "${options[@]}"
 do
     case $opt in

@@ -1,6 +1,9 @@
 # Source Mainnet Node Install Guide
 
-## В этом руководстве мы рассмотрим установку ноду Source в mainnet. 
+## В этом руководстве мы рассмотрим установку ноду Source в mainnet. Можно воспользоваться скриптом так и поставить вручную. Также доступен скрипт 
+```
+wget -O source_mainnet_install.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/Source/source_mainnet_install.sh && chmod+x source_mainnet_install.sh && ./source_mainnet_install.sh
+```
 
 ### Если у вас уже есть установленная нода Source - нужно удалить ее. Для этого выполним
 

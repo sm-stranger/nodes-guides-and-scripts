@@ -41,7 +41,7 @@ do
                 PIP_REQUIRE_VIRTUALENV=true pip install -e .[dev]
                 pytest
                 cd $HOME/pathfinder/
-                cargo +stable build --release --bin pathfinder
+                cargo build --release --bin pathfinder
                 cd
 
                 source $HOME/.bashrc
@@ -59,11 +59,10 @@ do
                 [Service]
                 User=$USER
                 Type=simple
-                WorkingDirectory=$HOME/pathfinder/py
-                ExecStart=/bin/bash -c \"source $HOME/pathfinder/py/.venv/bin/activate && /usr/local/bin/pathfinder --http-rpc=\"0.0.0.0:9545\" --ethereum.url $ALCHEMY\"
+                ExecStart=/usr/local/bin/pathfinder --http-rpc=\"0.0.0.0:9545\" --ethereum.url \"$ALCHEMY\"
                 Restart=on-failure
                 LimitNOFILE=65535
-                
+
                 [Install]
                 WantedBy=multi-user.target" > $HOME/starknetd.service
 
@@ -78,6 +77,7 @@ do
             ;;
 
 
+            
             ######################################## Delete ########################################
 
             "Delete")
@@ -92,6 +92,7 @@ do
             ;;
 
 
+            
             ######################################## Update ########################################
             
             "Update")
@@ -133,12 +134,14 @@ do
             ;;
 
 
+
             ######################################## Check Logs ########################################
 
             "Check Logs")
                 journalctl -u starknetd -f
             break
             ;;
+            
 
 
             ######################################## Restart ########################################

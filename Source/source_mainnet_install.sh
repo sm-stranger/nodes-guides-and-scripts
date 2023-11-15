@@ -11,8 +11,8 @@ dash="============================================================="
 clear
 
 echo ""
-echo -e $green $dash $orange "Source Protocol Node Management" $green $dash
-echo ""
+echo -e $green $dash $orange "SOURCE PROTOCOL NODE MANAGEMENT" $green $dash
+echo -e $default ""
 
 PS3="Choose Action And Press Enter: "
 options=(
@@ -308,4 +308,5 @@ do
 
     esac
 done
+
 

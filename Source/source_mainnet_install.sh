@@ -1,6 +1,19 @@
 #!/bin/bash
 
+red='\033[91m'
+green='\033[92m'
+default='\033[39m'
+dark_red='\033[31m'
+orange='\033[93m'
+
+dash="============================================================="
+
 clear
+
+echo ""
+echo -e $default $dash $orange "Source Protocol Node Management" $default $dash
+echo ""
+
 PS3="Choose Action And Press Enter: "
 options=(
     "Backup"

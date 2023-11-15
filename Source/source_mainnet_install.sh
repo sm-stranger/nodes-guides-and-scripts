@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+clear
 PS3="Choose Action And Press Enter: "
 options=(
     "Backup"

@@ -216,6 +216,8 @@ do
         #################################################### COMMANDS ############################################################
 
         "Commands")
+        
+            clear
             PS3="Choose Command And Press Enter: "
             options=(
                 "Source Node Start"
@@ -231,7 +233,6 @@ do
 
                 "Show Logs"
                 "Daemon Reload"
-                ""
             )
             select opt in "${options[@]}"
             do

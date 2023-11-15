@@ -216,7 +216,7 @@ do
         #################################################### COMMANDS ############################################################
 
         "Commands")
-        
+
             clear
             PS3="Choose Command And Press Enter: "
             options=(
@@ -233,6 +233,8 @@ do
 
                 "Show Logs"
                 "Daemon Reload"
+
+                "Main Menu"
             )
             select opt in "${options[@]}"
             do
@@ -281,6 +283,10 @@ do
                 
                     "Daemon Reload")
                         sudo systemctl daemon-reload
+                    ;;
+
+                    "Main Menu")
+                        cd && ./source_mainnet_install.sh
                     ;;
 
                 esac

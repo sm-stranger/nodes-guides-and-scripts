@@ -11,7 +11,7 @@ dash="============================================================="
 clear
 
 echo ""
-echo -e $default $dash $orange "Source Protocol Node Management" $default $dash
+echo -e $green $dash $orange "Source Protocol Node Management" $green $dash
 echo ""
 
 PS3="Choose Action And Press Enter: "

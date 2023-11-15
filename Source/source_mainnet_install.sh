@@ -1,14 +1,15 @@
 #!/bin/bash
 
 
-PS3="Choose Option And Press Enter: "
+PS3="Choose Action And Press Enter: "
 options=(
-        "Backup"
-        "Delete Old Node"
-        "Install"
-        "Snapshot"
-        "Node Status"
-        )
+    "Backup"
+    "Delete Old Node"
+    "Install"
+    "Statesync"
+    "Snapshot"
+    "Commands"
+)
 select opt in "${options[@]}"
 do
     case $opt in
@@ -212,30 +213,79 @@ do
 
 
 
-        #################################################### NODE STATUS ############################################################
+        #################################################### COMMANDS ############################################################
 
-        "Node Status")
-            sourced status
+        "Commands")
+            PS3="Choose Command And Press Enter: "
+            options=(
+                "Source Node Start"
+                "Source Node Stop"
+                "Source Node Status"
+
+                "Sourced Service Enable"
+                "Sourced Service Start"
+                "Sourced Service Stop"
+
+                "Sourced Service Restart"
+                "Sourced Service Status"
+
+                "Show Logs"
+                "Daemon Reload"
+                ""
+            )
+            select opt in "${options[@]}"
+            do
+                case $opt in
+
+                    "Source Node Start")
+                        sourced start
+                    ;;
+
+                    "Source Node Stop")
+                        sourced stop
+                    ;;
+
+                    "Source Node Status")
+                        sourced status
+                    ;;
+
+                    "Sourced Service Enable")
+                        sudo systemctl enable sourced
+                    ;;
+                
+                    "Sourced Service Disable")
+                        sudo systemctl disable sourced
+                    ;;
+
+                    "Sourced Service Start")
+                        sudo systemctl start sourced
+                    ;;
+
+                    "Sourced Service Stop")
+                        sudo systemctl stop sourced
+                    ;;
+
+                    "Sourced Service Restart")
+                        sudo systemctl restart sourced
+                    ;;
+
+
+                    "Sourced Service Status")
+                        sudo systemctl status sourced
+                    ;;
+
+                    "Show Logs")
+                        sudo journalctl -u sourced -f -o cat
+                    ;;
+                
+                    "Daemon Reload")
+                        sudo systemctl daemon-reload
+                    ;;
+
+                esac
+            done
         ;;
 
     esac
 done
-
-
-# Start Node
-sourced start
-
-
-sudo systemctl daemon-reload &&
-sudo systemctl enable sourced &&
-sudo systemctl restart sourced && sudo journalctl -u sourced -f -o cat
-
-# Start Sourced Service
-sudo systemctl start sourced
-
-# Stop Sourced Service
-sudo systemctl stop sourced
-
-# Status Sourced Service
-sudo systemctl status sourced
 

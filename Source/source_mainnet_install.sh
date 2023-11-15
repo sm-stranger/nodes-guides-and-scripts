@@ -10,7 +10,7 @@ dash="============================================================="
 
 clear
 
-echo ""
+echo -e $default ""
 echo -e $green $dash $orange "SOURCE PROTOCOL NODE MANAGEMENT" $green $dash
 echo -e $default ""
 
@@ -308,5 +308,4 @@ do
 
     esac
 done
-
 

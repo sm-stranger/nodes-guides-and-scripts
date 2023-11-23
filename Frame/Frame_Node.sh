@@ -1,5 +1,6 @@
 #!/bin/bash
-colors() {
+
+function colors {
   GREEN="\e[32m"
   YELLOW="\e[33m"
   RED="\e[39m"
@@ -7,18 +8,18 @@ colors() {
 }
 
 
-line(){
+function line {
   echo -e "${GREEN}-----------------------------------------------------------------------------${NORMAL}"
 }
 
- install_docker{
+ function install_docker {
     if ! type "docker" > /dev/null; then
         echo -e "${YELLOW}Install Docker${NORMAL}"
         bash <(curl -s https://raw.githubusercontent.com/F1rstCap1tal/doker/main/doker.sh)
     fi
 }
 
- prepare_files() {
+ function prepare_files {
     echo -e "${YELLOW}Prepare Config Files${NORMAL}"
     if [ ! -d "$HOME/frame-validator" ]; then
         mkdir -p $HOME/frame-validator/node-data
@@ -38,7 +39,7 @@ line(){
 
 }
 
-run_docker() {
+function run_docker {
     echo -e "${YELLOW}Запускаем докер контейнер для валидатора${NORMAL}"
     if [ ! "$(docker ps -q -f name=^frame$)" ]; then
         if [ "$(docker ps -aq -f status=exited -f name=^frame$)" ]; then
@@ -51,14 +52,14 @@ run_docker() {
 }
 
 
- output() {
+ function output {
     echo -e "${YELLOW}Для проверки логов выполняем команду:${NORMAL}"
     echo -e "docker logs -f frame --tail=100"
     echo -e "${YELLOW}Для перезапуска выполняем команду:${NORMAL}"
     echo -e "docker restart frame"
 }
 
- main() {
+ function main {
     colors
     line
     prepare_files

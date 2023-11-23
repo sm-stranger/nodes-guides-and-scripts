@@ -28,6 +28,7 @@ colors{
             sed -i 's|"url":.*|"url": "https://ethereum-sepolia.publicnode.com"|' node-config/testnet.json
         fi
     else
+        echo -e "${YELLOW}Node Already Installed${NORMAL}"
         cd $HOME/frame-validator
         docker rm -f frame
         rm -rf $HOME/frame-validator/node-config
@@ -37,10 +38,11 @@ colors{
 
 }
 
- run_docker{
-    echo -e "${YELLOW}Run Validator${NORMAL}"
+run_docker{
+    echo -e "${YELLOW}Запускаем докер контейнер для валидатора${NORMAL}"
     if [ ! "$(docker ps -q -f name=^frame$)" ]; then
         if [ "$(docker ps -aq -f status=exited -f name=^frame$)" ]; then
+            echo -e "${YELLOW}Докер контейнер уже существует в статусе exited. Удаляем его и запускаем заново${NORMAL}"
             docker rm -f frame
         fi
         docker run -d --name frame --restart always -it -v $(pwd)/node-data:/home/user/.frame -v $(pwd)/node-config/testnet.json:/home/user/testnet.json public.ecr.aws/o8e2k8j7/nitro-node:frame --conf.file testnet.json
@@ -73,6 +75,38 @@ colors{
 
 PS3="Choose Option And Press Enter: "
 options=(
-    
+    "Install"
     "Commands"
 )
+select opt in "${options[@]}"
+do
+    case $opt in
+
+        "Install")
+            main
+        ;;
+
+        "Commands")
+            PS3="Choose Command And Press Enter: "
+            options=(
+                "Logs"
+                "Restart"
+            )
+            select opt in "${options[@]}"
+            do
+                case $opt in
+
+                    "Logs")
+                        docker logs -f frame --tail=100
+                    ;;
+
+                    "Restart")
+                        docker restart frame
+                    ;;
+
+                esac
+            done
+        ;;
+
+    esac
+done

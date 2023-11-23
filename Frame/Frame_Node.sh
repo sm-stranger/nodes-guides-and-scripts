@@ -1,5 +1,5 @@
 #!/bin/bash
-colors{
+colors(){
   GREEN="\e[32m"
   YELLOW="\e[33m"
   RED="\e[39m"

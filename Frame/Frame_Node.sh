@@ -74,6 +74,7 @@ function run_docker {
 
 #main
 
+line
 PS3="Choose Option And Press Enter: "
 options=(
     "Install"

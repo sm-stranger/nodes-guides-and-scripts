@@ -12,6 +12,7 @@ function dash {
   echo -e "${GREEN}===================================================================================${NORMAL}"
 }
 
+
  function install_docker {
     if ! type "docker" > /dev/null; then
         echo -e "${YELLOW}Install Docker${NORMAL}"
@@ -19,17 +20,6 @@ function dash {
     fi
 }
 
-function run {
-    echo -e "${YELLOW}Run Validator${NORMAL}"
-    if [ ! "$(docker ps -q -f name=^frame$)" ]; then
-        if [ "$(docker ps -aq -f status=exited -f name=^frame$)" ]; then
-            #echo -e "${YELLOW}Докер контейнер уже существует в статусе exited. Удаляем его и запускаем заново${NORMAL}"
-            docker rm -f frame
-        fi
-        docker run -d --name frame --restart always -it -v $(pwd)/node-data:/home/user/.frame -v $(pwd)/node-config/testnet.json:/home/user/testnet.json public.ecr.aws/o8e2k8j7/nitro-node:frame --conf.file testnet.json
-    fi
-
-}
 
  function install_frame {
     if [ ! -d "$HOME/frame-validator" ]; then
@@ -47,10 +37,24 @@ function run {
 
 }
 
+
 function remove_frame {
     cd $HOME/frame-validator
     docker rm -f frame
     rm -rf $HOME/frame-validator/node-config
+}
+
+
+function run {
+    echo -e "${YELLOW}Run Validator${NORMAL}"
+    if [ ! "$(docker ps -q -f name=^frame$)" ]; then
+        if [ "$(docker ps -aq -f status=exited -f name=^frame$)" ]; then
+            #echo -e "${YELLOW}Докер контейнер уже существует в статусе exited. Удаляем его и запускаем заново${NORMAL}"
+            docker rm -f frame
+        fi
+        docker run -d --name frame --restart always -it -v $(pwd)/node-data:/home/user/.frame -v $(pwd)/node-config/testnet.json:/home/user/testnet.json public.ecr.aws/o8e2k8j7/nitro-node:frame --conf.file testnet.json
+    fi
+
 }
 
 
@@ -76,7 +80,7 @@ do
     PS3="Choose Option And Press Enter: "
     options=(
         "Install"
-        "Commands"
+        "Management"
     )
     select opt in "${options[@]}"
     do
@@ -94,9 +98,9 @@ do
 
             
 
-            # ================================================= Commands ================================================= #
+            # ================================================= Management ================================================= #
 
-            "Commands")
+            "Management")
                 clear
                 echo -e "${GREEN}=================================================${NORMAL} COMMANDS ${GREEN}=================================================${NORMAL}"
                 PS3="Choose Command And Press Enter: "

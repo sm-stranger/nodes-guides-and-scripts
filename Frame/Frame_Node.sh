@@ -8,8 +8,8 @@ function colors {
 }
 
 
-function line {
-  echo -e "${GREEN}-----------------------------------------------------------------------------${NORMAL}"
+function dash {
+  echo -e "${GREEN}===================================================================================${NORMAL}"
 }
 
  function install_docker {
@@ -19,31 +19,11 @@ function line {
     fi
 }
 
- function prepare_files {
-    echo -e "${YELLOW}Prepare Config Files${NORMAL}"
-    if [ ! -d "$HOME/frame-validator" ]; then
-        mkdir -p $HOME/frame-validator/node-data
-        cd $HOME/frame-validator
-        if [ ! -d "$HOME/frame-validator/node-config" ]; then
-            git clone https://github.com/frame-network/node-config.git
-            sed -i 's|"url":.*|"url": "https://ethereum-sepolia.publicnode.com"|' node-config/testnet.json
-        fi
-    else
-        echo -e "${YELLOW}Node Already Installed${NORMAL}"
-        cd $HOME/frame-validator
-        docker rm -f frame
-        rm -rf $HOME/frame-validator/node-config
-        git clone https://github.com/frame-network/node-config.git
-        sed -i 's|"url":.*|"url": "https://ethereum-sepolia.publicnode.com"|' node-config/testnet.json
-    fi
-
-}
-
-function run_docker {
-    echo -e "${YELLOW}Запускаем докер контейнер для валидатора${NORMAL}"
+function run {
+    echo -e "${YELLOW}Run Validator${NORMAL}"
     if [ ! "$(docker ps -q -f name=^frame$)" ]; then
         if [ "$(docker ps -aq -f status=exited -f name=^frame$)" ]; then
-            echo -e "${YELLOW}Докер контейнер уже существует в статусе exited. Удаляем его и запускаем заново${NORMAL}"
+            #echo -e "${YELLOW}Докер контейнер уже существует в статусе exited. Удаляем его и запускаем заново${NORMAL}"
             docker rm -f frame
         fi
         docker run -d --name frame --restart always -it -v $(pwd)/node-data:/home/user/.frame -v $(pwd)/node-config/testnet.json:/home/user/testnet.json public.ecr.aws/o8e2k8j7/nitro-node:frame --conf.file testnet.json
@@ -51,65 +31,104 @@ function run_docker {
 
 }
 
+ function install_frame {
+    if [ ! -d "$HOME/frame-validator" ]; then
+        echo -e "${YELLOW}Prepare Config Files${NORMAL}"
+        mkdir -p $HOME/frame-validator/node-data
+        cd $HOME/frame-validator
+        if [ ! -d "$HOME/frame-validator/node-config" ]; then
+            git clone https://github.com/frame-network/node-config.git
+            sed -i 's|"url":.*|"url": "https://ethereum-sepolia.publicnode.com"|' node-config/testnet.json
+        fi
+    else
+        echo -e "${YELLOW}Node Already Installed.${NORMAL}"
+        
+    fi
 
- function output {
+}
+
+function remove_frame {
+    cd $HOME/frame-validator
+    docker rm -f frame
+    rm -rf $HOME/frame-validator/node-config
+}
+
+
+function output {
     echo -e "${YELLOW}Для проверки логов выполняем команду:${NORMAL}"
     echo -e "docker logs -f frame --tail=100"
     echo -e "${YELLOW}Для перезапуска выполняем команду:${NORMAL}"
     echo -e "docker restart frame"
 }
 
- function main {
-    colors
-    line
-    prepare_files
-    line
-    install_docker
-    line
-    run_docker
-    line
-    output
-    line
-}
 
-#main
 
-colors
-line
-PS3="Choose Option And Press Enter: "
-options=(
-    "Install"
-    "Commands"
-)
-select opt in "${options[@]}"
+
+############################################################# FRAME NODE #############################################################
+
+while true
 do
-    case $opt in
 
-        "Install")
-            main
-        ;;
+    clear
+    colors
+    echo -e "${GREEN}=====================================${NORMAL} Frame Node ${GREEN}=====================================${NORMAL}"
+    echo ''
+    PS3="Choose Option And Press Enter: "
+    options=(
+        "Install"
+        "Commands"
+    )
+    select opt in "${options[@]}"
+    do
+        case $opt in
 
-        "Commands")
-            PS3="Choose Command And Press Enter: "
-            options=(
-                "Logs"
-                "Restart"
-            )
-            select opt in "${options[@]}"
-            do
-                case $opt in
+            # ================================================= Install ================================================= #
 
-                    "Logs")
-                        docker logs -f frame --tail=100
-                    ;;
+            "Install")
+                clear
+                install_docker
+                install_frame
+                run
+            break
+            ;;
 
-                    "Restart")
-                        docker restart frame
-                    ;;
+            
 
-                esac
-            done
-        ;;
+            # ================================================= Commands ================================================= #
 
-    esac
+            "Commands")
+                clear
+                echo -e "${GREEN}=================================================${NORMAL} COMMANDS ${GREEN}=================================================${NORMAL}"
+                PS3="Choose Command And Press Enter: "
+                options=(
+                    "Logs"
+                    "Restart"
+                    "Main Menu"
+                )
+                select opt in "${options[@]}"
+                do
+                    case $opt in
+
+                        "Logs")
+                            echo -e "${YELLOW}Для выхода из логов - нажмите ${NORMAL} Ctrl+C"
+                            sleep 2
+                            docker logs -f frame --tail=100
+                        ;;
+
+                        "Restart")
+                            docker restart frame
+                        ;;
+
+                        "Main Menu")
+                            cd && ./Frame_Node.sh
+                        ;;
+
+                    esac
+                done
+            
+            break
+            ;;
+
+        esac
+    done
 done

@@ -1,5 +1,7 @@
-# обновление и установка доп. пакетов
+## Обновление и установка доп. пакетов
+```
 sudo apt update && sudo apt upgrade && sudo apt install mc -y
+```
 
 # установка Mina
 sudo echo "deb [trusted=yes] http://packages.o1test.net $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/mina.list

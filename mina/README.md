@@ -1,4 +1,4 @@
-   ### обновление и установка доп. пакетов
+   #### обновление и установка доп. пакетов
    ```
    sudo apt update && sudo apt upgrade && sudo apt install mc -y
    ```

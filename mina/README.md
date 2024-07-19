@@ -1,3 +1,8 @@
+   ```
+   wget -O starknet.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/mina/mina_node.sh && chmod +x mina_node.sh && ./mina_node.sh
+   ```
+   
+   
    #### обновление и установка доп. пакетов
    ```
    sudo apt update && sudo apt upgrade && sudo apt install mc -y

@@ -1,3 +1,5 @@
+   #### Mina
+
    ```
    wget -O starknet.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/mina/mina_node.sh && chmod +x mina_node.sh && ./mina_node.sh
    ```
@@ -39,9 +41,6 @@
 
    # 2.1 Запуск только Производителя блоков (Block Producer):(одна команда. Все строки)
 
-
-
-   ################
 
    sudo docker run --name mina -d \
    --restart always \

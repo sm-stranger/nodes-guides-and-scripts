@@ -69,7 +69,7 @@ while true do
          
          
          ######################################## Run Mina ########################################
-         "Run Mina")
+         "Run")
 
             sudo docker run --name mina -d \
             --restart always \

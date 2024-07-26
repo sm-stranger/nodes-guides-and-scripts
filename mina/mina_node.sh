@@ -53,7 +53,7 @@ while true do
                sudo apt update
                sudo apt install -y curl unzip mina-mainnet=3.0.0-93e0279
 
-               if [ -d /keys ]
+               if [ -d /keys ]; then
                   # set permission
                   chmod 700 $HOME/keys && chmod 600 $HOME/keys/my-wallet
 

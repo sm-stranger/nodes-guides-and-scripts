@@ -9,14 +9,6 @@ orange='\033[93m'
 dash="============================================================="
 
 
-###################################### Prepare ######################################
-
-# update && upgrade
-sudo apt update && sudo apt upgrade && sudo apt install mc -y
-
-# install Docker
-sudo apt install docker.io curl -y && sudo systemctl start docker && sudo systemctl enable docker
-
 while true do
 
 
@@ -45,7 +37,14 @@ while true do
          ######################################## Install ########################################
          "Install")
 
-            if ! [ -d /root/.mina-config ]; then
+            if ! [ -d /root/.mina-config ]
+            then
+
+               # update && upgrade
+               sudo apt update && sudo apt upgrade && sudo apt install mc -y
+
+               # install Docker
+               sudo apt install docker.io curl -y && sudo systemctl start docker && sudo systemctl enable docker
 
                # install Mina
                sudo rm /etc/apt/sources.list.d/mina*.list
@@ -53,7 +52,8 @@ while true do
                sudo apt update
                sudo apt install -y curl unzip mina-mainnet=3.0.0-93e0279
 
-               if [ -d /keys ]; then
+               if [ -d /keys ]
+               then
                   # set permission
                   chmod 700 $HOME/keys && chmod 600 $HOME/keys/my-wallet
 

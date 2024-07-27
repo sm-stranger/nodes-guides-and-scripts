@@ -4,7 +4,7 @@
 
    Далее запускаем скрипт
    ```
-   rm -rf /$HOME/.mina_node.sh && wget -O mina_node.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/mina/mina_node.sh && chmod +x mina_node.sh && ./mina_node.sh
+   rm -rf /root/.mina_node.sh && wget -O mina_node.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/mina/mina_node.sh && chmod +x mina_node.sh && ./mina_node.sh
    ```
    <img width="600px" height="300px" src="img/img-1.png">
    

@@ -22,6 +22,7 @@ chmod 600 $HOME/keys/my-wallet
 sudo iptables -A INPUT -p tcp --dport 8302:8303 -j ACCEPT
 
 # set var
+KEYPATH=$HOME/keys/my-wallet
 MINA_PUBLIC_KEY=$(cat $HOME/keys/my-wallet.pub)
 
 # run

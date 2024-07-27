@@ -46,10 +46,9 @@ do
 
             # install Mina
             sudo rm /etc/apt/sources.list.d/mina*.list
-
-            sudo echo "deb [trusted=yes] http://packages.o1test.net $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/mina.list \
-            && sudo apt update \
-            && sudo apt install -y curl unzip mina-mainnet=3.0.0-93e0279
+            sudo echo "deb [trusted=yes] http://packages.o1test.net $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/mina.list
+            sudo apt update
+            sudo apt install -y curl unzip mina-mainnet=3.0.0-93e0279
 
             # set permission
             chmod 700 $HOME/keys && chmod 600 $HOME/keys/my-wallet
@@ -81,6 +80,8 @@ do
             --insecure-rest-server \
             --file-log-level Debug \
             -log-level Info
+
+            sleep 3
 
          break
          ;;

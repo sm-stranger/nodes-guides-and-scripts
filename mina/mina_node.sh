@@ -38,31 +38,27 @@ do
          ######################################## Install ########################################
          "Install")
 
-               # update && upgrade
-               sudo apt update && sudo apt upgrade && sudo apt install mc -y
+            # update && upgrade
+            sudo apt update && sudo apt upgrade && sudo apt install mc -y
 
-               # install Docker
-               sudo apt install docker.io curl -y && sudo systemctl start docker && sudo systemctl enable docker
+            # install Docker
+            sudo apt install docker.io curl -y && sudo systemctl start docker && sudo systemctl enable docker
 
-               # install Mina
-               sudo rm /etc/apt/sources.list.d/mina*.list
-               sudo echo "deb [trusted=yes] http://packages.o1test.net $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/mina.list
-               sudo apt update
-               sudo apt install -y curl unzip mina-mainnet=3.0.0-93e0279
+            # install Mina
+            sudo rm /etc/apt/sources.list.d/mina*.list
 
-               if [ -d /keys ]
-               then
-                  # set permission
-                  chmod 700 $HOME/keys && chmod 600 $HOME/keys/my-wallet
+            sudo echo "deb [trusted=yes] http://packages.o1test.net $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/mina.list \
+            && sudo apt update \
+            && sudo apt install -y curl unzip mina-mainnet=3.0.0-93e0279
 
-                  # export keys
-                  echo 'export KEYPATH=$HOME/keys/my-wallet' >> $HOME/.bashrc
-                  echo 'export MINA_PUBLIC_KEY=$(cat $HOME/keys/my-wallet.pub)' >> $HOME/.bashrc
-                  source ~/.bashrc
-               fi
+            # set permission
+            chmod 700 $HOME/keys && chmod 600 $HOME/keys/my-wallet
 
-               # open ports 8302 and 8303
-               sudo iptables -A INPUT -p tcp --dport 8302:8303 -j ACCEPT
+            # open ports 8302 and 8303
+            sudo iptables -A INPUT -p tcp --dport 8302:8303 -j ACCEPT
+
+            # set var
+            MINA_PUBLIC_KEY=$(cat $HOME/keys/my-wallet.pub)
 
          break
          ;;

@@ -9,7 +9,7 @@ orange='\033[93m'
 dash="============================================================="
 
 
-while true 
+while true
 do
 
 
@@ -38,9 +38,6 @@ do
          ######################################## Install ########################################
          "Install")
 
-            if ! [ -d /root/.mina-config ]
-            then
-
                # update && upgrade
                sudo apt update && sudo apt upgrade && sudo apt install mc -y
 
@@ -66,8 +63,6 @@ do
 
                # open ports 8302 and 8303
                sudo iptables -A INPUT -p tcp --dport 8302:8303 -j ACCEPT
-
-            fi
 
          break
          ;;
@@ -162,7 +157,7 @@ done
 #sudo docker stop mina
 
 # Рестарт контейнера
-#sudo docker restart mina
+sudo docker restart mina
 
 # Удаление контейнера:
 #sudo docker rm mina

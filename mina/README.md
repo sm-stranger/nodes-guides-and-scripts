@@ -5,7 +5,6 @@
 #### Далее устанавливаем мину скриптом
 ```
 wget -O mina_install.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/mina/mina_install.sh && chmod +x mina_install.sh && ./mina_install.sh
-
 ```
 
 #### Проверяем статус

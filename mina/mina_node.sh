@@ -9,13 +9,13 @@ orange='\033[93m'
 dash="============================================================="
 
 
-while true
+while true 
 do
 
 
    ####################################################### MAIN MENU #######################################################
 
-    #clear
+    clear
     echo ""
     echo -e $default $dash $orange "MINA NODE MANAGEMENT" $default $dash
     echo ""
@@ -162,7 +162,7 @@ done
 #sudo docker stop mina
 
 # Рестарт контейнера
-sudo docker restart mina
+#sudo docker restart mina
 
 # Удаление контейнера:
 #sudo docker rm mina

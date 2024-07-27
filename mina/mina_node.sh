@@ -9,7 +9,8 @@ orange='\033[93m'
 dash="============================================================="
 
 
-while true do
+while true
+do
 
 
    ####################################################### MAIN MENU #######################################################
@@ -161,7 +162,7 @@ done
 #sudo docker stop mina
 
 # Рестарт контейнера
-#sudo docker restart mina
+sudo docker restart mina
 
 # Удаление контейнера:
 #sudo docker rm mina

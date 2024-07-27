@@ -31,7 +31,7 @@ amount= <amount>
 ```
 mina client send-payment \
 -sender B62qjU8FUq5CmJ6MWFFEM1KGVb9DfZSvSmDCD1U5vgxrpDxAV3JZDrj \
--receiver $receiver \
+-receiver B62qp75GRmMaN1B6MkuDPZiJEvDr1vmTyswwyzyom2c2rZp5f73BDmG \
 -fee 0.01 \
 -amount $amount
 ```

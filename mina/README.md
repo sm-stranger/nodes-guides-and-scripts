@@ -8,6 +8,7 @@ wget -O mina_install.sh https://raw.githubusercontent.com/sm-stranger/nodes-guid
 ```
 
 <p>
+  
 #### Проверяем статус. Ждем когда появится synced
 ```
 sudo docker exec -it mina mina client status

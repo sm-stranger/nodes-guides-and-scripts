@@ -7,13 +7,12 @@
 wget -O mina_install.sh https://raw.githubusercontent.com/sm-stranger/nodes-guides-and-scripts/main/mina/mina_install.sh && chmod +x mina_install.sh && ./mina_install.sh
 ```
 
-<p>
-  
+<br>
+
 #### Проверяем статус. Ждем когда появится synced
 ```
 sudo docker exec -it mina mina client status
 ```  
-</p>
 
 
 #### Импорт аккаунта

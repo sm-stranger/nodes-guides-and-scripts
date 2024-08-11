@@ -22,9 +22,9 @@ mina accounts import -privkey-path $KEYPATH
 mina accounts unlock -public-key $MINA_PUBLIC_KEY
 ```
 
-#### Далее указываем количество монет для вывода ( "amount" заменить на количество)
+#### Далее указываем количество монет для вывода ( "amount" заменить на количество мины)
 ```
-amount= <amount>
+amount=amount
 ```
 
 #### И теперь выводим мину

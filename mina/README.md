@@ -27,7 +27,7 @@ mina accounts unlock -public-key $MINA_PUBLIC_KEY
 
 #### Далее указываем количество монет для вывода ( "amount" заменить на количество мины)
 ```
-amount=amount
+amount=количество мины
 ```
 
 #### И теперь выводим мину

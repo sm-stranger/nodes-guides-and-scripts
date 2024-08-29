@@ -24,6 +24,8 @@ sudo iptables -A INPUT -p tcp --dport 8302:8303 -j ACCEPT
 # set var
 KEYPATH=$HOME/keys/my-wallet
 MINA_PUBLIC_KEY=$(cat $HOME/keys/my-wallet.pub)
+echo 'export KEYPATH=$HOME/keys/my-wallet' >> $HOME/.bashrc
+echo 'export MINA_PUBLIC_KEY=$(cat $HOME/keys/my-wallet.pub)' >> $HOME/.bashrc
 
 # run
 sudo docker run --name mina -d \

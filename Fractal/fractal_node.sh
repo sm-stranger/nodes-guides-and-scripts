@@ -6,7 +6,7 @@ sudo apt install ca-certificates zlib1g-dev libncurses5-dev libgdbm-dev libnss3-
 wget https://github.com/fractal-bitcoin/fractald-release/releases/download/v0.1.8/fractald-0.1.8-x86_64-linux-gnu.tar.gz
 tar -zxvf fractald-0.1.8-x86_64-linux-gnu.tar.gz 
 
-cd fractald-0.1.7-x86_64-linux-gnu/
+cd fractald-0.1.8-x86_64-linux-gnu/
 mkdir data
 cp ./bitcoin.conf ./data
 
